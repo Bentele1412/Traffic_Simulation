@@ -15,7 +15,7 @@ else:
 
 def run():
     step = 0
-    traci.trafficlight.setPhase("m", 1)
+    traci.trafficlight.setPhase("m", 0)
     detectedVehicles = 0
     lastVehicleIDs = []
     while traci.simulation.getMinExpectedNumber() > 0:
