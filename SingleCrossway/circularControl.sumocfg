@@ -8,6 +8,7 @@
     <input>
         <net-file value="circularControlNet.net.xml"/>
         <route-files value="circularControlRoutes.xml"/>
+        <additional-files value="additionals.xml"/>
     </input>
 
     <report>
