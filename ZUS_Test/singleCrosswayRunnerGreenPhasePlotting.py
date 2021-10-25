@@ -63,20 +63,29 @@ if __name__ == '__main__':
 
     meanSpeeds = np.zeros(maxGreenDuration, dtype=float)
 
+    numReplications = 10
+
     for i in range(1, maxGreenDuration+1):
         greenDuration += direction
         changeDuration(greenDuration)
-
-        #start server
-        traci.start([sumoBinary, "-c", configPath,
-                                "--tripinfo-output", "tripinfo.xml",
-                                "--statistic-output", "statistics.xml"])
-
-        #one simulation run
-        run()
-
-        meanSpeeds[i-1] = getMeanSpeed()
         print("Green duration: ", greenDuration)
+        for rep in range(numReplications):
+            
+            #create new routes
+            os.system('randomTrips.py -n circularControlNet.net.xml -o "C:\\Users\\Marcus\\Desktop\\Hauptordner\\Studium\\Masterstudium\\3. Semester\\Projekt_Sim-Opt\\Traffic_Simulation\\ZUS_Test\\circularControlFlow.xml" -b 0 -e 36000 --random --binomial 1 -p 6')
+            os.system('jtrrouter -c circularControl.jtrrcfg')
+
+            #start server
+            traci.start([sumoBinary, "-c", configPath,
+                                    "--tripinfo-output", "tripinfo.xml",
+                                    "--statistic-output", "statistics.xml"])
+
+            #one simulation run
+            run()
+
+            meanSpeeds[i-1] += float(getMeanSpeed())
+            print(getMeanSpeed())
+        meanSpeeds[i-1] /= numReplications
     
     greenDurations = np.arange(1, maxGreenDuration+1, 1)
     plt.plot(greenDurations, meanSpeeds)
