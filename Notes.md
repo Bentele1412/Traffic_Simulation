@@ -7,3 +7,7 @@
 ## Open Questions
 * definition of traffic density
 * number of traffic density calculations
+
+
+## Questions to Vollbrecht
+* Where to depart/arrive? Middle of edges - junctions - only outer junctions? 

@@ -6,12 +6,12 @@
 <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/jtrrouterConfiguration.xsd">
 
     <input>
-        <net-file value="circularControlNet.net.xml"/>
-        <route-files value="circularControlFlow.xml"/>
+        <net-file value="twoCross.net.xml"/>
+        <route-files value="twoCrossFlow.xml"/>
     </input>
 
     <output>
-        <output-file value="circularControlRoutes.xml"/>
+        <output-file value="twoCrossRoutes.xml"/>
     </output>
 
     <processing>
