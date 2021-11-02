@@ -25,7 +25,7 @@ def changeDuration(duration):
     tree = ET.parse("twoCross.net.xml")
     root = tree.getroot()
     for counter, phase in enumerate(root.iter("phase")):
-        if counter % 2 == 0:
+        if counter % 4 == 0:
             phase.set("duration", str(duration))
     tree.write("twoCross.net.xml")
 
@@ -56,23 +56,29 @@ if __name__ == '__main__':
     netPath = os.path.abspath("twoCross.net.xml")
 
     #optimization loop
-    greenDuration = 0
+    minGreenDuration = 40 #min green duration -1
+    greenDuration = minGreenDuration 
     direction = 1
-    #changeDuration(greenDuration)
-    maxGreenDuration = 2
+    changeDuration(greenDuration)
+    maxGreenDuration = 80
 
-    meanSpeeds = np.zeros(maxGreenDuration, dtype=float)
+    meanSpeeds = np.zeros(maxGreenDuration-minGreenDuration, dtype=float)
 
     numReplications = 1
 
-    for i in range(1, maxGreenDuration+1):
+    for i in range(maxGreenDuration-minGreenDuration):
         greenDuration += direction
-        #changeDuration(greenDuration)
+        changeDuration(greenDuration)
         print("Green duration: ", greenDuration)
         for rep in range(numReplications):
             
-            #create new routes
-            os.system('randomTrips.py -n twoCross.net.xml -o ".\\twoCrossFlow.xml" -b 0 -e 3600 --random --binomial 1 -p 6 --trip-attributes="departPos=\\"random\\""')
+            '''
+            create new routes
+            -p 3 for low traffic
+            -p 1 for medium traffic
+            -p 0.5 for high traffic
+            '''
+            os.system('randomTrips.py -n twoCross.net.xml -o ".\\twoCrossFlow.xml" -b 0 -e 3600 --random -p 0.5')
             os.system('jtrrouter -c twoCross.jtrrcfg')
 
             #start server
@@ -83,11 +89,11 @@ if __name__ == '__main__':
             #one simulation run
             run()
 
-            meanSpeeds[i-1] += float(getMeanSpeed())
+            meanSpeeds[i] += float(getMeanSpeed())
             print(getMeanSpeed())
-        meanSpeeds[i-1] /= numReplications
+        meanSpeeds[i] /= numReplications
     
-    greenDurations = np.arange(1, maxGreenDuration+1, 1)
+    greenDurations = np.arange(minGreenDuration, maxGreenDuration, 1)
     plt.plot(greenDurations, meanSpeeds)
     plt.yticks(np.arange(1, 10, 1))
     plt.title("Mean speeds of various green phase durations")
