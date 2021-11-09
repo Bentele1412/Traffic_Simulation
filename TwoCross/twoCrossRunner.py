@@ -78,7 +78,7 @@ if __name__ == '__main__':
             -p 1 for medium traffic
             -p 0.5 for high traffic
             '''
-            os.system('randomTrips.py -n twoCross.net.xml -o ".\\twoCrossFlow.xml" -b 0 -e 3600 --random -p 0.5')
+            os.system('randomTrips.py -n twoCross.net.xml -o ".\\twoCrossFlow.xml" -b 0 -e 3600 --random -p 0.5 --allow-fringe')
             os.system('jtrrouter -c twoCross.jtrrcfg')
 
             #start server

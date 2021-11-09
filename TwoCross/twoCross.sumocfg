@@ -8,7 +8,7 @@
     <input>
         <net-file value="twoCross.net.xml"/>
         <route-files value="twoCrossRoutes.xml"/>
-        <!-- <additional-files value="additionals.xml"/> -->
+        <additional-files value="additionals.xml"/>
     </input>
 
     <report>

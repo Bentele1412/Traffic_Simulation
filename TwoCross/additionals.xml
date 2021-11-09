@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on 2021-11-09 09:50:04 by Eclipse SUMO netedit Version 1.10.0
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/netconvertConfiguration.xsd">
+
+    <input>
+        <sumo-net-file value="C:\Users\Marcus\Desktop\Hauptordner\Studium\Masterstudium\3.%20Semester\Projekt_Sim-Opt\Traffic_Simulation\TwoCross\twoCross.net.xml"/>
+    </input>
+
+    <output>
+        <output-file value="C:\Users\Marcus\Desktop\Hauptordner\Studium\Masterstudium\3.%20Semester\Projekt_Sim-Opt\Traffic_Simulation\TwoCross\twoCross.net.xml"/>
+    </output>
+
+    <processing>
+        <geometry.min-radius.fix.railways value="false"/>
+        <geometry.max-grade.fix value="false"/>
+        <offset.disable-normalization value="true"/>
+        <lefthand value="false"/>
+    </processing>
+
+    <junctions>
+        <no-turnarounds value="true"/>
+        <junctions.corner-detail value="5"/>
+        <junctions.limit-turn-speed value="5.5"/>
+        <rectangular-lane-cut value="false"/>
+    </junctions>
+
+    <pedestrian>
+        <walkingareas value="false"/>
+    </pedestrian>
+
+    <netedit>
+        <additional-files value="C:\Users\Marcus\Desktop\Hauptordner\Studium\Masterstudium\3.%20Semester\Projekt_Sim-Opt\Traffic_Simulation\TwoCross\additionals.xml"/>
+    </netedit>
+
+    <report>
+        <aggregate-warnings value="5"/>
+    </report>
+
+</configuration>
+-->
+
+<additional xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/additional_file.xsd">
+    <e1Detector id="deta2Lb2_1" lane="a2Lb2_1" pos="12.00" freq="300.00" file="detOutputs\e1Detector_a2Lb2_1.xml"/>
+    <e1Detector id="deta2Lb2_0" lane="a2Lb2_0" pos="12.00" freq="300.00" file="detOutputs\e1Detector_a2Lb2_0.xml"/>
+    <e1Detector id="detb3Lb2_0" lane="b3Lb2_0" pos="12.00" freq="300.00" file="detOutputs\e1Detector_b3Lb2_0.xml"/>
+    <e1Detector id="detb3Lb2_1" lane="b3Lb2_1" pos="12.00" freq="300.00" file="detOutputs\e1Detector_b3Lb2_1.xml"/>
+    <e1Detector id="detb1Lb2_0" lane="b1Lb2_0" pos="12.00" freq="300.00" file="detOutputs\e1Detector_b1Lb2_0.xml"/>
+    <e1Detector id="detb1Lb2_1" lane="b1Lb2_1" pos="12.00" freq="300.00" file="detOutputs\e1Detector_b1Lb2_1.xml"/>
+    <e1Detector id="detc3Lc2_0" lane="c3Lc2_0" pos="12.00" freq="300.00" file="detOutputs\e1Detector_c3Lc2_0.xml"/>
+    <e1Detector id="detc3Lc2_1" lane="c3Lc2_1" pos="12.00" freq="300.00" file="detOutputs\e1Detector_c3Lc2_1.xml"/>
+    <e1Detector id="detc1Lc2_0" lane="c1Lc2_0" pos="12.00" freq="300.00" file="detOutputs\e1Detector_c1Lc2_0.xml"/>
+    <e1Detector id="detc1Lc2_1" lane="c1Lc2_1" pos="12.00" freq="300.00" file="detOutputs\e1Detector_c1Lc2_1.xml"/>
+    <e1Detector id="detc2Lc2_0" lane="c2Lc2_0" pos="12.00" freq="300.00" file="detOutputs\e1Detector_c2Lc2_0.xml"/>
+    <e1Detector id="detc2Lc2_1" lane="c2Lc2_1" pos="12.00" freq="300.00" file="detOutputs\e1Detector_c2Lc2_1.xml"/>
+    <e1Detector id="detc2b2_0" lane="c2b2_0" pos="262.00" freq="300.00" file="detOutputs\e1Detector_c2b2_0.xml"/>
+    <e1Detector id="detc2b2_1" lane="c2b2_1" pos="262.00" freq="300.00" file="detOutputs\e1Detector_c2b2_1.xml"/>
+    <e1Detector id="detb2c2_0" lane="b2c2_0" pos="262.00" freq="300.00" file="detOutputs\e1Detector_b2c2_0.xml"/>
+    <e1Detector id="detb2c2_1" lane="b2c2_1" pos="262.00" freq="300.00" file="detOutputs\e1Detector_b2c2_1.xml"/>
+</additional>

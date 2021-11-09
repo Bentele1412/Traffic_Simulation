@@ -9,5 +9,9 @@
 * number of traffic density calculations
 
 
+## Keep in mind
+* Identify stable system state and only measure if system in stable state
+
+
 ## Questions to Vollbrecht
 * Where to depart/arrive? Middle of edges - junctions - only outer junctions? 

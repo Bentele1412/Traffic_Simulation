@@ -1,0 +1,30 @@
+<edgedata>
+    <interval id="via" begin="0" end="3600">
+        <edge id="c3Lc2" value="100.00"/>
+        <edge id="c2c3L" value="100.00"/>
+        <edge id="c2c2L" value="100.00"/>
+        <edge id="c2c1L" value="100.00"/>
+        <edge id="c2b2" value="100.00"/>
+        <edge id="c2Lc2" value="100.00"/>
+        <edge id="c1Lc2" value="100.00"/>
+        <edge id="b3Lb2" value="100.00"/>
+        <edge id="b2c2" value="100.00"/>
+        <edge id="b2b3L" value="100.00"/>
+        <edge id="b2b1L" value="100.00"/>
+        <edge id="b2a2L" value="100.00"/>
+        <edge id="b1Lb2" value="100.00"/>
+        <edge id="a2Lb2" value="100.00"/>
+        <edge id="d2c2L" value="0.00"/>
+        <edge id="c3c3L" value="0.00"/>
+        <edge id="c3Lc3" value="0.00"/>
+        <edge id="c2Ld2" value="0.00"/>
+        <edge id="c1c1L" value="0.00"/>
+        <edge id="c1Lc1" value="0.00"/>
+        <edge id="b3b3L" value="0.00"/>
+        <edge id="b3Lb3" value="0.00"/>
+        <edge id="b1b1L" value="0.00"/>
+        <edge id="b1Lb1" value="0.00"/>
+        <edge id="a2a2L" value="0.00"/>
+        <edge id="a2La2" value="0.00"/>
+    </interval>
+</edgedata>
