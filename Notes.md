@@ -15,3 +15,11 @@
 
 ## Questions to Vollbrecht
 * Where to depart/arrive? Middle of edges - junctions - only outer junctions? 
+
+## To-do
+* Read paper until tuesday
+* reimplement 2X3 grid from paper with flows
+* implement SOTL with well defined object structure
+* implement fixed cycle based control
+* compare SOTL and FIX + comparison to paper results
+* 
