@@ -60,7 +60,7 @@ if __name__ == '__main__':
     greenDuration = minGreenDuration 
     direction = 1
     changeDuration(greenDuration)
-    maxGreenDuration = 80
+    maxGreenDuration = 41
 
     meanSpeeds = np.zeros(maxGreenDuration-minGreenDuration, dtype=float)
 
