@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<routes>
+    <flow probability="0.08333" id="1" end="3600" begin="0">
+        <route edges="N1A1 A1B1 B1S1"/>
+    </flow>
+
+    <flow probability="0.08333" id="2" end="3600" begin="0">
+        <route edges="N2A2 A2B2 B2S2"/>
+    </flow>
+
+    <flow probability="0.08333" id="3" end="3600" begin="0">
+        <route edges="N3A3 A3B3 B3S3"/>
+    </flow>
+
+    <flow probability="0.08333" id="4" end="3600" begin="0">
+        <route edges="W1A1 A1A2 A2A3 A3E1"/>
+    </flow>
+
+    <flow probability="0.08333" id="5" end="3600" begin="0">
+        <route edges="W2B1 B1B2 B2B3 B3E2"/>
+    </flow>
+
+    <flow probability="0.58333" id="6" end="1200" begin="0">
+        <route edges="N1A1 A1B1 B1B2 B2B3 B3E2"/>
+    </flow>
+
+    <flow probability="0.58333" id="7" end="2400" begin="1200">
+        <route edges="W1A1 A1A2 A2A3 A3B3 B3E2"/>
+    </flow>
+
+    <flow probability="0.58333" id="8" end="3600" begin="2400">
+        <route edges="W1A1 A1A2 A2B2 B2B3 B3E2"/>
+    </flow>
+</routes>
