@@ -1,19 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- generated on 2021-11-16 09:48:20 by Eclipse SUMO netedit Version 1.10.0
+<!-- generated on 2021-11-17 12:53:06 by Eclipse SUMO netedit Version 1.10.0
 <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/netconvertConfiguration.xsd">
+
+    <input>
+        <sumo-net-file value="C:\Users\Marcus\Desktop\Hauptordner\Studium\Masterstudium\3.%20Semester\Projekt_Sim-Opt\Traffic_Simulation\2X3GridNetwork\2x3net.net.xml"/>
+    </input>
 
     <output>
         <output-file value="C:\Users\Marcus\Desktop\Hauptordner\Studium\Masterstudium\3.%20Semester\Projekt_Sim-Opt\Traffic_Simulation\2X3GridNetwork\2x3net.net.xml"/>
     </output>
 
     <processing>
+        <geometry.min-radius.fix.railways value="false"/>
+        <geometry.max-grade.fix value="false"/>
         <offset.disable-normalization value="true"/>
+        <lefthand value="false"/>
     </processing>
 
     <junctions>
         <no-turnarounds value="true"/>
+        <junctions.corner-detail value="5"/>
+        <junctions.limit-turn-speed value="5.5"/>
+        <rectangular-lane-cut value="false"/>
     </junctions>
+
+    <pedestrian>
+        <walkingareas value="false"/>
+    </pedestrian>
 
     <report>
         <aggregate-warnings value="5"/>
@@ -24,7 +38,7 @@
 
 <net version="1.9" junctionCornerDetail="5" limitTurnSpeed="5.50" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/net_file.xsd">
 
-    <location netOffset="0.00,0.00" convBoundary="-500.00,-1000.00,1500.00,500.00" origBoundary="10000000000.00,10000000000.00,-10000000000.00,-10000000000.00" projParameter="!"/>
+    <location netOffset="0.00,0.00" convBoundary="-500.00,-1000.00,1500.00,500.00" origBoundary="-10000000000.00,-10000000000.00,10000000000.00,10000000000.00" projParameter="!"/>
 
     <edge id=":A1_0" function="internal">
         <lane id=":A1_0_0" index="0" speed="13.89" length="11.20" shape="-1.60,4.00 -1.60,-7.20"/>
@@ -152,39 +166,39 @@
     </edge>
 
     <tlLogic id="A1" type="static" programID="0" offset="0">
-        <phase duration="42" state="GGrr"/>
+        <phase duration="1000" state="GGrr"/>
         <phase duration="3"  state="yyrr"/>
-        <phase duration="42" state="rrGG"/>
+        <phase duration="1000" state="rrGG"/>
         <phase duration="3"  state="rryy"/>
     </tlLogic>
     <tlLogic id="A2" type="static" programID="0" offset="0">
-        <phase duration="42" state="GGrr"/>
+        <phase duration="1000" state="GGrr"/>
         <phase duration="3"  state="yyrr"/>
-        <phase duration="42" state="rrGG"/>
+        <phase duration="1000" state="rrGG"/>
         <phase duration="3"  state="rryy"/>
     </tlLogic>
     <tlLogic id="A3" type="static" programID="0" offset="0">
-        <phase duration="42" state="GGrr"/>
+        <phase duration="1000" state="GGrr"/>
         <phase duration="3"  state="yyrr"/>
-        <phase duration="42" state="rrGG"/>
+        <phase duration="1000" state="rrGG"/>
         <phase duration="3"  state="rryy"/>
     </tlLogic>
     <tlLogic id="B1" type="static" programID="0" offset="0">
-        <phase duration="42" state="GGrr"/>
+        <phase duration="1000" state="GGrr"/>
         <phase duration="3"  state="yyrr"/>
-        <phase duration="42" state="rrGG"/>
+        <phase duration="1000" state="rrGG"/>
         <phase duration="3"  state="rryy"/>
     </tlLogic>
     <tlLogic id="B2" type="static" programID="0" offset="0">
-        <phase duration="42" state="GGrr"/>
+        <phase duration="1000" state="GGrr"/>
         <phase duration="3"  state="yyrr"/>
-        <phase duration="42" state="rrGG"/>
+        <phase duration="1000" state="rrGG"/>
         <phase duration="3"  state="rryy"/>
     </tlLogic>
     <tlLogic id="B3" type="static" programID="0" offset="0">
-        <phase duration="42" state="GGrr"/>
+        <phase duration="1000" state="GGrr"/>
         <phase duration="3"  state="yyrr"/>
-        <phase duration="42" state="rrGG"/>
+        <phase duration="1000" state="rrGG"/>
         <phase duration="3"  state="rryy"/>
     </tlLogic>
 

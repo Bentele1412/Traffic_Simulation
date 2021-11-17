@@ -88,19 +88,114 @@ class Detector():
         self.detectedVehicles = 0
 
     def getCurrentCars(self):
+        incomingCars = 0
         vehicleIDs = traci.inductionloop.getLastStepVehicleIDs(self.id)
         for id in vehicleIDs:
             if not id in self.lastVehicleIDs:
-                self.detectedVehicles += 1
+                incomingCars += 1
         self.lastVehicleIDs = vehicleIDs
+        self.detectedVehicles += incomingCars
+        return incomingCars
 
     def resetDetectedVehicles(self):
         self.detectedVehicles = 0
 
 class Lane():
-    def __init__(self, id, detectors, correspondingTLPhase):
+    def __init__(self, id, detectors):
         self.id = id
-        self.detectors = detectors
-        self.correspondingTLPhase = correspondingTLPhase
+        self.detectors = detectors #[begin, mid, end]
 
         self.isRed = True
+        self.carsOnLane = 0
+        self.carsWithinOmega = 0
+
+    def updateCarCount(self):
+        incomingCars = self.detectors[0].getCurrentCars()
+        incomingCarsOmega = self.detectors[1].getCurrentCars()
+        outflowingCars = self.detectors[-1].getCurrentCars()
+        
+        self.carsOnLane += incomingCars - outflowingCars
+        self.carsWithinOmega += incomingCarsOmega - outflowingCars
+
+class SOTL():
+    def __init__(self, tl, mu, theta):
+        self.tl = tl
+        self.mu = mu
+        self.theta = theta
+
+        self.kappa = 0
+        self.phi_min = self.tl.minGreenPhase
+        self.phi = 0
+
+    def step(self):
+        self.phi += 1
+        for lane in self.tl.lanes:
+            if lane.isRed: 
+                self.kappa += lane.carsOnLane
+                break
+        if self.phi >= self.phi_min:
+            for lane in self.tl.lanes:
+                if not lane.isRed:
+                    if not(0 < lane.carsWithinOmega and lane.carsWithinOmega < self.mu):
+                        if self.kappa >= self.theta:
+                            self.tl.switchLight(self.tl.getCurrentPhase())
+                            self.kappa = 0
+                            self.phi = 0
+                            break
+        
+
+def createDetectors():
+    '''
+    !Legacy function!
+    '''
+
+    # [[[], []]] --> junction, lane, detectors
+    detectors = []
+    junction = []
+    lane = []
+    tree = ET.parse("additionals.xml")
+    root = tree.getroot()
+    for counter, detector in enumerate(root.iter("e1Detector")):
+        if counter % 3 == 0 and counter != 0:
+            junction.append(lane)
+            lane = []
+        if counter % 6 == 0 and counter != 0:
+            detectors.append(junction)
+            junction = []
+        lane.append(Detector(detector.get('id')))
+    junction.append(lane)
+    detectors.append(junction)
+    return detectors
+
+def createTrafficLights(minGreenTime, maxGreenTime):
+    '''
+    Create list of all TrafficLights containing all corresponding lanes which consist of their corresponding detectors 
+    '''
+
+    trafficLights = []
+    lanes = []
+    detectors = []
+    tree = ET.parse("additionals.xml")
+    root = tree.getroot()
+    for counter, detector in enumerate(root.iter("e1Detector")):
+        if counter % 3 == 0 and counter != 0:
+            lanes.append(Lane(prevDetector.get('lane'), detectors))
+            detectors = []
+        if counter % 6 == 0 and counter != 0:
+            trafficLights.append(TrafficLight(prevDetector.get('lane')[2:4], lanes, minGreenTime, maxGreenTime))
+            lanes = []
+        detectors.append(Detector(detector.get('id')))
+        prevDetector = detector
+    lanes.append(Lane(prevDetector.get('lane'), detectors))
+    trafficLights.append(TrafficLight(prevDetector.get('lane')[2:4], lanes, minGreenTime, maxGreenTime))
+    return trafficLights
+
+if __name__ == '__main__':
+    sumoBinary = checkBinary('sumo')
+    configPath = os.path.abspath("2x3.sumocfg")
+
+    #create instances
+    minGreenTime = 5
+    maxGreenTime = 30
+    trafficLights = createTrafficLights(minGreenTime, maxGreenTime)
+    
