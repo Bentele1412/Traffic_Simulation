@@ -22,4 +22,3 @@
 * implement SOTL with well defined object structure
 * implement fixed cycle based control
 * compare SOTL and FIX + comparison to paper results
-* 

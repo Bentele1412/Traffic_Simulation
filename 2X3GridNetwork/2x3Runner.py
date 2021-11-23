@@ -11,8 +11,8 @@ import sys
 import os
 from sumolib import checkBinary
 import xml.etree.ElementTree as ET
-import matplotlib.pyplot as plt
-import numpy as np
+#import matplotlib.pyplot as plt
+#import numpy as np
 
 if 'SUMO_HOME' in os.environ:
     tools = os.path.join(os.environ['SUMO_HOME'], 'tools')
@@ -22,15 +22,8 @@ else:
 
 
 '''
-Helper functions
+Class definitions
 '''
-
-def getMeanSpeedWaitingTime():
-    tree = ET.parse("statistics.xml")
-    root = tree.getroot()
-    avgSpeed = root.find('vehicleTripStatistics').attrib['speed']
-    avgWaitingTime = root.find('vehicleTripStatistics').attrib['waitingTime']
-    return avgSpeed, avgWaitingTime
 
 class TrafficLight():
     '''
@@ -124,25 +117,39 @@ class SOTL():
         self.theta = theta
 
         self.kappa = 0
-        self.phi_min = self.tl.minGreenPhase
+        self.phi_min = self.tl.minGreenTime
         self.phi = 0
 
     def step(self):
         self.phi += 1
         for lane in self.tl.lanes:
+            lane.updateCarCount()
             if lane.isRed: 
-                self.kappa += lane.carsOnLane
-                break
+                self.kappa += lane.carsOnLane #change to more kappas if more than one direction has red
         if self.phi >= self.phi_min:
             for lane in self.tl.lanes:
                 if not lane.isRed:
-                    if not(0 < lane.carsWithinOmega and lane.carsWithinOmega < self.mu):
+                    if not(0 < lane.carsWithinOmega and lane.carsWithinOmega < self.mu) or self.phi > self.tl.maxGreenTime:
                         if self.kappa >= self.theta:
                             self.tl.switchLight(self.tl.getCurrentPhase())
-                            self.kappa = 0
-                            self.phi = 0
+                            self.resetParams()
                             break
-        
+    
+    def resetParams(self):
+        self.phi = 0
+        self.kappa = 0
+
+
+'''
+Helper functions
+'''
+
+def getMeanSpeedWaitingTime():
+    tree = ET.parse("statistics.xml")
+    root = tree.getroot()
+    avgSpeed = root.find('vehicleTripStatistics').attrib['speed']
+    avgWaitingTime = root.find('vehicleTripStatistics').attrib['waitingTime']
+    return avgSpeed, avgWaitingTime
 
 def createDetectors():
     '''
@@ -190,12 +197,60 @@ def createTrafficLights(minGreenTime, maxGreenTime):
     trafficLights.append(TrafficLight(prevDetector.get('lane')[2:4], lanes, minGreenTime, maxGreenTime))
     return trafficLights
 
+def run(sotls):
+    step = 0
+    while traci.simulation.getMinExpectedNumber() > 0:
+        traci.simulationStep()
+        for sotl in sotls:
+            currentPhase = sotl.tl.getCurrentPhase()
+            if currentPhase % 2 == 0: #don´t execute SOTL if TL in yellow phase
+                sotl.step()
+        step += 1
+    traci.close()
+    sys.stdout.flush()
+
+def setFlows(numVehicles, simulationTime):
+    groundProb = numVehicles/simulationTime/12
+    heavyProb = groundProb*7
+    probabilities = [groundProb]*5
+    for _ in range(3):
+        probabilities.append(heavyProb)
+    tree = ET.parse("2x3.flow.xml")
+    root = tree.getroot()
+    for counter, flow in enumerate(root.iter("flow")):
+        flow.set("probability", str(probabilities[counter]))
+    tree.write("2x3.flow.xml")
+
+
 if __name__ == '__main__':
     sumoBinary = checkBinary('sumo')
+    sumoGui = checkBinary('sumo-gui')
     configPath = os.path.abspath("2x3.sumocfg")
+    simulationTime = 3600
+    numVehicles = 1500
 
     #create instances
-    minGreenTime = 5
-    maxGreenTime = 30
+    minGreenTime = 20
+    maxGreenTime = 60 #change to maxRedTime
     trafficLights = createTrafficLights(minGreenTime, maxGreenTime)
+
+    mu = 3
+    theta = 41
+    sotls = []
+    for tl in trafficLights:
+        sotls.append(SOTL(tl, mu, theta))
+
+    #setFlows(numVehicles, simulationTime)
+    #os.system('jtrrouter -c 2x3.jtrrcfg')
+
+    traci.start([sumoGui, "-c", configPath,
+                                    "--tripinfo-output", "tripinfo.xml",
+                                    "--statistic-output", "statistics.xml"])
+    
+    run(sotls)
+
+    meanSpeed, meanWaitingTime = getMeanSpeedWaitingTime()
+    print("Mean speed: ", meanSpeed)
+    print("Mean waiting time: ", meanWaitingTime)
+    
     
