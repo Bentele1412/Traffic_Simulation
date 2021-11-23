@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on 2021-11-16 11:28:40 by Eclipse SUMO sumo Version 1.10.0
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/sumoConfiguration.xsd">
+
+    <input>
+        <net-file value="C:\Users\Marcus\Desktop\Hauptordner\Studium\Masterstudium\3.%20Semester\Projekt_Sim-Opt\Traffic_Simulation\TwoCross\twoCross.net.xml"/>
+        <route-files value="C:\Users\Marcus\Desktop\Hauptordner\Studium\Masterstudium\3.%20Semester\Projekt_Sim-Opt\Traffic_Simulation\TwoCross\twoCrossRoutes.xml"/>
+        <additional-files value="C:\Users\Marcus\Desktop\Hauptordner\Studium\Masterstudium\3.%20Semester\Projekt_Sim-Opt\Traffic_Simulation\TwoCross\additionals.xml"/>
+    </input>
+
+    <output>
+        <tripinfo-output value="tripinfo.xml"/>
+        <statistic-output value="statistics.xml"/>
+    </output>
+
+    <report>
+        <no-step-log value="true"/>
+    </report>
+
+    <traci_server>
+        <remote-port value="64199"/>
+    </traci_server>
+
+</configuration>
+-->
+
+<detector xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/det_e1_file.xsd">
+    <interval begin="0.00" end="300.00" id="detc3Lc2_0" nVehContrib="59" flow="708.00" occupancy="7.63" speed="13.03" harmonicMeanSpeed="12.89" length="5.00" nVehEntered="59"/>
+    <interval begin="300.00" end="600.00" id="detc3Lc2_0" nVehContrib="59" flow="708.00" occupancy="18.00" speed="9.20" harmonicMeanSpeed="5.46" length="5.00" nVehEntered="59"/>
+</detector>

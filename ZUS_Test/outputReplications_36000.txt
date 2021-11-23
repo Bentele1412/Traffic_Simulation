@@ -1,0 +1,2091 @@
+Green duration:  1
+Loading configuration ... done.
+Success.up to time step: 36017.00
+Loading configuration ... done.
+5.46
+Loading configuration ... done.
+Success.up to time step: 36005.00
+Loading configuration ... done.
+5.45
+Loading configuration ... done.
+Success.up to time step: 36020.00
+Loading configuration ... done.
+5.56
+Loading configuration ... done.
+Success.up to time step: 36003.00
+Loading configuration ... done.
+5.53
+Loading configuration ... done.
+Success.up to time step: 36010.00
+Loading configuration ... done.
+5.43
+Loading configuration ... done.
+Success.up to time step: 36013.00
+Loading configuration ... done.
+5.38
+Loading configuration ... done.
+Success.up to time step: 36003.00
+Loading configuration ... done.
+5.42
+Loading configuration ... done.
+Success.up to time step: 36010.00
+Loading configuration ... done.
+5.53
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+5.34
+Loading configuration ... done.
+Success.up to time step: 36009.00
+Loading configuration ... done.
+5.50
+Green duration:  2
+Loading configuration ... done.
+Success.up to time step: 36011.00
+Loading configuration ... done.
+4.01
+Loading configuration ... done.
+Success.up to time step: 36004.00
+Loading configuration ... done.
+4.03
+Loading configuration ... done.
+Success.up to time step: 36006.00
+Loading configuration ... done.
+3.85
+Loading configuration ... done.
+Success.up to time step: 36003.00
+Loading configuration ... done.
+3.68
+Loading configuration ... done.
+Success.up to time step: 36014.00
+Loading configuration ... done.
+3.66
+Loading configuration ... done.
+Success.up to time step: 36003.00
+Loading configuration ... done.
+3.67
+Loading configuration ... done.
+Success.up to time step: 36006.00
+Loading configuration ... done.
+3.69
+Loading configuration ... done.
+Success.up to time step: 36016.00
+Loading configuration ... done.
+3.83
+Loading configuration ... done.
+Success.up to time step: 36007.00
+Loading configuration ... done.
+3.96
+Loading configuration ... done.
+Success.up to time step: 36005.00
+Loading configuration ... done.
+3.73
+Green duration:  3
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+1.20
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+1.17
+Loading configuration ... done.
+Success.up to time step: 36017.00
+Loading configuration ... done.
+1.12
+Loading configuration ... done.
+Success.up to time step: 36029.00
+Loading configuration ... done.
+1.36
+Loading configuration ... done.
+Success.up to time step: 36006.00
+Loading configuration ... done.
+1.35
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+1.68
+Loading configuration ... done.
+Success.up to time step: 36003.00
+Loading configuration ... done.
+1.32
+Loading configuration ... done.
+Success.up to time step: 36006.00
+Loading configuration ... done.
+1.09
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+1.40
+Loading configuration ... done.
+Success.up to time step: 36013.00
+Loading configuration ... done.
+1.20
+Green duration:  4
+Loading configuration ... done.
+Success.up to time step: 36005.00
+Loading configuration ... done.
+5.36
+Loading configuration ... done.
+Success.up to time step: 36003.00
+Loading configuration ... done.
+5.30
+Loading configuration ... done.
+Success.up to time step: 36004.00
+Loading configuration ... done.
+5.50
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+5.38
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+5.40
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+5.44
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+5.34
+Loading configuration ... done.
+Success.up to time step: 36014.00
+Loading configuration ... done.
+5.43
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+5.44
+Loading configuration ... done.
+Success.up to time step: 36013.00
+Loading configuration ... done.
+5.33
+Green duration:  5
+Loading configuration ... done.
+Success.up to time step: 36006.00
+Loading configuration ... done.
+5.23
+Loading configuration ... done.
+Success.up to time step: 36006.00
+Loading configuration ... done.
+5.20
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+5.19
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+5.10
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+5.23
+Loading configuration ... done.
+Success.up to time step: 36010.00
+Loading configuration ... done.
+5.26
+Loading configuration ... done.
+Success.up to time step: 36015.00
+Loading configuration ... done.
+5.18
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+5.38
+Loading configuration ... done.
+Success.up to time step: 36009.00
+Loading configuration ... done.
+5.25
+Loading configuration ... done.
+Success.up to time step: 36004.00
+Loading configuration ... done.
+5.17
+Green duration:  6
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+5.43
+Loading configuration ... done.
+Success.up to time step: 36003.00
+Loading configuration ... done.
+5.33
+Loading configuration ... done.
+Success.up to time step: 36008.00
+Loading configuration ... done.
+5.41
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+5.41
+Loading configuration ... done.
+Success.up to time step: 36013.00
+Loading configuration ... done.
+5.34
+Loading configuration ... done.
+Success.up to time step: 36010.00
+Loading configuration ... done.
+5.43
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+5.38
+Loading configuration ... done.
+Success.up to time step: 36003.00
+Loading configuration ... done.
+5.29
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+5.43
+Loading configuration ... done.
+Success.up to time step: 36010.00
+Loading configuration ... done.
+5.36
+Green duration:  7
+Loading configuration ... done.
+Success.up to time step: 36006.00
+Loading configuration ... done.
+5.61
+Loading configuration ... done.
+Success.up to time step: 36005.00
+Loading configuration ... done.
+5.53
+Loading configuration ... done.
+Success.up to time step: 36005.00
+Loading configuration ... done.
+5.61
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+5.62
+Loading configuration ... done.
+Success.up to time step: 36004.00
+Loading configuration ... done.
+5.56
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+5.59
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+5.58
+Loading configuration ... done.
+Success.up to time step: 36004.00
+Loading configuration ... done.
+5.61
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+5.54
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+5.64
+Green duration:  8
+Loading configuration ... done.
+Success.up to time step: 36005.00
+Loading configuration ... done.
+5.49
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+5.51
+Loading configuration ... done.
+Success.up to time step: 36012.00
+Loading configuration ... done.
+5.49
+Loading configuration ... done.
+Success.up to time step: 36004.00
+Loading configuration ... done.
+5.52
+Loading configuration ... done.
+Success.up to time step: 36003.00
+Loading configuration ... done.
+5.51
+Loading configuration ... done.
+Success.up to time step: 36004.00
+Loading configuration ... done.
+5.47
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+5.49
+Loading configuration ... done.
+Success.up to time step: 36003.00
+Loading configuration ... done.
+5.47
+Loading configuration ... done.
+Success.up to time step: 36025.00
+Loading configuration ... done.
+5.50
+Loading configuration ... done.
+Success.up to time step: 36007.00
+Loading configuration ... done.
+5.41
+Green duration:  9
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+5.57
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+5.57
+Loading configuration ... done.
+Success.up to time step: 36004.00
+Loading configuration ... done.
+5.53
+Loading configuration ... done.
+Success.up to time step: 36011.00
+Loading configuration ... done.
+5.45
+Loading configuration ... done.
+Success.up to time step: 36005.00
+Loading configuration ... done.
+5.54
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+5.50
+Loading configuration ... done.
+Success.up to time step: 36006.00
+Loading configuration ... done.
+5.55
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+5.57
+Loading configuration ... done.
+Success.up to time step: 36015.00
+Loading configuration ... done.
+5.59
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+5.57
+Green duration:  10
+Loading configuration ... done.
+Success.up to time step: 36008.00
+Loading configuration ... done.
+5.42
+Loading configuration ... done.
+Success.up to time step: 36005.00
+Loading configuration ... done.
+5.42
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+5.43
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+5.46
+Loading configuration ... done.
+Success.up to time step: 36004.00
+Loading configuration ... done.
+5.44
+Loading configuration ... done.
+Success.up to time step: 36022.00
+Loading configuration ... done.
+5.49
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+5.43
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+5.39
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+5.51
+Loading configuration ... done.
+Success.up to time step: 36006.00
+Loading configuration ... done.
+5.39
+Green duration:  11
+Loading configuration ... done.
+Success.up to time step: 36020.00
+Loading configuration ... done.
+5.40
+Loading configuration ... done.
+Success.up to time step: 36011.00
+Loading configuration ... done.
+5.37
+Loading configuration ... done.
+Success.up to time step: 36006.00
+Loading configuration ... done.
+5.40
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+5.35
+Loading configuration ... done.
+Success.up to time step: 36004.00
+Loading configuration ... done.
+5.38
+Loading configuration ... done.
+Success.up to time step: 36013.00
+Loading configuration ... done.
+5.38
+Loading configuration ... done.
+Success.up to time step: 36008.00
+Loading configuration ... done.
+5.42
+Loading configuration ... done.
+Success.up to time step: 36009.00
+Loading configuration ... done.
+5.38
+Loading configuration ... done.
+Success.up to time step: 36016.00
+Loading configuration ... done.
+5.39
+Loading configuration ... done.
+Success.up to time step: 36003.00
+Loading configuration ... done.
+5.37
+Green duration:  12
+Loading configuration ... done.
+Success.up to time step: 36003.00
+Loading configuration ... done.
+5.37
+Loading configuration ... done.
+Success.up to time step: 36018.00
+Loading configuration ... done.
+5.39
+Loading configuration ... done.
+Success.up to time step: 36009.00
+Loading configuration ... done.
+5.36
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+5.34
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+5.32
+Loading configuration ... done.
+Success.up to time step: 36003.00
+Loading configuration ... done.
+5.33
+Loading configuration ... done.
+Success.up to time step: 36004.00
+Loading configuration ... done.
+5.30
+Loading configuration ... done.
+Success.up to time step: 36005.00
+Loading configuration ... done.
+5.32
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+5.29
+Loading configuration ... done.
+Success.up to time step: 36009.00
+Loading configuration ... done.
+5.38
+Green duration:  13
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+5.31
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+5.25
+Loading configuration ... done.
+Success.up to time step: 36006.00
+Loading configuration ... done.
+5.25
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+5.29
+Loading configuration ... done.
+Success.up to time step: 36004.00
+Loading configuration ... done.
+5.28
+Loading configuration ... done.
+Success.up to time step: 36005.00
+Loading configuration ... done.
+5.26
+Loading configuration ... done.
+Success.up to time step: 36006.00
+Loading configuration ... done.
+5.25
+Loading configuration ... done.
+Success.up to time step: 36003.00
+Loading configuration ... done.
+5.30
+Loading configuration ... done.
+Success.up to time step: 36009.00
+Loading configuration ... done.
+5.25
+Loading configuration ... done.
+Success.up to time step: 36008.00
+Loading configuration ... done.
+5.26
+Green duration:  14
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+5.22
+Loading configuration ... done.
+Success.up to time step: 36005.00
+Loading configuration ... done.
+5.18
+Loading configuration ... done.
+Success.up to time step: 36011.00
+Loading configuration ... done.
+5.23
+Loading configuration ... done.
+Success.up to time step: 36006.00
+Loading configuration ... done.
+5.20
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+5.25
+Loading configuration ... done.
+Success.up to time step: 36004.00
+Loading configuration ... done.
+5.20
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+5.22
+Loading configuration ... done.
+Success.up to time step: 36013.00
+Loading configuration ... done.
+5.18
+Loading configuration ... done.
+Success.up to time step: 36004.00
+Loading configuration ... done.
+5.23
+Loading configuration ... done.
+Success.up to time step: 36012.00
+Loading configuration ... done.
+5.20
+Green duration:  15
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+5.10
+Loading configuration ... done.
+Success.up to time step: 36005.00
+Loading configuration ... done.
+5.15
+Loading configuration ... done.
+Success.up to time step: 36014.00
+Loading configuration ... done.
+5.05
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+5.11
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+5.16
+Loading configuration ... done.
+Success.up to time step: 36008.00
+Loading configuration ... done.
+5.10
+Loading configuration ... done.
+Success.up to time step: 36004.00
+Loading configuration ... done.
+5.15
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+5.09
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+5.20
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+5.15
+Green duration:  16
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+5.04
+Loading configuration ... done.
+Success.up to time step: 36011.00
+Loading configuration ... done.
+5.08
+Loading configuration ... done.
+Success.up to time step: 36003.00
+Loading configuration ... done.
+5.15
+Loading configuration ... done.
+Success.up to time step: 36018.00
+Loading configuration ... done.
+4.99
+Loading configuration ... done.
+Success.up to time step: 36003.00
+Loading configuration ... done.
+5.05
+Loading configuration ... done.
+Success.up to time step: 36009.00
+Loading configuration ... done.
+5.09
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+5.12
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+5.03
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+5.16
+Loading configuration ... done.
+Success.up to time step: 36009.00
+Loading configuration ... done.
+5.08
+Green duration:  17
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+5.03
+Loading configuration ... done.
+Success.up to time step: 36012.00
+Loading configuration ... done.
+5.03
+Loading configuration ... done.
+Success.up to time step: 36015.00
+Loading configuration ... done.
+4.99
+Loading configuration ... done.
+Success.up to time step: 36003.00
+Loading configuration ... done.
+5.00
+Loading configuration ... done.
+Success.up to time step: 36012.00
+Loading configuration ... done.
+5.01
+Loading configuration ... done.
+Success.up to time step: 36014.00
+Loading configuration ... done.
+4.99
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+5.01
+Loading configuration ... done.
+Success.up to time step: 36011.00
+Loading configuration ... done.
+4.96
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+4.97
+Loading configuration ... done.
+Success.up to time step: 36024.00
+Loading configuration ... done.
+4.96
+Green duration:  18
+Loading configuration ... done.
+Success.up to time step: 36014.00
+Loading configuration ... done.
+4.97
+Loading configuration ... done.
+Success.up to time step: 36005.00
+Loading configuration ... done.
+4.95
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+4.94
+Loading configuration ... done.
+Success.up to time step: 36011.00
+Loading configuration ... done.
+4.88
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+4.95
+Loading configuration ... done.
+Success.up to time step: 36010.00
+Loading configuration ... done.
+5.03
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+4.91
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+4.92
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+4.97
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+4.90
+Green duration:  19
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+4.87
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+4.94
+Loading configuration ... done.
+Success.up to time step: 36007.00
+Loading configuration ... done.
+4.90
+Loading configuration ... done.
+Success.up to time step: 36007.00
+Loading configuration ... done.
+4.90
+Loading configuration ... done.
+Success.up to time step: 36003.00
+Loading configuration ... done.
+4.90
+Loading configuration ... done.
+Success.up to time step: 36008.00
+Loading configuration ... done.
+4.80
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+4.87
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+4.87
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+4.87
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+4.89
+Green duration:  20
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+4.82
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+4.92
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+4.78
+Loading configuration ... done.
+Success.up to time step: 36004.00
+Loading configuration ... done.
+4.74
+Loading configuration ... done.
+Success.up to time step: 36006.00
+Loading configuration ... done.
+4.86
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+4.85
+Loading configuration ... done.
+Success.up to time step: 36003.00
+Loading configuration ... done.
+4.80
+Loading configuration ... done.
+Success.up to time step: 36006.00
+Loading configuration ... done.
+4.79
+Loading configuration ... done.
+Success.up to time step: 36004.00
+Loading configuration ... done.
+4.82
+Loading configuration ... done.
+Success.up to time step: 36008.00
+Loading configuration ... done.
+4.86
+Green duration:  21
+Loading configuration ... done.
+Success.up to time step: 36003.00
+Loading configuration ... done.
+4.75
+Loading configuration ... done.
+Success.up to time step: 36006.00
+Loading configuration ... done.
+4.82
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+4.70
+Loading configuration ... done.
+Success.up to time step: 36011.00
+Loading configuration ... done.
+4.74
+Loading configuration ... done.
+Success.up to time step: 36005.00
+Loading configuration ... done.
+4.79
+Loading configuration ... done.
+Success.up to time step: 36009.00
+Loading configuration ... done.
+4.79
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+4.79
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+4.76
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+4.81
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+4.74
+Green duration:  22
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+4.65
+Loading configuration ... done.
+Success.up to time step: 36018.00
+Loading configuration ... done.
+4.64
+Loading configuration ... done.
+Success.up to time step: 36003.00
+Loading configuration ... done.
+4.74
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+4.65
+Loading configuration ... done.
+Success.up to time step: 36010.00
+Loading configuration ... done.
+4.68
+Loading configuration ... done.
+Success.up to time step: 36005.00
+Loading configuration ... done.
+4.74
+Loading configuration ... done.
+Success.up to time step: 36016.00
+Loading configuration ... done.
+4.71
+Loading configuration ... done.
+Success.up to time step: 36012.00
+Loading configuration ... done.
+4.71
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+4.73
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+4.68
+Green duration:  23
+Loading configuration ... done.
+Success.up to time step: 36005.00
+Loading configuration ... done.
+4.60
+Loading configuration ... done.
+Success.up to time step: 36012.00
+Loading configuration ... done.
+4.62
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+4.64
+Loading configuration ... done.
+Success.up to time step: 36022.00
+Loading configuration ... done.
+4.68
+Loading configuration ... done.
+Success.up to time step: 36009.00
+Loading configuration ... done.
+4.67
+Loading configuration ... done.
+Success.up to time step: 36004.00
+Loading configuration ... done.
+4.62
+Loading configuration ... done.
+Success.up to time step: 36005.00
+Loading configuration ... done.
+4.71
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+4.64
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+4.73
+Loading configuration ... done.
+Success.up to time step: 36004.00
+Loading configuration ... done.
+4.72
+Green duration:  24
+Loading configuration ... done.
+Success.up to time step: 36012.00
+Loading configuration ... done.
+4.59
+Loading configuration ... done.
+Success.up to time step: 36003.00
+Loading configuration ... done.
+4.60
+Loading configuration ... done.
+Success.up to time step: 36006.00
+Loading configuration ... done.
+4.57
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+4.56
+Loading configuration ... done.
+Success.up to time step: 36005.00
+Loading configuration ... done.
+4.59
+Loading configuration ... done.
+Success.up to time step: 36003.00
+Loading configuration ... done.
+4.60
+Loading configuration ... done.
+Success.up to time step: 36005.00
+Loading configuration ... done.
+4.64
+Loading configuration ... done.
+Success.up to time step: 36003.00
+Loading configuration ... done.
+4.63
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+4.56
+Loading configuration ... done.
+Success.up to time step: 36003.00
+Loading configuration ... done.
+4.54
+Green duration:  25
+Loading configuration ... done.
+Success.up to time step: 36009.00
+Loading configuration ... done.
+4.48
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+4.57
+Loading configuration ... done.
+Success.up to time step: 36013.00
+Loading configuration ... done.
+4.58
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+4.51
+Loading configuration ... done.
+Success.up to time step: 36019.00
+Loading configuration ... done.
+4.53
+Loading configuration ... done.
+Success.up to time step: 36004.00
+Loading configuration ... done.
+4.59
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+4.59
+Loading configuration ... done.
+Success.up to time step: 36016.00
+Loading configuration ... done.
+4.52
+Loading configuration ... done.
+Success.up to time step: 36004.00
+Loading configuration ... done.
+4.54
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+4.48
+Green duration:  26
+Loading configuration ... done.
+Success.up to time step: 36008.00
+Loading configuration ... done.
+4.50
+Loading configuration ... done.
+Success.up to time step: 36003.00
+Loading configuration ... done.
+4.45
+Loading configuration ... done.
+Success.up to time step: 36010.00
+Loading configuration ... done.
+4.58
+Loading configuration ... done.
+Success.up to time step: 36003.00
+Loading configuration ... done.
+4.56
+Loading configuration ... done.
+Success.up to time step: 36003.00
+Loading configuration ... done.
+4.52
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+4.53
+Loading configuration ... done.
+Success.up to time step: 36006.00
+Loading configuration ... done.
+4.47
+Loading configuration ... done.
+Success.up to time step: 36008.00
+Loading configuration ... done.
+4.49
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+4.50
+Loading configuration ... done.
+Success.up to time step: 36018.00
+Loading configuration ... done.
+4.51
+Green duration:  27
+Loading configuration ... done.
+Success.up to time step: 36006.00
+Loading configuration ... done.
+4.48
+Loading configuration ... done.
+Success.up to time step: 36003.00
+Loading configuration ... done.
+4.47
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+4.47
+Loading configuration ... done.
+Success.up to time step: 36003.00
+Loading configuration ... done.
+4.47
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+4.35
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+4.49
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+4.38
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+4.47
+Loading configuration ... done.
+Success.up to time step: 36007.00
+Loading configuration ... done.
+4.46
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+4.45
+Green duration:  28
+Loading configuration ... done.
+Success.up to time step: 36007.00
+Loading configuration ... done.
+4.47
+Loading configuration ... done.
+Success.up to time step: 36021.00
+Loading configuration ... done.
+4.43
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+4.46
+Loading configuration ... done.
+Success.up to time step: 36003.00
+Loading configuration ... done.
+4.51
+Loading configuration ... done.
+Success.up to time step: 36009.00
+Loading configuration ... done.
+4.41
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+4.52
+Loading configuration ... done.
+Success.up to time step: 36004.00
+Loading configuration ... done.
+4.39
+Loading configuration ... done.
+Success.up to time step: 36004.00
+Loading configuration ... done.
+4.45
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+4.35
+Loading configuration ... done.
+Success.up to time step: 36006.00
+Loading configuration ... done.
+4.37
+Green duration:  29
+Loading configuration ... done.
+Success.up to time step: 36005.00
+Loading configuration ... done.
+4.39
+Loading configuration ... done.
+Success.up to time step: 36004.00
+Loading configuration ... done.
+4.36
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+4.38
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+4.44
+Loading configuration ... done.
+Success.up to time step: 36029.00
+Loading configuration ... done.
+4.32
+Loading configuration ... done.
+Success.up to time step: 36003.00
+Loading configuration ... done.
+4.33
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+4.38
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+4.33
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+4.39
+Loading configuration ... done.
+Success.up to time step: 36006.00
+Loading configuration ... done.
+4.40
+Green duration:  30
+Loading configuration ... done.
+Success.up to time step: 36004.00
+Loading configuration ... done.
+4.32
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+4.38
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+4.30
+Loading configuration ... done.
+Success.up to time step: 36013.00
+Loading configuration ... done.
+4.32
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+4.38
+Loading configuration ... done.
+Success.up to time step: 36006.00
+Loading configuration ... done.
+4.33
+Loading configuration ... done.
+Success.up to time step: 36015.00
+Loading configuration ... done.
+4.24
+Loading configuration ... done.
+Success.up to time step: 36005.00
+Loading configuration ... done.
+4.30
+Loading configuration ... done.
+Success.up to time step: 36019.00
+Loading configuration ... done.
+4.36
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+4.31
+Green duration:  31
+Loading configuration ... done.
+Success.up to time step: 36006.00
+Loading configuration ... done.
+4.28
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+4.37
+Loading configuration ... done.
+Success.up to time step: 36004.00
+Loading configuration ... done.
+4.27
+Loading configuration ... done.
+Success.up to time step: 36005.00
+Loading configuration ... done.
+4.34
+Loading configuration ... done.
+Success.up to time step: 36003.00
+Loading configuration ... done.
+4.36
+Loading configuration ... done.
+Success.up to time step: 36006.00
+Loading configuration ... done.
+4.27
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+4.22
+Loading configuration ... done.
+Success.up to time step: 36010.00
+Loading configuration ... done.
+4.30
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+4.34
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+4.25
+Green duration:  32
+Loading configuration ... done.
+Success.up to time step: 36006.00
+Loading configuration ... done.
+4.27
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+4.26
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+4.30
+Loading configuration ... done.
+Success.up to time step: 36003.00
+Loading configuration ... done.
+4.30
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+4.23
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+4.26
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+4.22
+Loading configuration ... done.
+Success.up to time step: 36004.00
+Loading configuration ... done.
+4.28
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+4.27
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+4.24
+Green duration:  33
+Loading configuration ... done.
+Success.up to time step: 36009.00
+Loading configuration ... done.
+4.23
+Loading configuration ... done.
+Success.up to time step: 36007.00
+Loading configuration ... done.
+4.27
+Loading configuration ... done.
+Success.up to time step: 36007.00
+Loading configuration ... done.
+4.19
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+4.20
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+4.19
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+4.24
+Loading configuration ... done.
+Success.up to time step: 36005.00
+Loading configuration ... done.
+4.21
+Loading configuration ... done.
+Success.up to time step: 36004.00
+Loading configuration ... done.
+4.19
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+4.24
+Loading configuration ... done.
+Success.up to time step: 36004.00
+Loading configuration ... done.
+4.19
+Green duration:  34
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+4.15
+Loading configuration ... done.
+Success.up to time step: 36003.00
+Loading configuration ... done.
+4.20
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+4.20
+Loading configuration ... done.
+Success.up to time step: 36004.00
+Loading configuration ... done.
+4.14
+Loading configuration ... done.
+Success.up to time step: 36016.00
+Loading configuration ... done.
+4.08
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+4.18
+Loading configuration ... done.
+Success.up to time step: 36004.00
+Loading configuration ... done.
+4.16
+Loading configuration ... done.
+Success.up to time step: 36011.00
+Loading configuration ... done.
+4.13
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+4.26
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+4.20
+Green duration:  35
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+4.15
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+4.19
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+4.19
+Loading configuration ... done.
+Success.up to time step: 36005.00
+Loading configuration ... done.
+4.23
+Loading configuration ... done.
+Success.up to time step: 36006.00
+Loading configuration ... done.
+4.15
+Loading configuration ... done.
+Success.up to time step: 36014.00
+Loading configuration ... done.
+4.12
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+4.09
+Loading configuration ... done.
+Success.up to time step: 36006.00
+Loading configuration ... done.
+4.16
+Loading configuration ... done.
+Success.up to time step: 36003.00
+Loading configuration ... done.
+4.14
+Loading configuration ... done.
+Success.up to time step: 36009.00
+Loading configuration ... done.
+4.10
+Green duration:  36
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+4.12
+Loading configuration ... done.
+Success.up to time step: 36018.00
+Loading configuration ... done.
+4.10
+Loading configuration ... done.
+Success.up to time step: 36007.00
+Loading configuration ... done.
+4.08
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+4.11
+Loading configuration ... done.
+Success.up to time step: 36007.00
+Loading configuration ... done.
+4.16
+Loading configuration ... done.
+Success.up to time step: 36014.00
+Loading configuration ... done.
+4.06
+Loading configuration ... done.
+Success.up to time step: 36004.00
+Loading configuration ... done.
+4.16
+Loading configuration ... done.
+Success.up to time step: 36005.00
+Loading configuration ... done.
+4.17
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+4.12
+Loading configuration ... done.
+Success.up to time step: 36007.00
+Loading configuration ... done.
+4.21
+Green duration:  37
+Loading configuration ... done.
+Success.up to time step: 36003.00
+Loading configuration ... done.
+4.03
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+4.16
+Loading configuration ... done.
+Success.up to time step: 36004.00
+Loading configuration ... done.
+4.06
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+4.05
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+4.09
+Loading configuration ... done.
+Success.up to time step: 36012.00
+Loading configuration ... done.
+4.03
+Loading configuration ... done.
+Success.up to time step: 36005.00
+Loading configuration ... done.
+4.09
+Loading configuration ... done.
+Success.up to time step: 36004.00
+Loading configuration ... done.
+4.07
+Loading configuration ... done.
+Success.up to time step: 36003.00
+Loading configuration ... done.
+4.04
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+3.99
+Green duration:  38
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+3.99
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+4.07
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+4.12
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+4.06
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+4.10
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+4.01
+Loading configuration ... done.
+Success.up to time step: 36039.00
+Loading configuration ... done.
+4.07
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+4.02
+Loading configuration ... done.
+Success.up to time step: 36014.00
+Loading configuration ... done.
+4.02
+Loading configuration ... done.
+Success.up to time step: 36003.00
+Loading configuration ... done.
+4.05
+Green duration:  39
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+4.05
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+4.02
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+4.04
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+3.92
+Loading configuration ... done.
+Success.up to time step: 36005.00
+Loading configuration ... done.
+3.99
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+4.05
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+4.04
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+4.02
+Loading configuration ... done.
+Success.up to time step: 36009.00
+Loading configuration ... done.
+4.07
+Loading configuration ... done.
+Success.up to time step: 36012.00
+Loading configuration ... done.
+4.04
+Green duration:  40
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+4.03
+Loading configuration ... done.
+Success.up to time step: 36012.00
+Loading configuration ... done.
+3.95
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+4.00
+Loading configuration ... done.
+Success.up to time step: 36003.00
+Loading configuration ... done.
+4.03
+Loading configuration ... done.
+Success.up to time step: 36026.00
+Loading configuration ... done.
+4.06
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+4.11
+Loading configuration ... done.
+Success.up to time step: 36003.00
+Loading configuration ... done.
+4.00
+Loading configuration ... done.
+Success.up to time step: 36003.00
+Loading configuration ... done.
+3.97
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+4.01
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+4.03
+Green duration:  41
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+3.99
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+3.97
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+4.02
+Loading configuration ... done.
+Success.up to time step: 36009.00
+Loading configuration ... done.
+4.02
+Loading configuration ... done.
+Success.up to time step: 36004.00
+Loading configuration ... done.
+3.98
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+3.89
+Loading configuration ... done.
+Success.up to time step: 36008.00
+Loading configuration ... done.
+4.00
+Loading configuration ... done.
+Success.up to time step: 36006.00
+Loading configuration ... done.
+3.92
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+3.86
+Loading configuration ... done.
+Success.up to time step: 36003.00
+Loading configuration ... done.
+4.03
+Green duration:  42
+Loading configuration ... done.
+Success.up to time step: 36005.00
+Loading configuration ... done.
+3.95
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+3.86
+Loading configuration ... done.
+Success.up to time step: 36004.00
+Loading configuration ... done.
+3.94
+Loading configuration ... done.
+Success.up to time step: 36014.00
+Loading configuration ... done.
+3.96
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+3.91
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+3.94
+Loading configuration ... done.
+Success.up to time step: 36006.00
+Loading configuration ... done.
+4.04
+Loading configuration ... done.
+Success.up to time step: 36005.00
+Loading configuration ... done.
+3.90
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+3.97
+Loading configuration ... done.
+Success.up to time step: 36007.00
+Loading configuration ... done.
+3.93
+Green duration:  43
+Loading configuration ... done.
+Success.up to time step: 36005.00
+Loading configuration ... done.
+3.91
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+3.86
+Loading configuration ... done.
+Success.up to time step: 36007.00
+Loading configuration ... done.
+3.95
+Loading configuration ... done.
+Success.up to time step: 36003.00
+Loading configuration ... done.
+3.97
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+3.93
+Loading configuration ... done.
+Success.up to time step: 36011.00
+Loading configuration ... done.
+3.97
+Loading configuration ... done.
+Success.up to time step: 36006.00
+Loading configuration ... done.
+4.00
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+3.93
+Loading configuration ... done.
+Success.up to time step: 36015.00
+Loading configuration ... done.
+3.87
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+3.89
+Green duration:  44
+Loading configuration ... done.
+Success.up to time step: 36003.00
+Loading configuration ... done.
+3.88
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+3.90
+Loading configuration ... done.
+Success.up to time step: 36012.00
+Loading configuration ... done.
+3.89
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+3.89
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+3.89
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+3.88
+Loading configuration ... done.
+Success.up to time step: 36004.00
+Loading configuration ... done.
+3.93
+Loading configuration ... done.
+Success.up to time step: 36004.00
+Loading configuration ... done.
+3.82
+Loading configuration ... done.
+Success.up to time step: 36003.00
+Loading configuration ... done.
+3.91
+Loading configuration ... done.
+Success.up to time step: 36004.00
+Loading configuration ... done.
+3.90
+Green duration:  45
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+3.95
+Loading configuration ... done.
+Success.up to time step: 36004.00
+Loading configuration ... done.
+3.97
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+3.87
+Loading configuration ... done.
+Success.up to time step: 36003.00
+Loading configuration ... done.
+3.84
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+3.85
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+3.87
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+3.98
+Loading configuration ... done.
+Success.up to time step: 36010.00
+Loading configuration ... done.
+3.84
+Loading configuration ... done.
+Success.up to time step: 36003.00
+Loading configuration ... done.
+3.91
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+3.90
+Green duration:  46
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+3.86
+Loading configuration ... done.
+Success.up to time step: 36008.00
+Loading configuration ... done.
+3.81
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+3.86
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+3.91
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+3.82
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+3.87
+Loading configuration ... done.
+Success.up to time step: 36008.00
+Loading configuration ... done.
+3.86
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+3.84
+Loading configuration ... done.
+Success.up to time step: 36006.00
+Loading configuration ... done.
+3.93
+Loading configuration ... done.
+Success.up to time step: 36004.00
+Loading configuration ... done.
+3.82
+Green duration:  47
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+3.88
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+3.86
+Loading configuration ... done.
+Success.up to time step: 36005.00
+Loading configuration ... done.
+3.85
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+3.87
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+3.87
+Loading configuration ... done.
+Success.up to time step: 36006.00
+Loading configuration ... done.
+3.82
+Loading configuration ... done.
+Success.up to time step: 36006.00
+Loading configuration ... done.
+3.87
+Loading configuration ... done.
+Success.up to time step: 36020.00
+Loading configuration ... done.
+3.90
+Loading configuration ... done.
+Success.up to time step: 36003.00
+Loading configuration ... done.
+3.89
+Loading configuration ... done.
+Success.up to time step: 36004.00
+Loading configuration ... done.
+3.79
+Green duration:  48
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+3.78
+Loading configuration ... done.
+Success.up to time step: 36004.00
+Loading configuration ... done.
+3.80
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+3.74
+Loading configuration ... done.
+Success.up to time step: 36007.00
+Loading configuration ... done.
+3.80
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+3.86
+Loading configuration ... done.
+Success.up to time step: 36006.00
+Loading configuration ... done.
+3.78
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+3.78
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+3.82
+Loading configuration ... done.
+Success.up to time step: 36012.00
+Loading configuration ... done.
+3.84
+Loading configuration ... done.
+Success.up to time step: 36005.00
+Loading configuration ... done.
+3.88
+Green duration:  49
+Loading configuration ... done.
+Success.up to time step: 36012.00
+Loading configuration ... done.
+3.82
+Loading configuration ... done.
+Success.up to time step: 36017.00
+Loading configuration ... done.
+3.86
+Loading configuration ... done.
+Success.up to time step: 36003.00
+Loading configuration ... done.
+3.85
+Loading configuration ... done.
+Success.up to time step: 36017.00
+Loading configuration ... done.
+3.77
+Loading configuration ... done.
+Success.up to time step: 36013.00
+Loading configuration ... done.
+3.74
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+3.85
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+3.82
+Loading configuration ... done.
+Success.up to time step: 36003.00
+Loading configuration ... done.
+3.76
+Loading configuration ... done.
+Success.up to time step: 36018.00
+Loading configuration ... done.
+3.71
+Loading configuration ... done.
+Success.up to time step: 36006.00
+Loading configuration ... done.
+3.80
+Green duration:  50
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+3.72
+Loading configuration ... done.
+Success.up to time step: 36005.00
+Loading configuration ... done.
+3.75
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+3.75
+Loading configuration ... done.
+Success.up to time step: 36003.00
+Loading configuration ... done.
+3.88
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+3.79
+Loading configuration ... done.
+Success.up to time step: 36004.00
+Loading configuration ... done.
+3.75
+Loading configuration ... done.
+Success.up to time step: 36007.00
+Loading configuration ... done.
+3.82
+Loading configuration ... done.
+Success.up to time step: 36012.00
+Loading configuration ... done.
+3.80
+Loading configuration ... done.
+Success.up to time step: 36001.00
+Loading configuration ... done.
+3.69
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+3.75
+Green duration:  51
+Loading configuration ... done.
+Success.up to time step: 36004.00
+Loading configuration ... done.
+3.70
+Loading configuration ... done.
+Success.up to time step: 36004.00
+Loading configuration ... done.
+3.68
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+3.80
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+3.79
+Loading configuration ... done.
+Success.up to time step: 36004.00
+Loading configuration ... done.
+3.74
+Loading configuration ... done.
+Success.up to time step: 36003.00
+Loading configuration ... done.
+3.81
+Loading configuration ... done.
+Success.up to time step: 36009.00
+Loading configuration ... done.
+3.82
+Loading configuration ... done.
+Success.up to time step: 36002.00
+Loading configuration ... done.
+3.78
+Loading configuration ... done.
+Success.up to time step: 36000.00
+Loading configuration ... done.
+3.76
+Loading configuration ... done.
+Success.up to time step: 36008.00
+Loading configuration ... done.
+3.80

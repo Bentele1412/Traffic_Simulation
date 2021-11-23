@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<routes>
+    <flow probability="0.16666" id="1" end="3600" begin="0">
+        <route edges="left0A0 A0B0 B0C0 C0right0"/>
+    </flow>
+
+    <flow probability="0.16666" id="2" end="3600" begin="0">
+        <route edges="left1A1 A1B1 B1C1 C1right1"/>
+    </flow>
+</routes>
