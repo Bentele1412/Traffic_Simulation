@@ -79,14 +79,15 @@ class Detector():
         self.id = id
         self.lastVehicleIDs = []
         self.detectedVehicles = 0
+        self.vehicleIDs = []
 
     def getCurrentCars(self):
         incomingCars = 0
-        vehicleIDs = traci.inductionloop.getLastStepVehicleIDs(self.id)
-        for id in vehicleIDs:
-            if not id in self.lastVehicleIDs:
+        self.vehicleIDs = traci.lanearea.getLastStepVehicleIDs(self.id)
+        for id in self.lastVehicleIDs:
+            if not id in self.vehicleIDs:
                 incomingCars += 1
-        self.lastVehicleIDs = vehicleIDs
+        self.lastVehicleIDs = self.vehicleIDs
         self.detectedVehicles += incomingCars
         return incomingCars
 
@@ -162,7 +163,7 @@ def createDetectors():
     lane = []
     tree = ET.parse("additionals.xml")
     root = tree.getroot()
-    for counter, detector in enumerate(root.iter("e1Detector")):
+    for counter, detector in enumerate(root.iter("e2Detector")):
         if counter % 3 == 0 and counter != 0:
             junction.append(lane)
             lane = []
@@ -184,7 +185,7 @@ def createTrafficLights(minGreenTime, maxGreenTime):
     detectors = []
     tree = ET.parse("additionals.xml")
     root = tree.getroot()
-    for counter, detector in enumerate(root.iter("e1Detector")):
+    for counter, detector in enumerate(root.iter("e2Detector")):
         if counter % 3 == 0 and counter != 0:
             lanes.append(Lane(prevDetector.get('lane'), detectors))
             detectors = []
