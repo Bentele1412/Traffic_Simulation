@@ -122,7 +122,9 @@ class SOTL():
         self.phi = 0
 
     def step(self):
-        self.phi += 1
+        currentPhase = self.tl.getCurrentPhase()
+        if currentPhase % 2 == 0: #don´t execute SOTL if TL in yellow phase
+            self.phi += 1
         for lane in self.tl.lanes:
             lane.updateCarCount()
             if lane.isRed: 
@@ -203,9 +205,7 @@ def run(sotls):
     while traci.simulation.getMinExpectedNumber() > 0:
         traci.simulationStep()
         for sotl in sotls:
-            currentPhase = sotl.tl.getCurrentPhase()
-            if currentPhase % 2 == 0: #don´t execute SOTL if TL in yellow phase
-                sotl.step()
+            sotl.step()
         step += 1
     traci.close()
     sys.stdout.flush()
