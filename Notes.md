@@ -11,10 +11,15 @@
 
 ## Keep in mind
 * Identify stable system state and only measure if system in stable state
+* LPSolve provides the inflow rates for internal edges<br/>--> use them to calculate junction utilization<br/> --> calculate minCycleTime and greenPhaseRatios with junction utilization 
 
 
 ## Questions to Vollbrecht
 * Where to depart/arrive? Middle of edges - junctions - only outer junctions? 
+* LPSolve Output for 2x3Grid and $\epsilon$ = 0.5:
+  * for a: 0.200002666702
+  * for b: 0.200002666702
+  * for c: 0.200002666702
 
 ## To-do
 * Read paper until tuesday
