@@ -79,14 +79,15 @@ class Detector():
         self.id = id
         self.lastVehicleIDs = []
         self.detectedVehicles = 0
+        self.vehicleIDs = []
 
     def getCurrentCars(self):
         incomingCars = 0
-        vehicleIDs = traci.inductionloop.getLastStepVehicleIDs(self.id)
-        for id in vehicleIDs:
-            if not id in self.lastVehicleIDs:
+        self.vehicleIDs = traci.lanearea.getLastStepVehicleIDs(self.id)
+        for id in self.lastVehicleIDs:
+            if not id in self.vehicleIDs:
                 incomingCars += 1
-        self.lastVehicleIDs = vehicleIDs
+        self.lastVehicleIDs = self.vehicleIDs
         self.detectedVehicles += incomingCars
         return incomingCars
 
@@ -121,7 +122,9 @@ class SOTL():
         self.phi = 0
 
     def step(self):
-        self.phi += 1
+        currentPhase = self.tl.getCurrentPhase()
+        if currentPhase % 2 == 0: #don´t execute SOTL if TL in yellow phase
+            self.phi += 1
         for lane in self.tl.lanes:
             lane.updateCarCount()
             if lane.isRed: 
@@ -162,7 +165,7 @@ def createDetectors():
     lane = []
     tree = ET.parse("additionals.xml")
     root = tree.getroot()
-    for counter, detector in enumerate(root.iter("e1Detector")):
+    for counter, detector in enumerate(root.iter("e2Detector")):
         if counter % 3 == 0 and counter != 0:
             junction.append(lane)
             lane = []
@@ -184,7 +187,7 @@ def createTrafficLights(minGreenTime, maxGreenTime):
     detectors = []
     tree = ET.parse("additionals.xml")
     root = tree.getroot()
-    for counter, detector in enumerate(root.iter("e1Detector")):
+    for counter, detector in enumerate(root.iter("e2Detector")):
         if counter % 3 == 0 and counter != 0:
             lanes.append(Lane(prevDetector.get('lane'), detectors))
             detectors = []
@@ -202,9 +205,7 @@ def run(sotls):
     while traci.simulation.getMinExpectedNumber() > 0:
         traci.simulationStep()
         for sotl in sotls:
-            currentPhase = sotl.tl.getCurrentPhase()
-            if currentPhase % 2 == 0: #don´t execute SOTL if TL in yellow phase
-                sotl.step()
+            sotl.step()
         step += 1
     traci.close()
     sys.stdout.flush()
