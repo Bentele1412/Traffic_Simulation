@@ -11,8 +11,7 @@ import sys
 import os
 from sumolib import checkBinary
 import xml.etree.ElementTree as ET
-#import matplotlib.pyplot as plt
-#import numpy as np
+import pandas as pd
 
 if 'SUMO_HOME' in os.environ:
     tools = os.path.join(os.environ['SUMO_HOME'], 'tools')
@@ -111,37 +110,6 @@ class Lane():
         self.carsOnLane += incomingCars - outflowingCars
         self.carsWithinOmega += incomingCarsOmega - outflowingCars
 
-class SOTL():
-    def __init__(self, tl, mu, theta):
-        self.tl = tl
-        self.mu = mu
-        self.theta = theta
-
-        self.kappa = 0
-        self.phi_min = self.tl.minGreenTime
-        self.phi = 0
-
-    def step(self):
-        currentPhase = self.tl.getCurrentPhase()
-        if currentPhase % 2 == 0: #don´t execute SOTL if TL in yellow phase
-            self.phi += 1
-        for lane in self.tl.lanes:
-            lane.updateCarCount()
-            if lane.isRed: 
-                self.kappa += lane.carsOnLane #change to more kappas if more than one direction has red
-        if self.phi >= self.phi_min:
-            for lane in self.tl.lanes:
-                if not lane.isRed:
-                    if not(0 < lane.carsWithinOmega and lane.carsWithinOmega < self.mu) or self.phi > self.tl.maxGreenTime:
-                        if self.kappa >= self.theta:
-                            self.tl.switchLight(self.tl.getCurrentPhase())
-                            self.resetParams()
-                            break
-    
-    def resetParams(self):
-        self.phi = 0
-        self.kappa = 0
-
 
 '''
 Helper functions
@@ -228,7 +196,7 @@ if __name__ == '__main__':
     sumoGui = checkBinary('sumo-gui')
     configPath = os.path.abspath("2x3.sumocfg")
     simulationTime = 3600
-    numVehicles = 1500
+    numVehicles = 900
 
     #create instances
     minGreenTime = 20
@@ -241,8 +209,8 @@ if __name__ == '__main__':
     for tl in trafficLights:
         sotls.append(SOTL(tl, mu, theta))
 
-    #setFlows(numVehicles, simulationTime)
-    #os.system('jtrrouter -c 2x3.jtrrcfg')
+    setFlows(numVehicles, simulationTime)
+    os.system('jtrrouter -c 2x3.jtrrcfg')
 
     traci.start([sumoGui, "-c", configPath,
                                     "--tripinfo-output", "tripinfo.xml",
