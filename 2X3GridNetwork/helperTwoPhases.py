@@ -12,6 +12,7 @@ import os
 from sumolib import checkBinary
 import xml.etree.ElementTree as ET
 import pandas as pd
+import numpy as np
 
 if 'SUMO_HOME' in os.environ:
     tools = os.path.join(os.environ['SUMO_HOME'], 'tools')
@@ -60,6 +61,7 @@ class TrafficLight():
         self.maxGreenTime = maxGreenTime
 
         self.carsApproachingRed = 0
+        self.utilization = 0
 
     def switchLight(self, currentPhase):
         traci.trafficlight.setPhase(self.id, currentPhase + 1)
@@ -73,8 +75,6 @@ class TrafficLight():
         for lane in self.lanes:
             lane.isRed = not lane.isRed
 
-    def getLaneUtilizationRates(self):
-        pass
 
 class Detector():
     def __init__(self, id):
@@ -107,6 +107,7 @@ class Lane():
         self.utilization = 0
         self.inflowRate = 0
         self.outflowRate = 0
+        self.greenPhaseDurationRatio = 0
 
     def updateCarCount(self):
         incomingCars = self.detectors[0].getCurrentCars()
@@ -148,6 +149,14 @@ class SOTL():
         self.kappa = 0
 
 
+class CycleBasedTLController():
+    def __init__(self, tl, cycleTime):
+        self.tl = tl
+        self.cycleTime = cycleTime
+
+        self.phi = 0
+        #use np.roll() !?!
+
 '''
 Helper functions
 '''
@@ -182,7 +191,7 @@ def createDetectors():
     detectors.append(junction)
     return detectors
 
-def createTrafficLights(minGreenTime, maxGreenTime):
+def createTrafficLights(minGreenTime = 5, maxGreenTime = 60):
     '''
     Create list of all TrafficLights containing all corresponding lanes which consist of their corresponding detectors 
     '''
@@ -216,3 +225,23 @@ def setFlows(numVehicles, simulationTime):
     for counter, flow in enumerate(root.iter("flow")):
         flow.set("probability", str(probabilities[counter]))
     tree.write("2x3.flow.xml")
+
+def mapLPDetailsToTL(trafficLights, path):
+        lpSolveResults = pd.read_csv(path, sep=';')
+        lpTrafficLightIds = np.arange(1, len(trafficLights)+1, 1) #tl sorted in correct structure (from north-west to north-east and then from south-west to south-east)
+        lpLaneDirections = ["1A", "3C"] #A = north, C = west #lanes ordered like north, west
+        for trafficLight, lpID in zip(trafficLights, lpTrafficLightIds):
+            lpID = str(lpID)
+            sumUtilization = 0
+            for lane, lpLaneDirection in zip(trafficLight.lanes, lpLaneDirections):
+                utilizationRow = lpSolveResults[lpSolveResults['Variables'] == "u" + lpID + "_" + lpLaneDirection]
+                lane.utilization = utilizationRow['result'].values[0]
+                sumUtilization += lane.utilization
+                inflowRateRow = lpSolveResults[lpSolveResults['Variables'] == "i" + lpID + lpLaneDirection[-1]]
+                lane.inflowRate = inflowRateRow['result'].values[0]
+                outFlowRateRow = lpSolveResults[lpSolveResults['Variables'] == "o" + lpID + lpLaneDirection[-1]]
+                lane.outflowRate = outFlowRateRow['result'].values[0]
+            
+            trafficLight.utilization = sumUtilization
+            for lane in trafficLight.lanes:
+                lane.greenPhaseDurationRatio = lane.utilization/trafficLight.utilization
