@@ -150,12 +150,33 @@ class SOTL():
 
 
 class CycleBasedTLController():
-    def __init__(self, tl, cycleTime):
+    def __init__(self, tl, cycleTime, phaseShift):
         self.tl = tl
         self.cycleTime = cycleTime
+        self.phaseShift = phaseShift
 
-        self.phi = 0
-        #use np.roll() !?!
+        totalGreenPhaseDuration = self.cycleTime - 2*3 #maybe remove hard coded yellow phase durations
+        self.phaseArr = []
+        phases = [0, 2]
+        for lane, phase in zip(self.tl.lanes, phases): #think about if more than 2 phases / 2 lanes 
+            greenPhaseLength = int(np.round(totalGreenPhaseDuration * lane.greenPhaseDurationRatio))
+            self.phaseArr.append([phase]*greenPhaseLength)
+            self.phaseArr.append([phase+1]*3) #hard coded yellow phase durations
+        self.phaseArr = [item for sublist in self.phaseArr for item in sublist]
+        
+        #test correct rounding
+        if len(self.phaseArr) != self.cycleTime:
+            self.phaseArr = np.concatenate((np.array([0]), self.phaseArr))
+            if len(self.phaseArr) != self.cycleTime:
+                print("False rounding at calculation of green phase length!")
+                print(self.phaseArr)
+        
+        #include phase shift
+        self.phaseArr = np.roll(self.phaseArr, self.phaseShift)
+
+    def step(self):
+        traci.trafficlight.setPhase(self.tl.id, self.phaseArr[0])
+        self.phaseArr = np.roll(self.phaseArr, -1)
 
 '''
 Helper functions
@@ -236,11 +257,14 @@ def mapLPDetailsToTL(trafficLights, path):
             for lane, lpLaneDirection in zip(trafficLight.lanes, lpLaneDirections):
                 utilizationRow = lpSolveResults[lpSolveResults['Variables'] == "u" + lpID + "_" + lpLaneDirection]
                 lane.utilization = utilizationRow['result'].values[0]
+                lane.utilization = float(lane.utilization.replace(',', '.'))
                 sumUtilization += lane.utilization
                 inflowRateRow = lpSolveResults[lpSolveResults['Variables'] == "i" + lpID + lpLaneDirection[-1]]
                 lane.inflowRate = inflowRateRow['result'].values[0]
+                lane.inflowRate = float(lane.inflowRate.replace(',', '.'))
                 outFlowRateRow = lpSolveResults[lpSolveResults['Variables'] == "o" + lpID + lpLaneDirection[-1]]
                 lane.outflowRate = outFlowRateRow['result'].values[0]
+                lane.outflowRate = float(lane.outflowRate.replace(',', '.'))
             
             trafficLight.utilization = sumUtilization
             for lane in trafficLight.lanes:
