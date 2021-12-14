@@ -13,6 +13,7 @@ from sumolib import checkBinary
 import xml.etree.ElementTree as ET
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 
 if 'SUMO_HOME' in os.environ:
     tools = os.path.join(os.environ['SUMO_HOME'], 'tools')
@@ -177,6 +178,118 @@ class CycleBasedTLController():
     def step(self):
         traci.trafficlight.setPhase(self.tl.id, self.phaseArr[0])
         self.phaseArr = np.roll(self.phaseArr, -1)
+
+    
+class HillClimbing():
+    def __init__(self, evalFunc, params, stepSizes):
+        self.evalFunc = evalFunc
+        self.params = params
+        self.stepSizes = stepSizes
+
+        self.posDirection = 1
+        self.negDirection = -1
+        self.fitness = self.evalFunc(self.params)
+    
+    def optimize(self, epsilon=1, numRuns=1, maxIter=50):
+        self.epsilon = epsilon
+        self.numRuns = numRuns
+
+        self.fitnessDynamics = [self.fitness]
+
+        for i in range(maxIter):
+            gradient = self._calcGradient()
+            print("Iteration %i done." % (i+1))
+            print(gradient)
+            print(np.linalg.norm(gradient))
+            if any(gradient): #and np.linalg.norm(gradient) > self.epsilon:
+                self.fitness = self.fitness + max(gradient)
+                self.params = self.params+gradient*self.stepSizes
+                self.fitnessDynamics.append(self.fitness)
+            else:
+                break
+        print("Found optimum with:")
+        print("Optimal fitness:", self.fitness)
+        print("Optimal params:", self.params)
+        
+        plt.plot(self.fitnessDynamics)
+        plt.xlabel("Iteration")
+        plt.ylabel("Fitness")
+        plt.title("Fitness dynamics")
+        plt.show()
+
+    def _calcGradient(self):
+        fitnessDevResults = []
+        for i in range(len(self.params)):
+            direction = np.zeros(len(self.params))
+            direction[i] = self.posDirection
+            posParams = self.params+direction*self.stepSizes
+            direction[i] = self.negDirection
+            negParams = self.params+direction*self.stepSizes
+            fitnessDevResults.append(self._performRuns(posParams) - self.fitness) 
+            fitnessDevResults.append(self._performRuns(negParams) - self.fitness)
+        maxInd = np.argmax(fitnessDevResults)
+        if maxInd % 2 == 0:
+            maxFitnessDev = fitnessDevResults[maxInd]
+        else:
+            maxFitnessDev = -fitnessDevResults[maxInd]
+        gradient = np.zeros(len(self.params))
+        gradient[int(np.floor(maxInd/2))] = maxFitnessDev
+        return gradient
+
+    def _performRuns(self, params):
+        fitnesses = []
+        for _ in range(self.numRuns):
+            fitnesses.append(self.evalFunc(params))
+        return np.mean(fitnesses)
+            
+'''
+Evaluation functions
+'''
+def meanSpeedCycleBased(params):
+    def _run(trafficLights, ctFactor, phaseShifts, lpSolveResultPaths):
+        step = 0
+        pathCounter = 0
+        cycleBasedTLControllers = []
+        while traci.simulation.getMinExpectedNumber() > 0:
+            if step % 1200 == 0 and step < 3600:
+                mapLPDetailsToTL(trafficLights, lpSolveResultPaths[pathCounter])
+                maxNodeUtilization = max([tl.utilization for tl in trafficLights])
+                cycleTime = int(np.round(ctFactor * ((1.5 * 2*3 + 5)/(1 - maxNodeUtilization)))) #maybe edit hard coded yellow phases and extract them from file
+                pathCounter += 1
+                for counter, tl in enumerate(trafficLights):
+                    cycleBasedTLControllers.append(CycleBasedTLController(tl, cycleTime, phaseShifts[counter]))
+            
+            for controller in cycleBasedTLControllers:
+                controller.step()
+            traci.simulationStep()
+
+            step += 1
+        traci.close()
+        sys.stdout.flush()
+
+    sumoBinary = checkBinary('sumo')
+    configPath = os.path.abspath("2x3.sumocfg")
+    simulationTime = 3600
+    numVehicles = 900
+    ctFactor = params[0]
+    #phaseShifts = [0]*6 #6 for 6 junctions 
+    phaseShifts = [0] + list(map(lambda x: int(x), params[1:]))
+    lpSolveResultPaths = ['./LPSolve/2x3Grid_a_eps0,4.lp.csv', './LPSolve/2x3Grid_b_eps0,4.lp.csv', './LPSolve/2x3Grid_c_eps0,4.lp.csv']
+
+    #create instances
+    trafficLights = createTrafficLights()
+
+    setFlows(numVehicles, simulationTime)
+    os.system('jtrrouter -c 2x3.jtrrcfg')
+
+    traci.start([sumoBinary, "-c", configPath,
+                                    "--tripinfo-output", "tripinfo.xml",
+                                    "--statistic-output", "statistics.xml"])
+
+    _run(trafficLights, ctFactor, phaseShifts, lpSolveResultPaths)
+
+    meanSpeed, meanWaitingTime = getMeanSpeedWaitingTime()
+    return float(meanSpeed)
 
 '''
 Helper functions

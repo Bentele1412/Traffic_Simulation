@@ -18,6 +18,7 @@
         <turn-defaults value="25,50,25"/>
         <accept-all-destinations value="true"/>
         <allow-loops value="true"/>
+        <random value="true"/>
     </processing>
 
 </configuration>

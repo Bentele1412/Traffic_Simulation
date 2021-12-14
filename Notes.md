@@ -27,3 +27,4 @@
 * implement SOTL with well defined object structure
 * implement fixed cycle based control
 * compare SOTL and FIX + comparison to paper results
+* Hillclimbing: define gradient per dimension with (positive direction fitness deviation - negative direction fitness deviation)
