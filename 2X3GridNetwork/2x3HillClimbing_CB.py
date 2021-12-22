@@ -10,4 +10,4 @@ if __name__ == '__main__':
     params = [ctFactor] + phaseShifts
     stepSizes = [0.1] + [5]*5
     hillClimbing = HillClimbing(evalFunc, params, stepSizes)
-    hillClimbing.optimize(epsilon=0.1, maxIter=50, numRuns=10)
+    hillClimbing.optimize(epsilon=0.1, maxIter=20, numRuns=5)

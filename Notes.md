@@ -27,4 +27,7 @@
 * implement SOTL with well defined object structure
 * implement fixed cycle based control
 * compare SOTL and FIX + comparison to paper results
-* Hillclimbing: define gradient per dimension with (positive direction fitness deviation - negative direction fitness deviation)
+* Hillclimbing: 
+  * define gradient per dimension with (positive direction fitness deviation - negative direction fitness deviation)
+  * ensure minCycleTime is never undercut
+* Consider phase switches at switching routes (t=1200/2400) --> maybe green light gets red immediately, but that should not be the case

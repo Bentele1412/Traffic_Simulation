@@ -193,6 +193,8 @@ class HillClimbing():
     def optimize(self, epsilon=1, numRuns=1, maxIter=50):
         self.epsilon = epsilon
         self.numRuns = numRuns
+        print("NumRuns: ", self.numRuns)
+        print("maxIter: ", maxIter)
 
         self.fitnessDynamics = [self.fitness]
 
