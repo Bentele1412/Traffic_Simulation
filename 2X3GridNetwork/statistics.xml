@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- generated on 2021-12-22 10:17:58 by Eclipse SUMO sumo Version 1.10.0
+<!-- generated on 2021-12-22 12:23:00 by Eclipse SUMO sumo Version 1.10.0
 <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/sumoConfiguration.xsd">
 
     <input>
@@ -19,18 +19,18 @@
     </report>
 
     <traci_server>
-        <remote-port value="62155"/>
+        <remote-port value="60715"/>
     </traci_server>
 
 </configuration>
 -->
 
 <statistics xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/statistic_file.xsd">
-    <vehicles loaded="951" inserted="951" running="0" waiting="0"/>
+    <vehicles loaded="880" inserted="880" running="0" waiting="0"/>
     <teleports total="0" jam="0" yield="0" wrongLane="0"/>
-    <safety collisions="0" emergencyStops="0"/>
+    <safety collisions="0" emergencyStops="1"/>
     <persons loaded="0" running="0" jammed="0"/>
-    <vehicleTripStatistics routeLength="2171.57" speed="9.91" duration="243.06" waitingTime="43.50" timeLoss="84.89" departDelay="0.91" departDelayWaiting="-1.00" totalTravelTime="231151.00" totalDepartDelay="862.00"/>
+    <vehicleTripStatistics routeLength="2165.61" speed="10.12" duration="238.35" waitingTime="38.83" timeLoss="80.91" departDelay="0.85" departDelayWaiting="-1.00" totalTravelTime="209747.00" totalDepartDelay="748.00"/>
     <pedestrianStatistics number="0" routeLength="0.00" duration="0.00" timeLoss="0.00"/>
     <rideStatistics number="0"/>
     <transportStatistics number="0"/>

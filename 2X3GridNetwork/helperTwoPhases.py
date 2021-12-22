@@ -14,6 +14,8 @@ import xml.etree.ElementTree as ET
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import ray
+
 
 if 'SUMO_HOME' in os.environ:
     tools = os.path.join(os.environ['SUMO_HOME'], 'tools')
@@ -174,7 +176,7 @@ class CycleBasedTLController():
         
         #include phase shift
         self.phaseArr = np.roll(self.phaseArr, self.phaseShift)
-        print(self.phaseArr)
+        #print(self.phaseArr)
 
     def step(self):
         traci.trafficlight.setPhase(self.tl.id, self.phaseArr[0])
@@ -206,7 +208,7 @@ class HillClimbing():
             print(np.linalg.norm(gradient))
             if any(gradient): #and np.linalg.norm(gradient) > self.epsilon:
                 self.fitness = bestFitness #self.fitness + max(gradient)
-                self.params = self.params+gradient*self.stepSizes
+                self.params = self.params + self.stepSizes*np.where(gradient != 0, 1, 0)#self.params+gradient*self.stepSizes
                 self.fitnessDynamics.append(self.fitness)
             else:
                 break
@@ -246,8 +248,12 @@ class HillClimbing():
 
     def _performRuns(self, params):
         fitnesses = []
-        for _ in range(self.numRuns):
-            fitnesses.append(self.evalFunc(params))
+        #@ray.remote
+        def _runRuns(params):
+            return self.evalFunc(params)
+
+        #fitnesses = ray.get([_runRuns.remote(params) for _ in range(self.numRuns)])
+        fitnesses = [_runRuns(params) for _ in range(self.numRuns)]
         return np.mean(fitnesses)
             
 '''

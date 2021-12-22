@@ -30,4 +30,6 @@
 * Hillclimbing: 
   * define gradient per dimension with (positive direction fitness deviation - negative direction fitness deviation)
   * ensure minCycleTime is never undercut
+  * 
 * Consider phase switches at switching routes (t=1200/2400) --> maybe green light gets red immediately, but that should not be the case
+* Parallelization --> file writings are issues to face
