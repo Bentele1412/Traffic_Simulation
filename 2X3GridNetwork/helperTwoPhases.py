@@ -174,6 +174,7 @@ class CycleBasedTLController():
         
         #include phase shift
         self.phaseArr = np.roll(self.phaseArr, self.phaseShift)
+        print(self.phaseArr)
 
     def step(self):
         traci.trafficlight.setPhase(self.tl.id, self.phaseArr[0])
@@ -199,12 +200,12 @@ class HillClimbing():
         self.fitnessDynamics = [self.fitness]
 
         for i in range(maxIter):
-            gradient = self._calcGradient()
+            gradient, bestFitness = self._calcGradient()
             print("Iteration %i done." % (i+1))
             print(gradient)
             print(np.linalg.norm(gradient))
             if any(gradient): #and np.linalg.norm(gradient) > self.epsilon:
-                self.fitness = self.fitness + max(gradient)
+                self.fitness = bestFitness #self.fitness + max(gradient)
                 self.params = self.params+gradient*self.stepSizes
                 self.fitnessDynamics.append(self.fitness)
             else:
@@ -221,14 +222,19 @@ class HillClimbing():
 
     def _calcGradient(self):
         fitnessDevResults = []
+        fitnesses = []
         for i in range(len(self.params)):
             direction = np.zeros(len(self.params))
             direction[i] = self.posDirection
             posParams = self.params+direction*self.stepSizes
+            posFitness = self._performRuns(posParams)
             direction[i] = self.negDirection
             negParams = self.params+direction*self.stepSizes
-            fitnessDevResults.append(self._performRuns(posParams) - self.fitness) 
-            fitnessDevResults.append(self._performRuns(negParams) - self.fitness)
+            negFitness = self._performRuns(negParams)
+            fitnessDevResults.append(posFitness - self.fitness) 
+            fitnesses.append(posFitness)
+            fitnessDevResults.append(negFitness - self.fitness)
+            fitnesses.append(negFitness)
         maxInd = np.argmax(fitnessDevResults)
         if maxInd % 2 == 0:
             maxFitnessDev = fitnessDevResults[maxInd]
@@ -236,7 +242,7 @@ class HillClimbing():
             maxFitnessDev = -fitnessDevResults[maxInd]
         gradient = np.zeros(len(self.params))
         gradient[int(np.floor(maxInd/2))] = maxFitnessDev
-        return gradient
+        return gradient, fitnesses[maxInd]
 
     def _performRuns(self, params):
         fitnesses = []
@@ -292,6 +298,7 @@ def meanSpeedCycleBased(params):
 
     meanSpeed, meanWaitingTime = getMeanSpeedWaitingTime()
     return float(meanSpeed)
+
 
 '''
 Helper functions
