@@ -30,6 +30,9 @@
 * Hillclimbing: 
   * define gradient per dimension with (positive direction fitness deviation - negative direction fitness deviation)
   * ensure minCycleTime is never undercut
-  * 
+  * Optimization strategies:
+    * calc all directions, take best and multiply with gradient --> new fitness evaluation needed after updates
+    * calc all directions, get all fitness increasing gradients and summarize as one gradient --> updates are performed in several directions at once
+    * iterate over directions and make the step and update for one direction immediately, if a better fitness value is achieved --> fitnessDynamics???
 * Consider phase switches at switching routes (t=1200/2400) --> maybe green light gets red immediately, but that should not be the case
 * Parallelization --> file writings are issues to face
