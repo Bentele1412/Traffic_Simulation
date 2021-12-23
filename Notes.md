@@ -36,3 +36,8 @@
     * iterate over directions and make the step and update for one direction immediately, if a better fitness value is achieved --> fitnessDynamics???
 * Consider phase switches at switching routes (t=1200/2400) --> maybe green light gets red immediately, but that should not be the case
 * Parallelization --> file writings are issues to face
+
+* Szenarios: TwoCross??, 2x3Grid, FH bridge
+* Traffic load: 900, 1200, 1500 (?)
+* Controller: Cycle based, SOTL, PBSS
+* Optimizers: HillClimbing, GridSearch, ES (?)

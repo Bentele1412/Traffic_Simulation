@@ -193,7 +193,13 @@ class HillClimbing():
         self.negDirection = -1
         self.fitness = self.evalFunc(self.params)
     
-    def optimize(self, epsilon=1, numRuns=1, maxIter=50):
+    def optimize(self, epsilon=1, numRuns=1, maxIter=50, strategy=0):
+        '''
+        strategy: 
+            0 = calc all directions, take best and multiply with gradient
+            1 = calc all directions, get all fitness increasing gradients and summarize as one gradient --> updates are performed in several directions at once
+            2 = iterate over directions and make the step and update for one direction immediately, if a better fitness value is achieved
+        '''
         self.epsilon = epsilon
         self.numRuns = numRuns
         print("NumRuns: ", self.numRuns)
@@ -202,13 +208,18 @@ class HillClimbing():
         self.fitnessDynamics = [self.fitness]
 
         for i in range(maxIter):
-            gradient, bestFitness = self._calcGradient()
+            if strategy == 0:
+                gradient = self._calcGradientUpdateOne()
+            elif strategy == 1:
+                gradient = self._calcGradientUpdateAll()
+            elif strategy == 2:
+                gradient = self._calcOneUpdateOne()
             print("Iteration %i done." % (i+1))
             print(gradient)
             print(np.linalg.norm(gradient))
             if any(gradient): #and np.linalg.norm(gradient) > self.epsilon:
-                self.fitness = bestFitness #self.fitness + max(gradient)
-                self.params = self.params + self.stepSizes*np.where(gradient != 0, 1, 0)#self.params+gradient*self.stepSizes
+                self.params = self.params + gradient * self.stepSizes if strategy != 2 else self.params
+                self.fitness = self._performRuns(self.params) if strategy != 2 else self.fitness
                 self.fitnessDynamics.append(self.fitness)
             else:
                 break
@@ -222,7 +233,7 @@ class HillClimbing():
         plt.title("Fitness dynamics")
         plt.show()
 
-    def _calcGradient(self):
+    def _calcGradientUpdateOne(self):
         fitnessDevResults = []
         fitnesses = []
         for i in range(len(self.params)):
@@ -244,7 +255,48 @@ class HillClimbing():
             maxFitnessDev = -fitnessDevResults[maxInd]
         gradient = np.zeros(len(self.params))
         gradient[int(np.floor(maxInd/2))] = maxFitnessDev
-        return gradient, fitnesses[maxInd]
+        return gradient
+    
+    def _calcGradientUpdateAll(self):
+        gradient = []
+        fitnesses = []
+        for i in range(len(self.params)):
+            direction = np.zeros(len(self.params))
+            direction[i] = self.posDirection
+            posParams = self.params+direction*self.stepSizes
+            posFitness = self._performRuns(posParams)
+            direction[i] = self.negDirection
+            negParams = self.params+direction*self.stepSizes
+            negFitness = self._performRuns(negParams)
+            gradient.append(((posFitness - negFitness)/2)) 
+            fitnesses.append(posFitness)
+            fitnesses.append(negFitness)
+        return np.array(gradient)
+
+    def _calcOneUpdateOne(self):
+        fitnesses = []
+        gradient = []
+        for i in range(len(self.params)):
+            direction = np.zeros(len(self.params))
+            direction[i] = self.posDirection
+            posParams = self.params+direction*self.stepSizes
+            posFitness = self._performRuns(posParams)
+            direction[i] = self.negDirection
+            negParams = self.params+direction*self.stepSizes
+            negFitness = self._performRuns(negParams)
+            if posFitness > self.fitness and posFitness > negFitness:
+                self.params = posParams
+                self.fitness = posFitness
+                gradient.append(1)
+            elif negFitness > self.fitness and negFitness > posFitness:
+                self.params = negParams
+                self.fitness = negFitness
+                gradient.append(-1)
+            else:
+                gradient.append(0)
+            fitnesses.append(posFitness)
+            fitnesses.append(negFitness)
+        return np.array(gradient)
 
     def _performRuns(self, params):
         fitnesses = []
