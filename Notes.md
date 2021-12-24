@@ -41,3 +41,6 @@
 * Traffic load: 900, 1200, 1500 (?)
 * Controller: Cycle based, SOTL, PBSS
 * Optimizers: HillClimbing, GridSearch, ES (?)
+
+Optimal fitness: 10.204
+Optimal params: [ 0.6688 10.099  20.023  10.215  19.992  29.667 ]
