@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
+from numpy.core.fromnumeric import mean
 from helperTwoPhases import *
+import matplotlib.pyplot as plt
 
 def run(trafficLights, ctFactor, phaseShifts, lpSolveResultPaths):
     step = 0
@@ -11,6 +13,7 @@ def run(trafficLights, ctFactor, phaseShifts, lpSolveResultPaths):
             mapLPDetailsToTL(trafficLights, lpSolveResultPaths[pathCounter])
             maxNodeUtilization = max([tl.utilization for tl in trafficLights])
             cycleTime = int(np.round(ctFactor * ((1.5 * 2*3 + 5)/(1 - maxNodeUtilization)))) #maybe edit hard coded yellow phases and extract them from file
+            #print(cycleTime)
             pathCounter += 1
             for counter, tl in enumerate(trafficLights):
                 cycleBasedTLControllers.append(CycleBasedTLController(tl, cycleTime, phaseShifts[counter]))
@@ -31,23 +34,37 @@ if __name__ == '__main__':
     numVehicles = 900
     ctFactor = 0.9
     #phaseShifts = [0]*6 #6 for 6 junctions 
-    phaseShifts = [0, 5, 10, 5, 10, 15]
+    phaseShifts = [0, 10, 20, 10, 20, 30]
     lpSolveResultPaths = ['./LPSolve/2x3Grid_a_eps0,4.lp.csv', './LPSolve/2x3Grid_b_eps0,4.lp.csv', './LPSolve/2x3Grid_c_eps0,4.lp.csv']
 
-    #create instances
-    trafficLights = createTrafficLights()
+    meanSpeeds = []
+    meanWaitingTimes = []
+    numReplications = 30
 
-    setFlows(numVehicles, simulationTime)
-    os.system('jtrrouter -c 2x3.jtrrcfg')
+    for i in range(numReplications):
 
-    traci.start([sumoGui, "-c", configPath,
-                                    "--tripinfo-output", "tripinfo.xml",
-                                    "--statistic-output", "statistics.xml"])
+        #create instances
+        trafficLights = createTrafficLights()
 
-    run(trafficLights, ctFactor, phaseShifts, lpSolveResultPaths)
+        setFlows(numVehicles, simulationTime)
+        os.system('jtrrouter -c 2x3.jtrrcfg')
 
-    meanSpeed, meanWaitingTime = getMeanSpeedWaitingTime()
-    print("Mean speed: ", meanSpeed)
-    print("Mean waiting time: ", meanWaitingTime)
-    
-    
+        traci.start([sumoBinary, "-c", configPath,
+                                        "--tripinfo-output", "tripinfo.xml",
+                                        "--statistic-output", "statistics.xml"])
+
+        run(trafficLights, ctFactor, phaseShifts, lpSolveResultPaths)
+
+        meanSpeed, meanWaitingTime = getMeanSpeedWaitingTime()
+        meanSpeeds.append(float(meanSpeed))
+        meanWaitingTimes.append(float(meanWaitingTime))
+        print("Replication %i done." % (i+1))
+
+    sortedSpeeds = sorted(meanSpeeds)
+    sortedWaitingTimes = sorted(meanWaitingTimes)
+    plt.plot(sortedSpeeds)
+    plt.title("Mean speeds")
+    plt.show()
+    plt.plot(sortedWaitingTimes)    
+    plt.title("Mean Waiting times")
+    plt.show()
