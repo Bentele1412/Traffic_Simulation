@@ -15,6 +15,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import ray
+import time
 
 
 if 'SUMO_HOME' in os.environ:
@@ -106,6 +107,8 @@ class Lane():
 
         self.isRed = True
         self.carsOnLane = 0
+        self.runningAvgCoL = 0 #for system stability
+        self.runningAvgDynamics = [] #for system stability
         self.carsWithinOmega = 0
         self.utilization = 0
         self.inflowRate = 0
@@ -119,6 +122,7 @@ class Lane():
         
         self.carsOnLane += incomingCars - outflowingCars
         self.carsWithinOmega += incomingCarsOmega - outflowingCars
+        self.runningAvgCoL = 0.9*self.runningAvgCoL + (1-0.9)*self.carsOnLane
 
 class SOTL():
     def __init__(self, tl, mu, theta):
@@ -167,12 +171,14 @@ class CycleBasedTLController():
             self.phaseArr.append([phase+1]*3) #hard coded yellow phase durations
         self.phaseArr = [item for sublist in self.phaseArr for item in sublist]
         
-        #test correct rounding
-        if len(self.phaseArr) != self.cycleTime:
+        #test correct rounding --> add or subtract a phase dependent on possible rounding mistake
+        if len(self.phaseArr) < self.cycleTime:
             self.phaseArr = np.concatenate((np.array([0]), self.phaseArr))
-            if len(self.phaseArr) != self.cycleTime:
-                print("False rounding at calculation of green phase length!")
-                print(self.phaseArr)
+        elif len(self.phaseArr) > self.cycleTime:
+            self.phaseArr = self.phaseArr[1:].copy()
+        if len(self.phaseArr) != self.cycleTime:
+            print("False rounding at calculation of green phase length!")
+            print(self.phaseArr)
         
         #include phase shift
         self.phaseArr = np.roll(self.phaseArr, self.phaseShift)
@@ -181,6 +187,11 @@ class CycleBasedTLController():
     def step(self):
         traci.trafficlight.setPhase(self.tl.id, self.phaseArr[0])
         self.phaseArr = np.roll(self.phaseArr, -1)
+
+        #calc carsOnLane
+        for lane in self.tl.lanes:
+            lane.updateCarCount()
+            lane.runningAvgDynamics.append(lane.runningAvgCoL)
 
     
 class HillClimbing():
@@ -200,6 +211,7 @@ class HillClimbing():
             1 = calc all directions, get all fitness increasing gradients and summarize as one gradient --> updates are performed in several directions at once
             2 = iterate over directions and make the step and update for one direction immediately, if a better fitness value is achieved
         '''
+        self.start = time.time()
         self.epsilon = epsilon
         self.numRuns = numRuns
         print("NumRuns: ", self.numRuns)
@@ -223,6 +235,10 @@ class HillClimbing():
                 self.fitnessDynamics.append(self.fitness)
             else:
                 break
+        self.totalSeconds = time.time()-self.start 
+        minutes = int(self.totalSeconds / 60)
+        seconds = self.totalSeconds - minutes*60
+        print("%d min and %f seconds needed." % (minutes, seconds))
         print("Found optimum with:")
         print("Optimal fitness:", self.fitness)
         print("Optimal params:", self.params)

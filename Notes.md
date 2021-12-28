@@ -42,5 +42,10 @@
 * Controller: Cycle based, SOTL, PBSS
 * Optimizers: HillClimbing, GridSearch, ES (?)
 
-Optimal fitness: 10.204
+Strategy 0:<br/>
+Optimal fitness: 10.1<br/>
+Optimal params: [ 0.7712  9.912  19.954   9.898  20.096  29.88  ]<br/>
+
+Strategy 1:<br/>
+Optimal fitness: 10.204<br/>
 Optimal params: [ 0.6688 10.099  20.023  10.215  19.992  29.667 ]
