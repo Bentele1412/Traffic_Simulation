@@ -20,7 +20,7 @@
     </flow>
 
     <flow begin="0" end="3600" id="6" probability="0.14583333333333331">
-        <route edges="N1A1 A1B1 B1B2 B2B3 B3E2" />
+        <route edges="W1A1 A1A2 A2B2 B2B3 B3E2" />
     </flow>
     
 </routes>

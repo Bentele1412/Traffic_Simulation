@@ -49,3 +49,19 @@ Optimal params: [ 0.7712  9.912  19.954   9.898  20.096  29.88  ]<br/>
 Strategy 1:<br/>
 Optimal fitness: 10.204<br/>
 Optimal params: [ 0.6688 10.099  20.023  10.215  19.992  29.667 ]
+
+Strategy 1:
+66 min and 7.585176 seconds needed.
+Found optimum with:
+Optimal fitness: 10.93
+Optimal params: [ 0.7875 10.225  19.785   9.75   20.47   30.18  ]
+
+59 min and 34.063972 seconds needed.
+Found optimum with:
+Optimal fitness: 10.83
+Optimal params: [ 0.755 10.305 20.     9.715 19.895 30.135]
+
+59 min and 38.805740 seconds needed.
+Found optimum with:
+Optimal fitness: 10.89
+Optimal params: [ 0.694 10.235 20.09  10.175 20.155 30.655]

@@ -333,7 +333,7 @@ def meanSpeedCycleBased(params):
         pathCounter = 0
         cycleBasedTLControllers = []
         while traci.simulation.getMinExpectedNumber() > 0:
-            if step % 1200 == 0 and step < 3600:
+            if step % 3601 == 0 and step < 3600:
                 mapLPDetailsToTL(trafficLights, lpSolveResultPaths[pathCounter])
                 maxNodeUtilization = max([tl.utilization for tl in trafficLights])
                 cycleTime = int(np.round(ctFactor * ((1.5 * 2*3 + 5)/(1 - maxNodeUtilization)))) #maybe edit hard coded yellow phases and extract them from file
@@ -356,7 +356,7 @@ def meanSpeedCycleBased(params):
     ctFactor = params[0]
     #phaseShifts = [0]*6 #6 for 6 junctions 
     phaseShifts = [0] + list(map(lambda x: int(x), params[1:]))
-    lpSolveResultPaths = ['./LPSolve/2x3Grid_a_eps0,4.lp.csv', './LPSolve/2x3Grid_b_eps0,4.lp.csv', './LPSolve/2x3Grid_c_eps0,4.lp.csv']
+    lpSolveResultPaths = ['./LPSolve/2x3Grid_c_eps0,4.lp.csv', './LPSolve/2x3Grid_a_eps0,4.lp.csv', './LPSolve/2x3Grid_b_eps0,4.lp.csv'] #changed order for experiment!!!
 
     #create instances
     trafficLights = createTrafficLights()

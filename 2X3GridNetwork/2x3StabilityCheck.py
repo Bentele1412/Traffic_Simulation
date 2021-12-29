@@ -8,7 +8,7 @@ if __name__ == '__main__':
         pathCounter = 0
         cycleBasedTLControllers = []
         while traci.simulation.getMinExpectedNumber() > 0:
-            if step % 1200 == 0 and step < 3600:
+            if step % 3601 == 0 and step < 3600:
                 mapLPDetailsToTL(trafficLights, lpSolveResultPaths[pathCounter])
                 maxNodeUtilization = max([tl.utilization for tl in trafficLights])
                 cycleTime = int(np.round(ctFactor * ((1.5 * 2*3 + 5)/(1 - maxNodeUtilization)))) #maybe edit hard coded yellow phases and extract them from file
@@ -36,8 +36,8 @@ if __name__ == '__main__':
     #create instances
     trafficLights = createTrafficLights()
 
-    #setFlows(numVehicles, simulationTime)
-    #os.system('jtrrouter -c 2x3.jtrrcfg')
+    setFlows(numVehicles, simulationTime)
+    os.system('jtrrouter -c 2x3.jtrrcfg')
 
     traci.start([sumoBinary, "-c", configPath,
                                     "--tripinfo-output", "tripinfo.xml",
@@ -45,5 +45,5 @@ if __name__ == '__main__':
 
     cycleBasedControllers = _run(trafficLights, ctFactor, phaseShifts, lpSolveResultPaths)
     
-    plt.plot(cycleBasedControllers[0].tl.lane[0].runningAvgDynamics)
+    plt.plot(cycleBasedControllers[0].tl.lanes[0].runningAvgDynamics)
     plt.show()
