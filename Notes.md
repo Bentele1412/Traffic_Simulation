@@ -22,26 +22,35 @@
   * for c: 0.200002666702
 
 ## To-do
-* Read paper until tuesday
-* reimplement 2X3 grid from paper with flows
-* implement SOTL with well defined object structure
-* implement fixed cycle based control
-* compare SOTL and FIX + comparison to paper results
+* **Done:** Read paper until tuesday
+* **Done:** reimplement 2X3 grid from paper with flows
+* **Done:** implement SOTL with well defined object structure
+* **Done:** implement fixed cycle based control
+* compare SOTL and FIX + comparison to paper results --> Cycle based difficult due to flow switches --> phase shifts?
 * Hillclimbing: 
-  * define gradient per dimension with (positive direction fitness deviation - negative direction fitness deviation)
+  * **Done:** define gradient per dimension with (positive direction fitness deviation - negative direction fitness deviation)
   * ensure minCycleTime is never undercut
-  * Optimization strategies:
-    * calc all directions, take best and multiply with gradient --> new fitness evaluation needed after updates
-    * calc all directions, get all fitness increasing gradients and summarize as one gradient --> updates are performed in several directions at once
-    * iterate over directions and make the step and update for one direction immediately, if a better fitness value is achieved --> fitnessDynamics???
+  * **Done:** Optimization strategies:
+    * **Done:** calc all directions, take best and multiply with gradient --> new fitness evaluation needed after updates
+    * **Done:** calc all directions, get all fitness increasing gradients and summarize as one gradient --> updates are performed in several directions at once
+    * **Done:** iterate over directions and make the step and update for one direction immediately, if a better fitness value is achieved --> fitnessDynamics???
 * Consider phase switches at switching routes (t=1200/2400) --> maybe green light gets red immediately, but that should not be the case
-* Parallelization --> file writings are issues to face
+* **Declined:** Parallelization --> file writings are issues to face
+* Bigger Phase shifts --> 50 secs per node
+* Random optimization starts
+* Handle more than 2 green phases + more than one red lane
+* Create different scenario
 
-* Szenarios: TwoCross??, 2x3Grid, FH bridge
-* Traffic load: 900, 1200, 1500 (?)
-* Controller: Cycle based, SOTL, PBSS
+
+## Possible paper content
+* Szenarios: TwoCross, 2x3Grid, FH bridge
+* Traffic load: 900, 1200, 1500 + real life data
+* Controller: Cycle based, SOTL, PBSS, AdaSOTL
 * Optimizers: HillClimbing, GridSearch, ES (?)
 
+
+## Experiment results
+### HillClimbing 2x3Grid: 20 iters, 5 runs
 Strategy 0:<br/>
 Optimal fitness: 10.1<br/>
 Optimal params: [ 0.7712  9.912  19.954   9.898  20.096  29.88  ]<br/>
@@ -50,17 +59,21 @@ Strategy 1:<br/>
 Optimal fitness: 10.204<br/>
 Optimal params: [ 0.6688 10.099  20.023  10.215  19.992  29.667 ]
 
-Strategy 1:
+
+### HillClimbing 2x3Grid: single Flows
+Flow 1:
 66 min and 7.585176 seconds needed.
 Found optimum with:
 Optimal fitness: 10.93
 Optimal params: [ 0.7875 10.225  19.785   9.75   20.47   30.18  ]
 
+Flow 2:
 59 min and 34.063972 seconds needed.
 Found optimum with:
 Optimal fitness: 10.83
 Optimal params: [ 0.755 10.305 20.     9.715 19.895 30.135]
 
+Flow 3:
 59 min and 38.805740 seconds needed.
 Found optimum with:
 Optimal fitness: 10.89

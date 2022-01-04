@@ -14,7 +14,6 @@ import xml.etree.ElementTree as ET
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import ray
 import time
 
 
@@ -155,12 +154,74 @@ class SOTL():
         self.phi = 0
         self.kappa = 0
 
+class AdaSOTL():
+    '''
+    Adaptive threshold self-organizing traffic light controller
+
+    Problem of basic SOTL:
+        - Green phases get shorter if traffic load gets heavier but should get longer
+        - leads to more yellow phases and crossing clearing --> less time for queue clearing --> lost time for every crossway participant to move on
+
+    Idea:
+        - adaptive threshold of integrated cars on lane
+        - the more cars driving to a red light of the crossway per lane, the bigger the threshold gets (biggest threshold for all (red) lanes at the crossway)
+
+    Implementation strategy:
+        - sum up all cars driving towards crossway and multiply with a constant (constant to be optimized)
+        --> threshold =  avgCarsTowardsCrossway**self.beta * self.alpha
+        - alpha 
+            - constant to adapt threshold to needed scale range
+        - beta 
+            - exponent to ensure increasing threshold of running averaged cars towards crossway
+            - otherwise kappa overshooting theta would need always the same time (linear dependency of carsTowardsCrossway and alpha)
+
+    Open Questions: 
+        - Adaptation strength
+    '''
+    def __init__(self, tl, mu, alpha, beta):
+            self.tl = tl
+            self.mu = mu
+            self.theta = 0
+            self.alpha = alpha
+            self.beta = beta
+
+            self.kappa = 0
+            self.phi_min = self.tl.minGreenTime
+            self.phi = 0
+
+    def step(self):
+        avgCarsTowardsCrossway = 0
+        currentPhase = self.tl.getCurrentPhase()
+        if currentPhase % 2 == 0: #don´t execute SOTL if TL in yellow phase
+            self.phi += 1
+        for lane in self.tl.lanes:
+            lane.updateCarCount()
+            if lane.isRed: 
+                self.kappa += lane.carsOnLane #change to more kappas if more than one direction has red
+            
+            #adaptivity
+            avgCarsTowardsCrossway += lane.runningAvgCoL
+        self.theta = avgCarsTowardsCrossway**self.beta * self.alpha
+
+        if self.phi >= self.phi_min:
+            for lane in self.tl.lanes:
+                if not lane.isRed:
+                    if not(0 < lane.carsWithinOmega and lane.carsWithinOmega < self.mu) or self.phi > self.tl.maxGreenTime:
+                        if self.kappa >= self.theta:
+                            self.tl.switchLight(self.tl.getCurrentPhase())
+                            self.resetParams()
+                            break
+    
+    def resetParams(self):
+        self.phi = 0
+        self.kappa = 0
 
 class CycleBasedTLController():
     def __init__(self, tl, cycleTime, phaseShift):
         self.tl = tl
         self.cycleTime = cycleTime
         self.phaseShift = phaseShift
+        self.lastSteps = [0]*4
 
         totalGreenPhaseDuration = self.cycleTime - 2*3 #maybe remove hard coded yellow phase durations
         self.phaseArr = []
@@ -185,6 +246,12 @@ class CycleBasedTLController():
         #print(self.phaseArr)
 
     def step(self):
+        '''
+        self.lastSteps = np.roll(self.lastSteps,1)
+        self.lastSteps[0] = self.phaseArr[0]
+        if self.lastSteps[1] % 2 == 0 and self.lastSteps[0] % 2 == 0 and self.lastSteps[1] != self.lastSteps[0]:
+            traci.trafficlight.setPhase(self.tl.id, self.lastSteps[1]+1) 
+        '''
         traci.trafficlight.setPhase(self.tl.id, self.phaseArr[0])
         self.phaseArr = np.roll(self.phaseArr, -1)
 
@@ -333,7 +400,7 @@ def meanSpeedCycleBased(params):
         pathCounter = 0
         cycleBasedTLControllers = []
         while traci.simulation.getMinExpectedNumber() > 0:
-            if step % 3601 == 0 and step < 3600:
+            if step % 1200 == 0 and step < 3600:
                 mapLPDetailsToTL(trafficLights, lpSolveResultPaths[pathCounter])
                 maxNodeUtilization = max([tl.utilization for tl in trafficLights])
                 cycleTime = int(np.round(ctFactor * ((1.5 * 2*3 + 5)/(1 - maxNodeUtilization)))) #maybe edit hard coded yellow phases and extract them from file
@@ -373,6 +440,46 @@ def meanSpeedCycleBased(params):
     meanSpeed, meanWaitingTime = getMeanSpeedWaitingTime()
     return float(meanSpeed)
 
+def meanSpeedAdaSOTL(params):
+    def _run(adaSotls):
+        step = 0
+        while traci.simulation.getMinExpectedNumber() > 0:
+            traci.simulationStep()
+            for sotl in adaSotls:
+                sotl.step()
+            step += 1
+        traci.close()
+        sys.stdout.flush()
+
+    sumoBinary = checkBinary('sumo')
+    configPath = os.path.abspath("2x3.sumocfg")
+    simulationTime = 3600
+    numVehicles = 900
+
+    #create instances
+    minGreenTime = 7
+    maxGreenTime = 60 #change to maxRedTime
+    trafficLights = createTrafficLights(minGreenTime, maxGreenTime)
+
+    mu = 3
+    
+    beta = params[1]
+    alpha = params[0]
+    adaSotls = []
+    for tl in trafficLights:
+        adaSotls.append(AdaSOTL(tl, mu, alpha, beta))
+
+    setFlows(numVehicles, simulationTime)
+    os.system('jtrrouter -c 2x3.jtrrcfg')
+
+    traci.start([sumoBinary, "-c", configPath,
+                                    "--tripinfo-output", "tripinfo.xml",
+                                    "--statistic-output", "statistics.xml"])
+    
+    _run(adaSotls)
+
+    meanSpeed, meanWaitingTime = getMeanSpeedWaitingTime()
+    return float(meanSpeed)
 
 '''
 Helper functions
