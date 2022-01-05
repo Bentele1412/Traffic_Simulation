@@ -28,10 +28,10 @@ if __name__ == '__main__':
     sumoGui = checkBinary('sumo-gui')
     configPath = os.path.abspath("2x3.sumocfg")
     simulationTime = 3600
-    numVehicles = 900
+    numVehicles = 1500
 
     #create instances
-    minGreenTime = 20
+    minGreenTime = 7
     maxGreenTime = 60 #change to maxRedTime
     trafficLights = createTrafficLights(minGreenTime, maxGreenTime)
 
@@ -44,7 +44,7 @@ if __name__ == '__main__':
     setFlows(numVehicles, simulationTime)
     os.system('jtrrouter -c 2x3.jtrrcfg')
 
-    traci.start([sumoGui, "-c", configPath,
+    traci.start([sumoBinary, "-c", configPath,
                                     "--tripinfo-output", "tripinfo.xml",
                                     "--statistic-output", "statistics.xml"])
     
