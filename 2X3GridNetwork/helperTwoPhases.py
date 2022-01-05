@@ -270,6 +270,7 @@ class HillClimbing():
         self.posDirection = 1
         self.negDirection = -1
         self.fitness = self.evalFunc(self.params)
+        self.best = [self.fitness, self.params]
     
     def optimize(self, epsilon=1, numRuns=1, maxIter=50, strategy=0):
         '''
@@ -296,19 +297,26 @@ class HillClimbing():
             print("Iteration %i done." % (i+1))
             print(gradient)
             print(np.linalg.norm(gradient))
-            if any(gradient): #and np.linalg.norm(gradient) > self.epsilon:
+            if any(gradient) and np.linalg.norm(gradient) > self.epsilon: #commented in norm(gradient)
                 self.params = self.params + gradient * self.stepSizes if strategy != 2 else self.params
                 self.fitness = self._performRuns(self.params) if strategy != 2 else self.fitness
+                print(self.fitness)
                 self.fitnessDynamics.append(self.fitness)
+                if self.fitness > self.best[0]:
+                    self.best = [self.fitness, self.params]
             else:
                 break
         self.totalSeconds = time.time()-self.start 
         minutes = int(self.totalSeconds / 60)
         seconds = self.totalSeconds - minutes*60
         print("%d min and %f seconds needed." % (minutes, seconds))
-        print("Found optimum with:")
-        print("Optimal fitness:", self.fitness)
-        print("Optimal params:", self.params)
+        print("Last evaluation:")
+        print("Fitness:", self.fitness)
+        print("Params:", self.params)
+        print()
+        print("Best:")
+        print("Optimal fitness:", self.best[0])
+        print("Optimal params:", self.best[1])
         
         plt.plot(self.fitnessDynamics)
         plt.xlabel("Iteration")
