@@ -297,7 +297,7 @@ class HillClimbing():
             print("Iteration %i done." % (i+1))
             print(gradient)
             print(np.linalg.norm(gradient))
-            if any(gradient) and np.linalg.norm(gradient) > self.epsilon: #commented in norm(gradient)
+            if any(gradient): #and np.linalg.norm(gradient) > self.epsilon: #commented in norm(gradient)
                 self.params = self.params + gradient * self.stepSizes if strategy != 2 else self.params
                 self.fitness = self._performRuns(self.params) if strategy != 2 else self.fitness
                 print(self.fitness)
@@ -485,6 +485,46 @@ def meanSpeedAdaSOTL(params):
                                     "--statistic-output", "statistics.xml"])
     
     _run(adaSotls)
+
+    meanSpeed, meanWaitingTime = getMeanSpeedWaitingTime()
+    return float(meanSpeed)
+
+def meanSpeedSOTL(params):
+    def _run(sotls):
+        step = 0
+        while traci.simulation.getMinExpectedNumber() > 0:
+            traci.simulationStep()
+            for sotl in sotls:
+                sotl.step()
+            step += 1
+        traci.close()
+        sys.stdout.flush()
+
+    sumoBinary = checkBinary('sumo')
+    configPath = os.path.abspath("2x3.sumocfg")
+    simulationTime = 3600
+    numVehicles = 900
+
+    #create instances
+    minGreenTime = 7
+    maxGreenTime = 60 #change to maxRedTime
+    trafficLights = createTrafficLights(minGreenTime, maxGreenTime)
+
+    mu = 3
+    
+    theta = params[0]
+    sotls = []
+    for tl in trafficLights:
+        sotls.append(SOTL(tl, mu, theta))
+
+    setFlows(numVehicles, simulationTime)
+    os.system('jtrrouter -c 2x3.jtrrcfg')
+
+    traci.start([sumoBinary, "-c", configPath,
+                                    "--tripinfo-output", "tripinfo.xml",
+                                    "--statistic-output", "statistics.xml"])
+    
+    _run(sotls)
 
     meanSpeed, meanWaitingTime = getMeanSpeedWaitingTime()
     return float(meanSpeed)
