@@ -36,10 +36,11 @@ if __name__ == '__main__':
     trafficLights = createTrafficLights(minGreenTime, maxGreenTime)
 
     mu = 3
-    theta = 41
+    beta = 1.2
+    alpha = 3
     sotls = []
     for tl in trafficLights:
-        sotls.append(SOTL(tl, mu, theta))
+        sotls.append(AdaSOTL(tl, mu, alpha, beta))
 
     setFlows(numVehicles, simulationTime)
     os.system('jtrrouter -c 2x3.jtrrcfg')

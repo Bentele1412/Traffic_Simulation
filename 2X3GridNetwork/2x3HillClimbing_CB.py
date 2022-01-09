@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 
-#import ray
-#ray.init()
 from helperTwoPhases import *
 
 if __name__ == '__main__':
