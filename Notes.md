@@ -78,3 +78,28 @@ Flow 3:
 Found optimum with:
 Optimal fitness: 10.89
 Optimal params: [ 0.694 10.235 20.09  10.175 20.155 30.655]
+
+
+### HillClimbing 2x3Grid: AdaSOTL, 50 iters, 5 runs, strategy 1, 900 vehicles
+423 min and 57.934498 seconds needed.
+Last evaluation:
+Fitness: 8.67
+Params: [4.2035 1.1912]
+
+Best:
+Optimal fitness: 8.67
+Optimal params: [4.2035 1.1912]
+
+Next best after rerunning optimization with previous params:
+Optimal fitness: 8.682
+Optimal params: [4.183  1.1866]
+
+### HillClimbing 2x3Grid: SOTL, 50 iters, 5 runs, strategy 1, 900 vehicles
+189 min and 38.304668 seconds needed.
+Last evaluation:
+Fitness: 8.48
+Params: [31.97]
+
+Best:
+Optimal fitness: 8.495999999999999
+Optimal params: [31.84]
