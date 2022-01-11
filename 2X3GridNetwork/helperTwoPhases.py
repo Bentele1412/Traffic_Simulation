@@ -219,22 +219,25 @@ class AdaSOTL():
         self.kappa = 0
 
 class CycleBasedTLController():
-    def __init__(self, tl, cycleTime, phaseShift):
+    def __init__(self, tl, cycleTime, phaseShift, numPhases, yellowPhaseDuration):
         self.tl = tl
-        self.cycleTime = cycleTime
-        self.phaseShift = phaseShift
         self.lastStep = 0
         self.currentStep = 0
         self.countYellowSteps = 0
-        numPhases, yellowPhaseDuration = getTLPhaseInfo()
+        self.numPhases = numPhases
+        self.yellowPhaseDuration = yellowPhaseDuration
+        self.setCycle(cycleTime, phaseShift)
 
-        totalGreenPhaseDuration = self.cycleTime - (numPhases/2)*yellowPhaseDuration
+    def setCycle(self, cycleTime, phaseShift):
+        self.cycleTime = cycleTime
+        self.phaseShift = phaseShift
+        totalGreenPhaseDuration = self.cycleTime - (self.numPhases/2)*self.yellowPhaseDuration
         self.phaseArr = []
-        phases = np.arange(0, numPhases+1, 2)
+        phases = np.arange(0, self.numPhases+1, 2)
         for lane, phase in zip(self.tl.lanes, phases): #think about if more than 2 phases / 2 lanes 
             greenPhaseLength = int(np.round(totalGreenPhaseDuration * lane.greenPhaseDurationRatio))
             self.phaseArr.append([phase]*greenPhaseLength)
-            self.phaseArr.append([phase+1]*yellowPhaseDuration)
+            self.phaseArr.append([phase+1]*self.yellowPhaseDuration)
         self.phaseArr = [item for sublist in self.phaseArr for item in sublist]
         
         #test correct rounding --> add or subtract a phase dependent on possible rounding mistake
@@ -442,8 +445,12 @@ def meanSpeedCycleBased(params):
                 maxNodeUtilization = max([tl.utilization for tl in trafficLights])
                 cycleTime = int(np.round(ctFactor * ((1.5 * 2*3 + 5)/(1 - maxNodeUtilization)))) #maybe edit hard coded yellow phases and extract them from file
                 pathCounter += 1
-                for counter, tl in enumerate(trafficLights):
-                    cycleBasedTLControllers.append(CycleBasedTLController(tl, cycleTime, phaseShifts[counter]))
+                if step == 0:
+                    for counter, tl in enumerate(trafficLights):
+                        cycleBasedTLControllers.append(CycleBasedTLController(tl, cycleTime, phaseShifts[counter]))
+                else:
+                    for counter, controller in enumerate(cycleBasedTLControllers):
+                        controller.setCycle(cycleTime, phaseShifts[counter])
             
             for controller in cycleBasedTLControllers:
                 controller.step()

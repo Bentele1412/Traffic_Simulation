@@ -12,11 +12,16 @@ def run(trafficLights, ctFactor, phaseShifts, lpSolveResultPaths):
         if step % 1200 == 0 and step < 3600:
             mapLPDetailsToTL(trafficLights, lpSolveResultPaths[pathCounter])
             maxNodeUtilization = max([tl.utilization for tl in trafficLights])
-            cycleTime = int(np.round(ctFactor * ((1.5 * 2*3 + 5)/(1 - maxNodeUtilization)))) #maybe edit hard coded yellow phases and extract them from file
+            numPhases, yellowPhaseDuration = getTLPhaseInfo()
+            cycleTime = int(np.round(ctFactor * ((1.5 * (numPhases/2)*yellowPhaseDuration + 5)/(1 - maxNodeUtilization))))
             #print(cycleTime)
             pathCounter += 1
-            for counter, tl in enumerate(trafficLights):
-                cycleBasedTLControllers.append(CycleBasedTLController(tl, cycleTime, phaseShifts[counter]))
+            if step == 0:
+                for counter, tl in enumerate(trafficLights):
+                    cycleBasedTLControllers.append(CycleBasedTLController(tl, cycleTime, phaseShifts[counter], numPhases, yellowPhaseDuration))
+            else:
+                for counter, controller in enumerate(cycleBasedTLControllers):
+                    controller.setCycle(cycleTime, phaseShifts[counter])
         
         for controller in cycleBasedTLControllers:
             controller.step()

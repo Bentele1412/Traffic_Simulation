@@ -10,10 +10,15 @@ def run(trafficLights, ctFactor, phaseShifts, lpSolveResultPaths):
         if step % 1200 == 0 and step < 3600:
             mapLPDetailsToTL(trafficLights, lpSolveResultPaths[pathCounter])
             maxNodeUtilization = max([tl.utilization for tl in trafficLights])
-            cycleTime = int(np.round(ctFactor * ((1.5 * 2*3 + 5)/(1 - maxNodeUtilization)))) #maybe edit hard coded yellow phases and extract them from file
+            numPhases, yellowPhaseDuration = getTLPhaseInfo()
+            cycleTime = int(np.round(ctFactor * ((1.5 * (numPhases/2)*yellowPhaseDuration + 5)/(1 - maxNodeUtilization))))
             pathCounter += 1
-            for counter, tl in enumerate(trafficLights):
-                cycleBasedTLControllers.append(CycleBasedTLController(tl, cycleTime, phaseShifts[counter]))
+            if step == 0:
+                for counter, tl in enumerate(trafficLights):
+                    cycleBasedTLControllers.append(CycleBasedTLController(tl, cycleTime, phaseShifts[counter], numPhases, yellowPhaseDuration))
+            else:
+                for counter, controller in enumerate(cycleBasedTLControllers):
+                    controller.setCycle(cycleTime, phaseShifts[counter])
         
         for controller in cycleBasedTLControllers:
             controller.step()
@@ -31,7 +36,7 @@ if __name__ == '__main__':
     numVehicles = 900
     ctFactor = 0.9
     #phaseShifts = [0]*6 #6 for 6 junctions 
-    phaseShifts = [0, 5, 10, 5, 10, 15]
+    phaseShifts = [0, 50, 100, 50, 100, 150]
     lpSolveResultPaths = ['./LPSolve/2x3Grid_a_eps0,4.lp.csv', './LPSolve/2x3Grid_b_eps0,4.lp.csv', './LPSolve/2x3Grid_c_eps0,4.lp.csv']
 
     #create instances
@@ -40,7 +45,7 @@ if __name__ == '__main__':
     setFlows(numVehicles, simulationTime)
     os.system('jtrrouter -c 2x3.jtrrcfg')
 
-    traci.start([sumoGui, "-c", configPath,
+    traci.start([sumoBinary, "-c", configPath,
                                     "--tripinfo-output", "tripinfo.xml",
                                     "--statistic-output", "statistics.xml"])
 

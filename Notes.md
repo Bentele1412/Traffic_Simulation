@@ -34,7 +34,7 @@
     * **Done:** calc all directions, take best and multiply with gradient --> new fitness evaluation needed after updates
     * **Done:** calc all directions, get all fitness increasing gradients and summarize as one gradient --> updates are performed in several directions at once
     * **Done:** iterate over directions and make the step and update for one direction immediately, if a better fitness value is achieved --> fitnessDynamics???
-* Consider phase switches at switching routes (t=1200/2400) --> maybe green light gets red immediately, but that should not be the case
+* **Done:** Consider phase switches at switching routes (t=1200/2400) --> maybe green light gets red immediately, but that should not be the case
 * **Declined:** Parallelization --> file writings are issues to face
 * Bigger Phase shifts --> 50 secs per node
 * Random optimization starts
