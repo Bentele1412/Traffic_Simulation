@@ -129,7 +129,7 @@ class SOTL():
         self.mu = mu
         self.theta = theta
 
-        self.kappa = 0
+        self.kappas = [0]*(len(self.tl.lanes)-1)
         self.phi_min = self.tl.minGreenTime
         self.phi = 0
 
@@ -137,22 +137,24 @@ class SOTL():
         currentPhase = self.tl.getCurrentPhase()
         if currentPhase % 2 == 0: #don´t execute SOTL if TL in yellow phase
             self.phi += 1
+        kappaCounter = 0
         for lane in self.tl.lanes:
             lane.updateCarCount()
             if lane.isRed: 
-                self.kappa += lane.carsOnLane #change to more kappas if more than one direction has red
+                self.kappas[kappaCounter] += lane.carsOnLane #change to more kappas if more than one direction has red
+                kappaCounter += 1
         if self.phi >= self.phi_min:
-            for lane in self.tl.lanes:
+            for counter, lane in enumerate(self.tl.lanes):
                 if not lane.isRed:
                     if not(0 < lane.carsWithinOmega and lane.carsWithinOmega < self.mu) or self.phi > self.tl.maxGreenTime:
-                        if self.kappa >= self.theta:
+                        if self.kappas[0] >= self.theta: #index out of bounds with self.kappas[counter]
                             self.tl.switchLight(self.tl.getCurrentPhase())
                             self.resetParams()
                             break
     
     def resetParams(self):
         self.phi = 0
-        self.kappa = 0
+        self.kappa = [0]*(len(self.tl.lanes)-1)
 
 class AdaSOTL():
     '''
@@ -221,7 +223,9 @@ class CycleBasedTLController():
         self.tl = tl
         self.cycleTime = cycleTime
         self.phaseShift = phaseShift
-        self.lastSteps = [0]*4
+        self.lastStep = 0
+        self.currentStep = 0
+        self.countYellowSteps = 0
         numPhases, yellowPhaseDuration = getTLPhaseInfo()
 
         totalGreenPhaseDuration = self.cycleTime - (numPhases/2)*yellowPhaseDuration
@@ -247,13 +251,37 @@ class CycleBasedTLController():
         #print(self.phaseArr)
 
     def step(self):
-        '''
-        self.lastSteps = np.roll(self.lastSteps,1)
-        self.lastSteps[0] = self.phaseArr[0]
-        if self.lastSteps[1] % 2 == 0 and self.lastSteps[0] % 2 == 0 and self.lastSteps[1] != self.lastSteps[0]:
-            traci.trafficlight.setPhase(self.tl.id, self.lastSteps[1]+1) 
-        '''
-        traci.trafficlight.setPhase(self.tl.id, self.phaseArr[0])
+        #Ensure that tl works consistently when cycles are switched
+        #first count how long the last yellow phase has been going ...
+        if self.lastStep%2 != 0:
+            #yellowPhase
+            self.countYellowSteps += 1      
+        else:
+            #greenPhase
+            self.countYellowSteps = 0
+
+        #if there is currently a green phase and the new cycle starts with the same green phase 
+        # or the yellow phase just before then continue with the green phase
+        if self.lastStep % 2 == 0 and (self.lastStep == self.phaseArr[0] or self.lastStep == self.phaseArr[0]+1):
+            #self.currentStep = self.phaseArr[0]
+            pass
+        # in all other cases, a safe switch guard has to ensure, that we have a yellow phase
+        # that is exactly 3 steps/seconds long before the new cycle starts
+
+        elif self.countYellowSteps == 0:
+            self.currentStep = self.lastStep+1
+        elif self.countYellowSteps < 3:
+            self.currentStep = self.lastStep
+        elif self.countYellowSteps == 3:
+            if self.phaseArr[0]%2 != 0:
+                self.currentStep = (self.phaseArr[0]+1)%self.numPhases
+            else:
+                self.currentStep = self.phaseArr[0]
+        elif self.countYellowSteps > 3:
+            print("error yellowPhase longer than 3 seconds")
+
+        traci.trafficlight.setPhase(self.tl.id, self.currentStep)
+        self.lastStep = self.currentStep
         self.phaseArr = np.roll(self.phaseArr, -1)
 
         #calc carsOnLane
