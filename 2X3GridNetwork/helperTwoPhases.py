@@ -273,15 +273,15 @@ class CycleBasedTLController():
 
         elif self.countYellowSteps == 0:
             self.currentStep = self.lastStep+1
-        elif self.countYellowSteps < 3:
+        elif self.countYellowSteps < self.yellowPhaseDuration:
             self.currentStep = self.lastStep
-        elif self.countYellowSteps == 3:
+        elif self.countYellowSteps == self.yellowPhaseDuration:
             if self.phaseArr[0]%2 != 0:
                 self.currentStep = (self.phaseArr[0]+1)%self.numPhases
             else:
                 self.currentStep = self.phaseArr[0]
-        elif self.countYellowSteps > 3:
-            print("error yellowPhase longer than 3 seconds")
+        elif self.countYellowSteps > self.yellowPhaseDuration:
+            print("error yellowPhase longer than %d seconds" % self.yellowPhaseDuration)
 
         traci.trafficlight.setPhase(self.tl.id, self.currentStep)
         self.lastStep = self.currentStep
@@ -501,8 +501,8 @@ def meanSpeedAdaSOTL(params):
     numVehicles = 900
 
     #create instances
-    minGreenTime = 7
-    maxGreenTime = 60 #change to maxRedTime
+    minGreenTime = 20
+    maxGreenTime = 55 #change to maxRedTime
     trafficLights = createTrafficLights(minGreenTime, maxGreenTime)
 
     mu = 3
@@ -542,8 +542,8 @@ def meanSpeedSOTL(params):
     numVehicles = 900
 
     #create instances
-    minGreenTime = 7
-    maxGreenTime = 60 #change to maxRedTime
+    minGreenTime = 20
+    maxGreenTime = 55 #change to maxRedTime
     trafficLights = createTrafficLights(minGreenTime, maxGreenTime)
 
     mu = 3

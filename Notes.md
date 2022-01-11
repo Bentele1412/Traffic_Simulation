@@ -40,6 +40,7 @@
 * Random optimization starts
 * Handle more than 2 green phases + more than one red lane
 * Create different scenario
+* Waiting time calculated differently in paper than provided mean waiting time of statistics --> avg per intersection and then avg over all intersections
 
 
 ## Possible paper content

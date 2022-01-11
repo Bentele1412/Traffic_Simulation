@@ -167,39 +167,39 @@
 
     <tlLogic id="A1" type="static" programID="0" offset="0">
         <phase duration="1000" state="GGrr"/>
-        <phase duration="3"  state="yyrr"/>
+        <phase duration="5"  state="yyrr"/>
         <phase duration="1000" state="rrGG"/>
-        <phase duration="3"  state="rryy"/>
+        <phase duration="5"  state="rryy"/>
     </tlLogic>
     <tlLogic id="A2" type="static" programID="0" offset="0">
         <phase duration="1000" state="GGrr"/>
-        <phase duration="3"  state="yyrr"/>
+        <phase duration="5"  state="yyrr"/>
         <phase duration="1000" state="rrGG"/>
-        <phase duration="3"  state="rryy"/>
+        <phase duration="5"  state="rryy"/>
     </tlLogic>
     <tlLogic id="A3" type="static" programID="0" offset="0">
         <phase duration="1000" state="GGrr"/>
-        <phase duration="3"  state="yyrr"/>
+        <phase duration="5"  state="yyrr"/>
         <phase duration="1000" state="rrGG"/>
-        <phase duration="3"  state="rryy"/>
+        <phase duration="5"  state="rryy"/>
     </tlLogic>
     <tlLogic id="B1" type="static" programID="0" offset="0">
         <phase duration="1000" state="GGrr"/>
-        <phase duration="3"  state="yyrr"/>
+        <phase duration="5"  state="yyrr"/>
         <phase duration="1000" state="rrGG"/>
-        <phase duration="3"  state="rryy"/>
+        <phase duration="5"  state="rryy"/>
     </tlLogic>
     <tlLogic id="B2" type="static" programID="0" offset="0">
         <phase duration="1000" state="GGrr"/>
-        <phase duration="3"  state="yyrr"/>
+        <phase duration="5"  state="yyrr"/>
         <phase duration="1000" state="rrGG"/>
-        <phase duration="3"  state="rryy"/>
+        <phase duration="5"  state="rryy"/>
     </tlLogic>
     <tlLogic id="B3" type="static" programID="0" offset="0">
         <phase duration="1000" state="GGrr"/>
-        <phase duration="3"  state="yyrr"/>
+        <phase duration="5"  state="yyrr"/>
         <phase duration="1000" state="rrGG"/>
-        <phase duration="3"  state="rryy"/>
+        <phase duration="5"  state="rryy"/>
     </tlLogic>
 
     <junction id="A1" type="traffic_light" x="0.00" y="0.00" incLanes="N1A1_0 W1A1_0" intLanes=":A1_0_0 :A1_1_0 :A1_2_0 :A1_3_0" shape="-3.20,4.00 0.00,4.00 0.44,1.78 1.00,1.00 1.78,0.44 2.78,0.11 4.00,0.00 4.00,-3.20 1.78,-3.64 1.00,-4.20 0.44,-4.98 0.11,-5.98 0.00,-7.20 -3.20,-7.20 -3.64,-4.98 -4.20,-4.20 -4.98,-3.64 -5.98,-3.31 -7.20,-3.20 -7.20,0.00 -4.98,0.44 -4.20,1.00 -3.64,1.78 -3.31,2.78">
