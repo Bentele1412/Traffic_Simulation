@@ -28,15 +28,15 @@ if __name__ == '__main__':
     sumoGui = checkBinary('sumo-gui')
     configPath = os.path.abspath("2x3.sumocfg")
     simulationTime = 3600
-    numVehicles = 1500
+    numVehicles = 900
 
     #create instances
-    minGreenTime = 7
-    maxGreenTime = 60 #change to maxRedTime
+    minGreenTime = 20
+    maxGreenTime = 55 #change to maxRedTime
     trafficLights = createTrafficLights(minGreenTime, maxGreenTime)
 
     mu = 3
-    theta = 41
+    theta = 32
     sotls = []
     for tl in trafficLights:
         sotls.append(SOTL(tl, mu, theta))
