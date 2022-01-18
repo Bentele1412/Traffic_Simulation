@@ -792,6 +792,18 @@ def createTrafficLights(minGreenTime = 5, maxGreenTime = 60):
     trafficLights.append(TrafficLight(prevDetector.get('lane')[2:4], lanes, minGreenTime, maxGreenTime))
     return trafficLights
 
+def mapLPDetailsTwoTL(trafficLights, flowFile):
+    pd.read_csv(flowFile)
+    for trafficLight in trafficLights:
+        for lane in trafficLight.lanes:
+            pass
+        pass
+    pass
+
+
+
+
+
 def setFlows(numVehicles, simulationTime):
     groundProb = numVehicles/simulationTime/12
     heavyProb = groundProb*7
