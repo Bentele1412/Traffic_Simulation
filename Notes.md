@@ -26,10 +26,8 @@
 * **Done:** reimplement 2X3 grid from paper with flows
 * **Done:** implement SOTL with well defined object structure
 * **Done:** implement fixed cycle based control
-* compare SOTL and FIX + comparison to paper results --> Cycle based difficult due to flow switches --> phase shifts?
 * Hillclimbing: 
   * **Done:** define gradient per dimension with (positive direction fitness deviation - negative direction fitness deviation)
-  * ensure minCycleTime is never undercut
   * **Done:** Optimization strategies:
     * **Done:** calc all directions, take best and multiply with gradient --> new fitness evaluation needed after updates
     * **Done:** calc all directions, get all fitness increasing gradients and summarize as one gradient --> updates are performed in several directions at once
@@ -38,9 +36,15 @@
 * **Declined:** Parallelization --> file writings are issues to face
 * Bigger Phase shifts --> 50 secs per node
 * Random optimization starts
-* Handle more than 2 green phases + more than one red lane
-* Create different scenario
-* Waiting time calculated differently in paper than provided mean waiting time of statistics --> avg per intersection and then avg over all intersections
+* **Freezed:** Handle more than 2 green phases + more than one red lane
+* **Freezed:** Create different scenario
+* **In Progress:** Waiting time calculated differently in paper than provided mean waiting time of statistics --> avg per intersection and then avg over all intersections
+* compare SOTL and FIX + comparison to paper results --> Cycle based difficult due to flow switches --> phase shifts?
+* **Done:** ensure minCycleTime is never undercut
+* termination condition of HillClimbing 
+* implement all platoon based algorithms
+* arterial network to validate CB and learn mor about AdaSOTL behavior --> verification 
+* structure helperTwoPhases.py into more files
 
 
 ## Possible paper content

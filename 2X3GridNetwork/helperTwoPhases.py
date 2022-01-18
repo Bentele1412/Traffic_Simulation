@@ -218,6 +218,153 @@ class AdaSOTL():
         self.phi = 0
         self.kappa = 0
 
+class PBSS():
+    class Cluster():
+        def __init__(self, tau_ps, n_pc, L_det, v_f, tau_pd=1):
+            '''
+            status: 
+                0 = Tuple
+                1 = Minor
+                2 = Queue
+                3 = Platoon
+            '''
+            self.tau_ps = tau_ps #sample period start time
+            self.tau_pd = tau_pd #sample period duration
+            self.calcTau_pe() #calc sample period end time
+            self.n_pc = n_pc #number of counted vehicles (drove over detector)
+            self.calcQ_pc() #calc flow rate of vehicles
+            self.L_det = L_det #length between intersection and detector
+            self.v_f = v_f #speed
+            self.tau_ps_t = self._getTau_ps_t(self.tau_ps)
+            self.status = 0 #tuple
+        
+        def _getTau_ps_t(self, t):
+            return self.tau_ps - t + self.L_det/self.v_f
+
+        def calcTau_pe(self):
+            self.tau_pe = self.tau_ps_t + self.tau_pd
+
+        def calcQ_pc(self):
+            self.q_pc = self.n_pc/self.tau_pd #flow rate of vehicles
+
+    def __init__(self, tl, tau_g_min=5, tau_g_max=55, tau_y=5, tau_sl=3, tau_sh=3, v_f=9.5, c_thc=5, c_thpc=5, useAAC=True, usePBE=True, usePBS=True):
+        self.tl = tl
+        self.tau_g_min = tau_g_min #min green time
+        self.tau_g_max = tau_g_max #max green time
+        self.tau_y = tau_y #yellow time
+        self.tau_sl = tau_sl #startup loss time
+        self.tau_sh = tau_sh #saturation headway
+        self.v_f = v_f #0.95*v_max --> here v_max = 10 m/s
+        self.c_thc = 0 if useAAC and not usePBE and not usePBS else c_thc #specified threshold duration for creating clusters
+        self.c_thpc = c_thpc #threshold of platoon count (in cars)
+        self.c_thpd = 1/self.c_thc if self.c_thc != 0 else 0 #flow rate threshold
+        self.useAAC = useAAC 
+        self.usePBE = usePBE
+        self.usePBS = usePBS
+
+        self.S = [[]*len(self.tl.lanes)]
+        self.tau_ge = 0
+
+    def step(self, t):
+        #don´t save tuple in self.S if n_pc = 0 
+        self.tau_ge += 1
+
+    def performAAC(self, tau_ge, s):
+        tau_gremain = self.tau_g_max - tau_ge
+        n_q = self.calcN_q(s)
+        n_qa = self.estimateN_qa(s, tau_ge, tau_adv=0, n_qn=n_q)
+        tau_ext = self.getTau_qc(n_qa, tau_ge)
+        tau_ext = min(tau_ext, tau_gremain)
+        return tau_ext
+
+    def performPBE(self, tau_ge, s_r, s_g):
+        tau_gremain = self.tau_g_max - tau_ge
+        n_q = self.calcN_q(s_r)
+        n_qa_r = self.estimateN_qa(s_r, tau_ge=0, tau_adv=self.tau_y, n_qn=n_q)
+        tau_qa_r = self.getTau_qc(n_qa_r, 0)
+        tau_qa_r = max(tau_qa_r, tau_gremain)
+        platoons_g = [c for c in s_g if c.status == 3]
+        if not len(platoons_g) == 0:
+            n_m_g = sum([c.n_pc for c in s_g if c.status == 1 and c.tau_ps_t < platoons_g[0].tau_ps_t])
+            tau_idle_g = platoons_g[0].tau_ps_t - self.getTau_qc(n_m_g, 0)
+            delta_tau = (tau_qa_r + 2 * self.tau_y) - tau_idle_g
+            if delta_tau > 0:
+                n_m_r = sum([c.n_pc for c in s_r if c.status == 1])
+                n_m_r = n_m_r + n_q - n_qa_r #questionable usage of n_q
+                delta_r = n_m_r * delta_tau - n_qa_r * (platoons_g[0].tau_pe + n_m_r * self.tau_sl)
+                delta_g = (delta_tau + self.tau_sl) * (platoons_g[0].n_pc + n_m_g) + n_m_g * tau_idle_g/2
+                if delta_g + delta_r > 0: #check +
+                    return platoons_g[0].tau_pe
+        return 0
+
+    def performPBS(self, tau_ge, s_r, s_g):
+        platoons_r = [c for c in s_r if c.status == 3]
+        if len(platoons_r) > 0:
+            tau_gremain = self.tau_g_max - tau_ge
+            n_q = self.calcN_q(s_r)
+            n_m_r = sum([c.n_pc for c in s_r if c.status == 1 and c.tau_ps_t < platoons_r[0].tau_ps_t])
+            tau_qa_r = self.getTau_qc(n_q + n_m_r, 0)
+            tau_qa_r = max(tau_qa_r, tau_gremain)
+            tau_idle_r = platoons_r[0].tau_ps_t - tau_qa_r - self.tau_y
+            '''
+            tbd
+            '''
+        return 0
+
+        
+
+
+
+    def aggregateClusters(self, s):
+        currentClusterInd = 0
+        while(currentClusterInd < len(s)-1):
+            currentCluster = s[currentClusterInd]
+            nextCluster = s[currentClusterInd+1]
+            currentTau_pe = currentCluster.tau_pe
+            if nextCluster.tau_ps_t - currentTau_pe < self.c_thc:
+                #merge tuples
+                currentCluster.tau_pe = nextCluster.tau_pe
+                currentCluster.tau_pd = currentCluster.tau_pe - currentCluster.tau_ps_t #changed from sum to this
+                currentCluster.n_pc += nextCluster.n_pc
+                currentCluster.calcQ_pc()
+                del s[currentClusterInd+1]
+            else:
+                currentClusterInd += 1
+
+        for cluster in s:
+            if cluster.tau_ps_t <= 0:
+                cluster.status = 2
+            elif cluster.q_pc > self.c_thpd and cluster.n_pc > self.c_thpc:
+                cluster.status = 3
+            else:
+                cluster.status = 1
+        return s
+
+    def estimateN_qa(self, s, tau_ge, tau_adv, n_qn):
+        n_qa = n_qn
+        tau_qc = self.getTau_qc(n_qa, tau_ge)
+        for c in s:
+            if c.tau_ps_t - tau_adv <= tau_qc:
+                delta_d = 1/self.tau_sh - c.q_pc
+                if delta_d <= 0 or c.tau_pe - tau_adv <= tau_qc:
+                    n_qa += c.n_pc
+                else:
+                    delta_t = (tau_qc - (c.tau_ps_t - tau_adv)) * c.q_pc/delta_d
+                    if delta_t < c.tau_pd:
+                        n_qa += c.n_pc * delta_t/c.tau_pd
+                        return n_qa
+                    else:
+                        n_qa += c.n_pc
+
+    def calcN_q(self, s):
+        return sum([c.n_pc for c in s if c.tau_ps_t <= 0])
+
+
+    def getTau_qc(self, n_q, tau_ge):
+        #calculate queue clearing time
+        return self.tau_sl - tau_ge + self.tau_sh * n_q if tau_ge < self.tau_sl else self.tau_sh * n_q
+            
+
 class CycleBasedTLController():
     def __init__(self, tl, cycleTime, phaseShift, numPhases, yellowPhaseDuration):
         self.tl = tl
@@ -304,7 +451,7 @@ class HillClimbing():
         self.fitness = self.evalFunc(self.params)
         self.best = [self.fitness, self.params]
     
-    def optimize(self, epsilon=1, numRuns=1, maxIter=50, strategy=0):
+    def optimize(self, epsilon=1, numRuns=1, maxIter=50, strategy=0, paramValidCallbacks=None):
         '''
         strategy: 
             0 = calc all directions, take best and multiply with gradient
@@ -329,8 +476,11 @@ class HillClimbing():
             print("Iteration %i done." % (i+1))
             print(gradient)
             print(np.linalg.norm(gradient))
-            if any(gradient): #and np.linalg.norm(gradient) > self.epsilon: #commented in norm(gradient)
-                self.params = self.params + gradient * self.stepSizes if strategy != 2 else self.params
+            if any(gradient) and np.linalg.norm(gradient) > self.epsilon: #commented in norm(gradient)
+                self.params = self.params + gradient / self.stepSizes if strategy != 2 else self.params #changed to /
+                if paramValidCallbacks:
+                    for callback in paramValidCallbacks:
+                        self.params = callback(self.params)
                 self.fitness = self._performRuns(self.params) if strategy != 2 else self.fitness
                 print(self.fitness)
                 self.fitnessDynamics.append(self.fitness)
@@ -430,7 +580,18 @@ class HillClimbing():
         #fitnesses = ray.get([_runRuns.remote(params) for _ in range(self.numRuns)])
         fitnesses = [_runRuns(params) for _ in range(self.numRuns)]
         return np.mean(fitnesses)
-            
+
+'''
+Validation callback functions
+'''
+def checkCTFactor(params):
+    ctFactor = params[0]
+    if ctFactor < 0.75:
+        params[0] = 0.75
+    elif ctFactor > 1.5:
+        params[0] = 1.5
+    return params
+
 '''
 Evaluation functions
 '''
@@ -443,11 +604,12 @@ def meanSpeedCycleBased(params):
             if step % 1200 == 0 and step < 3600:
                 mapLPDetailsToTL(trafficLights, lpSolveResultPaths[pathCounter])
                 maxNodeUtilization = max([tl.utilization for tl in trafficLights])
-                cycleTime = int(np.round(ctFactor * ((1.5 * 2*3 + 5)/(1 - maxNodeUtilization)))) #maybe edit hard coded yellow phases and extract them from file
+                numPhases, yellowPhaseDuration = getTLPhaseInfo()
+                cycleTime = int(np.round(ctFactor * ((1.5 * (numPhases/2)*yellowPhaseDuration + 5)/(1 - maxNodeUtilization)))) #maybe edit hard coded yellow phases and extract them from file
                 pathCounter += 1
                 if step == 0:
                     for counter, tl in enumerate(trafficLights):
-                        cycleBasedTLControllers.append(CycleBasedTLController(tl, cycleTime, phaseShifts[counter]))
+                        cycleBasedTLControllers.append(CycleBasedTLController(tl, cycleTime, phaseShifts[counter], numPhases, yellowPhaseDuration))
                 else:
                     for counter, controller in enumerate(cycleBasedTLControllers):
                         controller.setCycle(cycleTime, phaseShifts[counter])
@@ -467,7 +629,7 @@ def meanSpeedCycleBased(params):
     ctFactor = params[0]
     #phaseShifts = [0]*6 #6 for 6 junctions 
     phaseShifts = [0] + list(map(lambda x: int(x), params[1:]))
-    lpSolveResultPaths = ['./LPSolve/2x3Grid_c_eps0,4.lp.csv', './LPSolve/2x3Grid_a_eps0,4.lp.csv', './LPSolve/2x3Grid_b_eps0,4.lp.csv'] #changed order for experiment!!!
+    lpSolveResultPaths = ['./LPSolve/2x3Grid_a_eps0,4.lp.csv', './LPSolve/2x3Grid_b_eps0,4.lp.csv', './LPSolve/2x3Grid_c_eps0,4.lp.csv']
 
     #create instances
     trafficLights = createTrafficLights()
