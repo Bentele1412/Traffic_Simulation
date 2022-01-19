@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on 2022-01-19 17:12:55 by Eclipse SUMO sumo Version 1.10.0
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/sumoConfiguration.xsd">
+
+    <input>
+        <net-file value="C:\Users\Marcus\Desktop\Hauptordner\Studium\Masterstudium\3.%20Semester\Projekt_Sim-Opt\Traffic_Simulation\GridNetwork\2x3net.net.xml"/>
+        <route-files value="C:\Users\Marcus\Desktop\Hauptordner\Studium\Masterstudium\3.%20Semester\Projekt_Sim-Opt\Traffic_Simulation\GridNetwork\2x3Routes.xml"/>
+        <additional-files value="C:\Users\Marcus\Desktop\Hauptordner\Studium\Masterstudium\3.%20Semester\Projekt_Sim-Opt\Traffic_Simulation\GridNetwork\additionals.xml"/>
+    </input>
+
+    <output>
+        <tripinfo-output value="../tripinfo.xml"/>
+        <statistic-output value="../statistics.xml"/>
+    </output>
+
+    <report>
+        <no-step-log value="true"/>
+    </report>
+
+    <traci_server>
+        <remote-port value="62183"/>
+    </traci_server>
+
+</configuration>
+-->
+
+<tripinfos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/tripinfo_file.xsd">
+    <tripinfo id="1.0" depart="4.00" departLane="N1A1_0" departPos="5.10" departSpeed="0.00" departDelay="0.00" arrival="178.00" arrivalLane="B1S1_0" arrivalPos="492.80" arrivalSpeed="9.35" duration="174.00" routeLength="1494.90" waitingTime="9.00" waitingCount="1" stopTime="0.00" timeLoss="24.35" rerouteNo="0" devices="tripinfo_1.0" vType="paperVehicle" speedFactor="0.94" vaporized=""/>
+    <tripinfo id="1.1" depart="10.00" departLane="N1A1_0" departPos="5.10" departSpeed="0.00" departDelay="5.00" arrival="184.00" arrivalLane="B1S1_0" arrivalPos="492.80" arrivalSpeed="9.56" duration="174.00" routeLength="1494.90" waitingTime="4.00" waitingCount="1" stopTime="0.00" timeLoss="24.04" rerouteNo="0" devices="tripinfo_1.1" vType="paperVehicle" speedFactor="1.08" vaporized=""/>
+    <tripinfo id="1.2" depart="23.00" departLane="N1A1_0" departPos="5.10" departSpeed="0.00" departDelay="0.00" arrival="189.00" arrivalLane="B1S1_0" arrivalPos="492.80" arrivalSpeed="8.84" duration="166.00" routeLength="1494.90" waitingTime="0.00" waitingCount="0" stopTime="0.00" timeLoss="15.91" rerouteNo="0" devices="tripinfo_1.2" vType="paperVehicle" speedFactor="0.89" vaporized=""/>
+    <tripinfo id="3.0" depart="32.00" departLane="N3A3_0" departPos="5.10" departSpeed="0.00" departDelay="0.00" arrival="225.00" arrivalLane="B3S3_0" arrivalPos="492.80" arrivalSpeed="9.43" duration="193.00" routeLength="1494.90" waitingTime="24.00" waitingCount="2" stopTime="0.00" timeLoss="43.32" rerouteNo="0" devices="tripinfo_3.0" vType="paperVehicle" speedFactor="1.09" vaporized=""/>
+</tripinfos>

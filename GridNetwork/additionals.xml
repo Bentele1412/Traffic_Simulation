@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on 2021-501-509 09:50:04 by Eclipse SUMO netedit Version 1.10.0
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/netconvertConfiguration.xsd">
+
+    <input>
+        <sumo-net-file value="C:\Users\Marcus\Desktop\Hauptordner\Studium\Masterstudium\3.%20Semester\Projekt_Sim-Opt\Traffic_Simulation\TwoCross\twoCross.net.xml"/>
+    </input>
+
+    <output>
+        <output-file value="C:\Users\Marcus\Desktop\Hauptordner\Studium\Masterstudium\3.%20Semester\Projekt_Sim-Opt\Traffic_Simulation\TwoCross\twoCross.net.xml"/>
+    </output>
+
+    <processing>
+        <geometry.min-radius.fix.railways value="false"/>
+        <geometry.max-grade.fix value="false"/>
+        <offset.disable-normalization value="true"/>
+        <lefthand value="false"/>
+    </processing>
+
+    <junctions>
+        <no-turnarounds value="true"/>
+        <junctions.corner-detail value="5"/>
+        <junctions.limit-turn-speed value="5.5"/>
+        <rectangular-lane-cut value="false"/>
+    </junctions>
+
+    <pedestrian>
+        <walkingareas value="false"/>
+    </pedestrian>
+
+    <netedit>
+        <additional-files value="C:\Users\Marcus\Desktop\Hauptordner\Studium\Masterstudium\3.%20Semester\Projekt_Sim-Opt\Traffic_Simulation\TwoCross\additionals.xml"/>
+    </netedit>
+
+    <report>
+        <aggregate-warnings value="5"/>
+    </report>
+
+</configuration>
+-->
+
+<additional xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/additional_file.xsd">
+    <!--Junction A1-->
+    <e2Detector id="detN1A1b" lane="N1A1_0" pos="50"  length="14.00" freq="300.00" file="detOutputs\e2Detector_N1A1b.xml"/>
+    <e2Detector id="detN1A1m" lane="N1A1_0" pos="-120.00" length="14.00" freq="300.00" file="detOutputs\e2Detector_N1A1m.xml"/>
+    <e2Detector id="detN1A1e" lane="N1A1_0" pos="-14.00" length="14.00" freq="300.00" file="detOutputs\e2Detector_N1A1e.xml"/>
+    <e2Detector id="detW1A1b" lane="W1A1_0" pos="50" length="14.00" freq="300.00" file="detOutputs\e2Detector_W1A1b.xml"/>
+    <e2Detector id="detW1A1m" lane="W1A1_0" pos="-120.00" length="14.00" freq="300.00" file="detOutputs\e2Detector_W1A1m.xml"/>
+    <e2Detector id="detW1A1e" lane="W1A1_0" pos="-14.00" length="14.00" freq="300.00" file="detOutputs\e2Detector_W1A1e.xml"/>
+
+    <!--Junction A2-->
+    <e2Detector id="detN2A2b" lane="N2A2_0" pos="50" length="14.00" freq="300.00" file="detOutputs\e2Detector_N2A2b.xml"/>
+    <e2Detector id="detN2A2m" lane="N2A2_0" pos="-120.00" length="14.00" freq="300.00" file="detOutputs\e2Detector_N2A2m.xml"/>
+    <e2Detector id="detN2A2e" lane="N2A2_0" pos="-14.00" length="14.00" freq="300.00" file="detOutputs\e2Detector_N2A2e.xml"/>
+    <e2Detector id="detA1A2b" lane="A1A2_0" pos="50" length="14.00" freq="300.00" file="detOutputs\e2Detector_A1A2b.xml"/>
+    <e2Detector id="detA1A2m" lane="A1A2_0" pos="-120.00" length="14.00" freq="300.00" file="detOutputs\e2Detector_A1A2m.xml"/>
+    <e2Detector id="detA1A2e" lane="A1A2_0" pos="-14.00" length="14.00" freq="300.00" file="detOutputs\e2Detector_A1A2e.xml"/>
+
+    <!--Junction A3-->
+    <e2Detector id="detN3A3b" lane="N3A3_0" pos="50" length="14.00" freq="300.00" file="detOutputs\e2Detector_N3A3b.xml"/>
+    <e2Detector id="detN3A3m" lane="N3A3_0" pos="-120.00" length="14.00" freq="300.00" file="detOutputs\e2Detector_N3A3m.xml"/>
+    <e2Detector id="detN3A3e" lane="N3A3_0" pos="-14.00" length="14.00" freq="300.00" file="detOutputs\e2Detector_N3A3e.xml"/>
+    <e2Detector id="detA2A3b" lane="A2A3_0" pos="50" length="14.00" freq="300.00" file="detOutputs\e2Detector_A2A3b.xml"/>
+    <e2Detector id="detA2A3m" lane="A2A3_0" pos="-120.00" length="14.00" freq="300.00" file="detOutputs\e2Detector_A2A3m.xml"/>
+    <e2Detector id="detA2A3e" lane="A2A3_0" pos="-14.00" length="14.00" freq="300.00" file="detOutputs\e2Detector_A2A3e.xml"/>
+
+    <!--Junction B1-->
+    <e2Detector id="detA1B1b" lane="A1B1_0" pos="50" length="14.00" freq="300.00" file="detOutputs\e2Detector_A1B1b.xml"/>
+    <e2Detector id="detA1B1m" lane="A1B1_0" pos="-120.00" length="14.00" freq="300.00" file="detOutputs\e2Detector_A1B1m.xml"/>
+    <e2Detector id="detA1B1e" lane="A1B1_0" pos="-14.00" length="14.00" freq="300.00" file="detOutputs\e2Detector_A1B1e.xml"/>
+    <e2Detector id="detW2B1b" lane="W2B1_0" pos="50" length="14.00" freq="300.00" file="detOutputs\e2Detector_W2B1b.xml"/>
+    <e2Detector id="detW2B1m" lane="W2B1_0" pos="-120.00" length="14.00" freq="300.00" file="detOutputs\e2Detector_W2B1m.xml"/>
+    <e2Detector id="detW2B1e" lane="W2B1_0" pos="-14.00" length="14.00" freq="300.00" file="detOutputs\e2Detector_W2B1e.xml"/>
+
+    <!--Junction B2-->
+    <e2Detector id="detA2B2b" lane="A2B2_0" pos="50" length="14.00" freq="300.00" file="detOutputs\e2Detector_A2B2b.xml"/>
+    <e2Detector id="detA2B2m" lane="A2B2_0" pos="-120.00" length="14.00" freq="300.00" file="detOutputs\e2Detector_A2B2m.xml"/>
+    <e2Detector id="detA2B2e" lane="A2B2_0" pos="-14.00" length="14.00" freq="300.00" file="detOutputs\e2Detector_A2B2e.xml"/>
+    <e2Detector id="detB1B2b" lane="B1B2_0" pos="50" length="14.00" freq="300.00" file="detOutputs\e2Detector_B1B2b.xml"/>
+    <e2Detector id="detB1B2m" lane="B1B2_0" pos="-120.00" length="14.00" freq="300.00" file="detOutputs\e2Detector_B1B2m.xml"/>
+    <e2Detector id="detB1B2e" lane="B1B2_0" pos="-14.00" length="14.00" freq="300.00" file="detOutputs\e2Detector_B1B2e.xml"/>
+    
+    <!--Junction B3-->
+    <e2Detector id="detA3B3b" lane="A3B3_0" pos="50" length="14.00" freq="300.00" file="detOutputs\e2Detector_A3B3b.xml"/>
+    <e2Detector id="detA3B3m" lane="A3B3_0" pos="-120.00" length="14.00" freq="300.00" file="detOutputs\e2Detector_A3B3m.xml"/>
+    <e2Detector id="detA3B3e" lane="A3B3_0" pos="-14.00" length="14.00" freq="300.00" file="detOutputs\e2Detector_A3B3e.xml"/>
+    <e2Detector id="detB2B3b" lane="B2B3_0" pos="50" length="14.00" freq="300.00" file="detOutputs\e2Detector_B2B3b.xml"/>
+    <e2Detector id="detB2B3m" lane="B2B3_0" pos="-120.00" length="14.00" freq="300.00" file="detOutputs\e2Detector_B2B3m.xml"/>
+    <e2Detector id="detB2B3e" lane="B2B3_0" pos="-14.00" length="14.00" freq="300.00" file="detOutputs\e2Detector_B2B3e.xml"/>
+</additional>
