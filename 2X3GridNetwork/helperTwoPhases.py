@@ -220,7 +220,7 @@ class AdaSOTL():
 
 class PBSS():
     class Cluster():
-        def __init__(self, tau_ps, n_pc, L_det, v_f, tau_pd=1):
+        def __init__(self, tau_ps, n_pc, v_f, L_det=450, tau_pd=1):
             '''
             status: 
                 0 = Tuple
@@ -228,17 +228,17 @@ class PBSS():
                 2 = Queue
                 3 = Platoon
             '''
+            self.L_det = L_det #length between intersection and detector
+            self.v_f = v_f #speed
             self.tau_ps = tau_ps #sample period start time
             self.tau_pd = tau_pd #sample period duration
+            self.tau_ps_t = self.getTau_ps_t(self.tau_ps)
             self.calcTau_pe() #calc sample period end time
             self.n_pc = n_pc #number of counted vehicles (drove over detector)
             self.calcQ_pc() #calc flow rate of vehicles
-            self.L_det = L_det #length between intersection and detector
-            self.v_f = v_f #speed
-            self.tau_ps_t = self._getTau_ps_t(self.tau_ps)
             self.status = 0 #tuple
         
-        def _getTau_ps_t(self, t):
+        def getTau_ps_t(self, t):
             return self.tau_ps - t + self.L_det/self.v_f
 
         def calcTau_pe(self):
@@ -262,12 +262,57 @@ class PBSS():
         self.usePBE = usePBE
         self.usePBS = usePBS
 
-        self.S = [[]*len(self.tl.lanes)]
+        self.S = []
+        for _ in range(len(self.tl.lanes)):
+            self.S.append([])
         self.tau_ge = 0
+        self.tau_ext = 0
 
     def step(self, t):
-        #don´t save tuple in self.S if n_pc = 0 
-        self.tau_ge += 1
+        yellowPhase = True if self.tl.getCurrentPhase() % 2 != 0 else False
+        self.tau_ge = self.tau_ge + 1 if not yellowPhase else self.tau_ge #only increase green phase duration count if tl is in a green phase
+        self.tau_ext = self.tau_ext - 1 if not yellowPhase else self.tau_ext
+
+        #perform incoming detection
+        for counter, lane in enumerate(self.tl.lanes):
+            incomingCars = lane.detectors[0].getCurrentCars()
+            if incomingCars > 0:
+                self.S[counter].append(self.Cluster(t, incomingCars, self.v_f))
+            
+            #perform outgoing detection
+            outflowingCars = lane.detectors[1].getCurrentCars()
+            while outflowingCars > 0:
+                if self.S[counter][0].n_pc - outflowingCars <= 0:
+                    outflowingCars -= self.S[counter][0].n_pc 
+                    del self.S[counter][0]
+                else:
+                    self.S[counter][0].n_pc -= outflowingCars
+                    break
+        
+        #update tau_ps_t for all clusters
+        for s in self.S:
+            for c in s:
+                c.tau_ps_t = c.getTau_ps_t(t)
+        
+        #reaching decision point
+        if not yellowPhase and self.tau_ext <= 0:
+            #aggregation
+            for counter, s in enumerate(self.S):
+                self.S[counter] = self.aggregateClusters(s)
+
+            #policy application
+            redLaneInd = 0 if self.tl.lanes[0].isRed else 1
+            greenLaneInd = 1 if redLaneInd == 0 else 0
+            if self.useAAC:
+                self.tau_ext = self.performAAC(self.tau_ge, self.S[greenLaneInd])
+            if self.usePBE and self.tau_ext <= 0:
+                self.tau_ext = self.performPBE(self.tau_ge, self.S[redLaneInd], self.S[greenLaneInd])
+            if self.usePBS and self.tau_ext <= 0:
+                self.tau_ext = self.performPBS(self.tau_ge, self.S[redLaneInd])
+
+            if self.tau_ext == 0 and self.tau_ge >= self.tau_g_min:
+                self.tl.switchLight(self.tl.getCurrentPhase())
+                self.tau_ge = 0
 
     def performAAC(self, tau_ge, s):
         tau_gremain = self.tau_g_max - tau_ge
@@ -293,11 +338,11 @@ class PBSS():
                 n_m_r = n_m_r + n_q - n_qa_r #questionable usage of n_q
                 delta_r = n_m_r * delta_tau - n_qa_r * (platoons_g[0].tau_pe + n_m_r * self.tau_sl)
                 delta_g = (delta_tau + self.tau_sl) * (platoons_g[0].n_pc + n_m_g) + n_m_g * tau_idle_g/2
-                if delta_g + delta_r > 0: #check +
+                if delta_g - delta_r > 0: #check +
                     return platoons_g[0].tau_pe
         return 0
 
-    def performPBS(self, tau_ge, s_r, s_g):
+    def performPBS(self, tau_ge, s_r):
         platoons_r = [c for c in s_r if c.status == 3]
         if len(platoons_r) > 0:
             tau_gremain = self.tau_g_max - tau_ge
@@ -306,15 +351,11 @@ class PBSS():
             tau_qa_r = self.getTau_qc(n_q + n_m_r, 0)
             tau_qa_r = max(tau_qa_r, tau_gremain)
             tau_idle_r = platoons_r[0].tau_ps_t - tau_qa_r - self.tau_y
-            '''
-            tbd
-            '''
+            if tau_idle_r < (self.tau_g_min + 2 * self.tau_y):
+                return tau_idle_r
         return 0
 
         
-
-
-
     def aggregateClusters(self, s):
         currentClusterInd = 0
         while(currentClusterInd < len(s)-1):
@@ -352,9 +393,10 @@ class PBSS():
                     delta_t = (tau_qc - (c.tau_ps_t - tau_adv)) * c.q_pc/delta_d
                     if delta_t < c.tau_pd:
                         n_qa += c.n_pc * delta_t/c.tau_pd
-                        return n_qa
+                        break
                     else:
                         n_qa += c.n_pc
+        return n_qa
 
     def calcN_q(self, s):
         return sum([c.n_pc for c in s if c.tau_ps_t <= 0])
@@ -799,10 +841,6 @@ def mapLPDetailsTwoTL(trafficLights, flowFile):
             pass
         pass
     pass
-
-
-
-
 
 def setFlows(numVehicles, simulationTime):
     groundProb = numVehicles/simulationTime/12
