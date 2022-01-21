@@ -12,8 +12,12 @@ class HillClimbing():
 
         self.posDirection = 1
         self.negDirection = -1
-        self.fitness = self.evalFunc(self.params)
+        self.fitness, _ = self.evalFunc(self.params)
         self.best = [self.fitness, self.params]
+
+        self.meanWaitingTimes = []
+        self.stdWaitingTimes = []
+        self.stdMeanSpeeds = []
     
     def optimize(self, epsilon=1, numRuns=1, maxIter=50, strategy=0, paramValidCallbacks=None):
         '''
@@ -41,13 +45,16 @@ class HillClimbing():
             print(gradient)
             print(np.linalg.norm(gradient))
             if any(gradient) and np.linalg.norm(gradient) > self.epsilon: #commented in norm(gradient)
-                self.params = self.params + gradient / self.stepSizes if strategy != 2 else self.params #changed to /
+                self.params = self.params + gradient * self.stepSizes if strategy != 2 else self.params
                 if paramValidCallbacks:
                     for callback in paramValidCallbacks:
                         self.params = callback(self.params)
-                self.fitness = self._performRuns(self.params) if strategy != 2 else self.fitness
+                self.fitness, stdMeanSpeed, meanWaitingTime, stdMeanWaitingTime = self._performRuns(self.params) if strategy != 2 else self.fitness
                 print(self.fitness)
                 self.fitnessDynamics.append(self.fitness)
+                self.meanWaitingTimes.append(meanWaitingTime)
+                self.stdMeanSpeeds.append(stdMeanSpeed)
+                self.stdWaitingTimes.append(stdMeanWaitingTime)
                 if self.fitness > self.best[0]:
                     self.best = [self.fitness, self.params]
             else:
@@ -55,6 +62,8 @@ class HillClimbing():
         self.totalSeconds = time.time()-self.start 
         minutes = int(self.totalSeconds / 60)
         seconds = self.totalSeconds - minutes*60
+        
+        #Optimization results
         print("%d min and %f seconds needed." % (minutes, seconds))
         print("Last evaluation:")
         print("Fitness:", self.fitness)
@@ -64,10 +73,29 @@ class HillClimbing():
         print("Optimal fitness:", self.best[0])
         print("Optimal params:", self.best[1])
         
+        #Dynamics ploting
         plt.plot(self.fitnessDynamics)
         plt.xlabel("Iteration")
-        plt.ylabel("Fitness")
-        plt.title("Fitness dynamics")
+        plt.ylabel("Mean Speed")
+        plt.title("Mean Speed dynamics")
+        plt.show()
+
+        plt.plot(self.stdMeanSpeeds)
+        plt.xlabel("Iteration")
+        plt.ylabel("Std Mean Speed")
+        plt.title("Std Mean Speed dynamics")
+        plt.show()
+
+        plt.plot(self.meanWaitingTimes)
+        plt.xlabel("Iteration")
+        plt.ylabel("Mean waiting time")
+        plt.title("Mean waiting time dynamics")
+        plt.show()
+
+        plt.plot(self.stdWaitingTimes)
+        plt.xlabel("Iteration")
+        plt.ylabel("Std waiting time")
+        plt.title("Std waiting time dynamics")
         plt.show()
 
     def _calcGradientUpdateOne(self):
@@ -77,10 +105,10 @@ class HillClimbing():
             direction = np.zeros(len(self.params))
             direction[i] = self.posDirection
             posParams = self.params+direction*self.stepSizes
-            posFitness = self._performRuns(posParams)
+            posFitness, _, _, _ = self._performRuns(posParams)
             direction[i] = self.negDirection
             negParams = self.params+direction*self.stepSizes
-            negFitness = self._performRuns(negParams)
+            negFitness, _, _, _ = self._performRuns(negParams)
             fitnessDevResults.append(posFitness - self.fitness) 
             fitnesses.append(posFitness)
             fitnessDevResults.append(negFitness - self.fitness)
@@ -101,10 +129,10 @@ class HillClimbing():
             direction = np.zeros(len(self.params))
             direction[i] = self.posDirection
             posParams = self.params+direction*self.stepSizes
-            posFitness = self._performRuns(posParams)
+            posFitness, _, _, _ = self._performRuns(posParams)
             direction[i] = self.negDirection
             negParams = self.params+direction*self.stepSizes
-            negFitness = self._performRuns(negParams)
+            negFitness, _, _, _ = self._performRuns(negParams)
             gradient.append(((posFitness - negFitness)/2)) 
             fitnesses.append(posFitness)
             fitnesses.append(negFitness)
@@ -117,10 +145,10 @@ class HillClimbing():
             direction = np.zeros(len(self.params))
             direction[i] = self.posDirection
             posParams = self.params+direction*self.stepSizes
-            posFitness = self._performRuns(posParams)
+            posFitness, _, _, _ = self._performRuns(posParams)
             direction[i] = self.negDirection
             negParams = self.params+direction*self.stepSizes
-            negFitness = self._performRuns(negParams)
+            negFitness, _, _, _ = self._performRuns(negParams)
             if posFitness > self.fitness and posFitness > negFitness:
                 self.params = posParams
                 self.fitness = posFitness
@@ -137,10 +165,12 @@ class HillClimbing():
 
     def _performRuns(self, params):
         fitnesses = []
-        #@ray.remote
+        waitingTimes = []
         def _runRuns(params):
             return self.evalFunc(params)
-
-        #fitnesses = ray.get([_runRuns.remote(params) for _ in range(self.numRuns)])
-        fitnesses = [_runRuns(params) for _ in range(self.numRuns)]
-        return np.mean(fitnesses)
+        for _ in range(self.numRuns):
+            meanSpeed, meanWaitingTime = _runRuns(params)
+            fitnesses.append(meanSpeed)
+            waitingTimes.append(meanWaitingTime)
+        #fitnesses = [_runRuns(params) for _ in range(self.numRuns)]
+        return np.mean(fitnesses), np.std(fitnesses), np.mean(waitingTimes), np.std(waitingTimes)

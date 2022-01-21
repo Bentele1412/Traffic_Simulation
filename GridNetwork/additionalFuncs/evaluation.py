@@ -66,7 +66,7 @@ def meanSpeedCycleBased(params):
     _run(trafficLights, ctFactor, phaseShifts, lpSolveResultPaths)
 
     meanSpeed, meanWaitingTime = getMeanSpeedWaitingTime()
-    return float(meanSpeed)
+    return float(meanSpeed), float(meanWaitingTime)
 
 def meanSpeedAdaSOTL(params):
     def _run(adaSotls):
@@ -107,7 +107,7 @@ def meanSpeedAdaSOTL(params):
     _run(adaSotls)
 
     meanSpeed, meanWaitingTime = getMeanSpeedWaitingTime()
-    return float(meanSpeed)
+    return float(meanSpeed), float(meanWaitingTime)
 
 def meanSpeedSOTL(params):
     def _run(sotls):
@@ -147,4 +147,4 @@ def meanSpeedSOTL(params):
     _run(sotls)
 
     meanSpeed, meanWaitingTime = getMeanSpeedWaitingTime()
-    return float(meanSpeed)
+    return float(meanSpeed), float(meanWaitingTime)

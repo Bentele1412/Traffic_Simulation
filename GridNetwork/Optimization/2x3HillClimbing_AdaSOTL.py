@@ -13,4 +13,4 @@ if __name__ == '__main__':
     params = [alpha, beta]
     stepSizes = [0.5, 0.05]
     hillClimbing = HillClimbing(evalFunc, params, stepSizes)
-    hillClimbing.optimize(epsilon=0.001, maxIter=100, numRuns=5, strategy=1)
+    hillClimbing.optimize(epsilon=0.001, maxIter=2, numRuns=2, strategy=1)
