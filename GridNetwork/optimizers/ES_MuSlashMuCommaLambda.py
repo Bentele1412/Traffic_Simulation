@@ -32,9 +32,10 @@ class ES_MuSlashMuCommaLambda():
         while self.sigma > self.sigma_stop:
             offsprings = []
             for _ in range(self.lambda_):
-                sigma_l = self.sigma**(self.tau*self.rng.normal())
+                sigma_l = self.sigma*np.e**(self.tau*self.rng.normal())
                 s_l = self.rng.normal(size=len(self.parent))
                 offspring_l = np.add(self.parent, sigma_l*s_l)
+                print(offspring_l)
                 fitness_l, _, _, _ = self._performRuns(offspring_l)
                 offsprings.append([fitness_l, offspring_l, sigma_l])
             if self.isMaximization:
@@ -45,7 +46,7 @@ class ES_MuSlashMuCommaLambda():
                 fitnesses = 0
                 offsprings = [0]*len(self.parent)
                 sigma = 0
-                for f, o, s in sortedOffsprings:
+                for f, o, s in sortedOffsprings[:self.mu]:
                     fitnesses += f
                     offsprings = np.add(offsprings, o)
                     sigma += s

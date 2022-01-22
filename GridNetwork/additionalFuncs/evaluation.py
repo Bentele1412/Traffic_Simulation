@@ -73,8 +73,8 @@ def meanSpeedAdaSOTL(params):
         step = 0
         while traci.simulation.getMinExpectedNumber() > 0:
             traci.simulationStep()
-            for sotl in adaSotls:
-                sotl.step()
+            for adasotl in adaSotls:
+                adasotl.step()
             step += 1
         traci.close()
         sys.stdout.flush()

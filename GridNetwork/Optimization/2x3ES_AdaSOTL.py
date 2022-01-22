@@ -12,6 +12,6 @@ if __name__ == '__main__':
     
     params = [alpha, beta]
     mu = 2
-    lambda_ = 3
+    lambda_ = 6
     es = ES_MuSlashMuCommaLambda(params, mu, lambda_)
-    es.optimize(evalFunc, isMaximization=True, sigma=0.1, numRuns=1, maxIter=3)
+    es.optimize(evalFunc, isMaximization=True, sigma=1, numRuns=5, maxIter=100)

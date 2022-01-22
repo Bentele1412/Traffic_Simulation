@@ -49,7 +49,7 @@ class AdaSOTL():
             avgCarsTowardsCrossway += lane.runningAvgCoL
         self.theta = avgCarsTowardsCrossway**self.beta * self.alpha
 
-        if self.phi >= self.phi_min:
+        if self.phi >= self.phi_min and currentPhase % 2 == 0:
             for lane in self.tl.lanes:
                 if not lane.isRed:
                     if not(0 < lane.carsWithinOmega and lane.carsWithinOmega < self.mu) or self.phi > self.tl.maxGreenTime:
