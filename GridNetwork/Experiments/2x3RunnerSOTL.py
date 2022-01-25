@@ -34,7 +34,7 @@ if __name__ == '__main__':
     trafficLights = createTrafficLights(minGreenTime, maxGreenTime)
 
     mu = 3
-    theta = 32
+    theta = 30
     sotls = []
     for tl in trafficLights:
         sotls.append(SOTL(tl, mu, theta))
