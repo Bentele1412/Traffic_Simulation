@@ -108,3 +108,47 @@ Params: [31.97]
 Best:
 Optimal fitness: 8.495999999999999
 Optimal params: [31.84]
+
+## Experiment results with setup similar to paper
+### ES 2x3Grid: AdaSOTL, 100 iters, 5 runs, 900 vehicles, mu=2, lambda=6
+1102 min and 33.877640 seconds needed.
+Best:
+Optimal fitness: 8.286
+Optimal params: [3.18689112 1.61760802]
+
+### ES 2x3Grid: SOTL, 50 iters, 5 runs, 900 vehicles, mu=3, lambda=6
+554 min and 32.572487 seconds needed.
+Best:
+Optimal fitness: 6.798
+Optimal params: [-57829.36829758]
+--> Sigma exploded
+
+### HillClimbing 2x3Grid: AdaSOTL, 50 iters, 5 runs, strategy 1, 900 vehicles
+376 min and 21.285167 seconds needed.
+Last evaluation:
+Fitness: 8.282
+Params: [3.5925 1.4584]
+
+Best:
+Optimal fitness: 8.312000000000001
+Optimal params: [3.5665  1.45495]
+
+Rerun:
+380 min and 5.536006 seconds needed.
+Last evaluation:
+Fitness: 8.288
+Params: [3.95    1.49215]
+
+Best:
+Optimal fitness: 8.315999999999999
+Optimal params: [3.601  1.4591]
+
+### HillClimbing 2x3Grid: SOTL, 50 iters, 5 runs, strategy 1, 900 vehicles
+237 min and 34.809808 seconds needed.
+Last evaluation:
+Fitness: 6.756
+Params: [28.77]
+
+Best:
+Optimal fitness: 7.47
+Optimal params: [30]
