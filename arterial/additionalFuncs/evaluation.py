@@ -47,7 +47,7 @@ def meanSpeedCycleBased(params):
     sumoBinary = checkBinary('sumo')
     configPath = os.path.abspath("../arterial.sumocfg")
     simulationTime = 3600
-    numVehicles = 900
+    numVehicles = 1200
     ctFactor = params[0]
     #phaseShifts = [0]*6 #6 for 6 junctions 
     phaseShifts = [0] + list(map(lambda x: int(x), params[1:]))
@@ -66,7 +66,7 @@ def meanSpeedCycleBased(params):
     _run(trafficLights, ctFactor, phaseShifts, lpSolveResultPaths)
 
     meanSpeed, meanWaitingTime = getMeanSpeedWaitingTime()
-    return float(meanSpeed)
+    return float(meanSpeed), float(meanWaitingTime)
 
 def meanSpeedAdaSOTL(params):
     def _run(adaSotls):
@@ -82,7 +82,7 @@ def meanSpeedAdaSOTL(params):
     sumoBinary = checkBinary('sumo')
     configPath = os.path.abspath("../arterial.sumocfg")
     simulationTime = 3600
-    numVehicles = 900
+    numVehicles = 1200
 
     #create instances
     minGreenTime = 20
@@ -107,7 +107,7 @@ def meanSpeedAdaSOTL(params):
     _run(adaSotls)
 
     meanSpeed, meanWaitingTime = getMeanSpeedWaitingTime()
-    return float(meanSpeed)
+    return float(meanSpeed), float(meanWaitingTime)
 
 def meanSpeedSOTL(params):
     def _run(sotls):
@@ -123,7 +123,7 @@ def meanSpeedSOTL(params):
     sumoBinary = checkBinary('sumo')
     configPath = os.path.abspath("../arterial.sumocfg")
     simulationTime = 3600
-    numVehicles = 900
+    numVehicles = 1200
 
     #create instances
     minGreenTime = 20
@@ -147,4 +147,4 @@ def meanSpeedSOTL(params):
     _run(sotls)
 
     meanSpeed, meanWaitingTime = getMeanSpeedWaitingTime()
-    return float(meanSpeed)
+    return float(meanSpeed), float(meanWaitingTime)

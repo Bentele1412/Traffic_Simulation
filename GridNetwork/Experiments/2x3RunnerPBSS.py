@@ -6,7 +6,7 @@ import os
 import traci
 from sumolib import checkBinary
 from controllers.PBSS import PBSS
-from GridNetwork.additionalFuncs.helper import getMeanSpeedWaitingTime, createTrafficLights, setFlows
+from GridNetwork.additionalFuncs.helper import getMeanSpeedWaitingTime, createTrafficLights, setFlows, calcWaitingTime
 
 
 def run(pbss):
@@ -47,7 +47,5 @@ if __name__ == '__main__':
     run(pbss)
 
     meanSpeed, meanWaitingTime = getMeanSpeedWaitingTime()
-    print("Mean speed: ", float(meanSpeed))
-    print("Mean waiting time: ", (float(meanWaitingTime)/3.33))
-    
-    
+    print("Mean speed: ", meanSpeed)
+    print("Mean waiting time: ", meanWaitingTime)

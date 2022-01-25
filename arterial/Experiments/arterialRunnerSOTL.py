@@ -26,7 +26,7 @@ if __name__ == '__main__':
     sumoGui = checkBinary('sumo-gui')
     configPath = os.path.abspath("../arterial.sumocfg")
     simulationTime = 3600
-    numVehicles = 900
+    numVehicles = 1200
 
     #create instances
     minGreenTime = 20
@@ -50,6 +50,6 @@ if __name__ == '__main__':
 
     meanSpeed, meanWaitingTime = getMeanSpeedWaitingTime()
     print("Mean speed: ", meanSpeed)
-    print("Mean waiting time: ", float(meanWaitingTime)/4)
+    print("Mean waiting time: ", meanWaitingTime)
     
     

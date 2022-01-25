@@ -111,7 +111,36 @@ Optimal params: [31.84]
 
 ## Experiment results with setup similar to paper
 ### Distribution of optimization experiments
-
+2x3 Grid:
+<table>
+<tr>
+  <th></th><th>900 vehicles</th><th>1200 vehicles</th><th>1500 vehicles</th>
+<tr>
+<tr>
+  <td>CB</td><td></td><td></td><td></td>
+</tr>
+<tr>
+  <td>SOTL</td><td>Marcus</td><td></td><td></td>
+</tr>
+<tr>
+  <td>AdaSOTL</td><td>Marcus</td><td></td><td></td>
+</tr>
+</table>
+Arterial Grid:
+<table>
+<tr>
+  <th></th><th>deltaR_t=0</th><th>deltaR_t=1/16</th><th>deltaR_t=2/16</th>
+<tr>
+<tr>
+  <td>CB</td><td></td><td></td><td></td>
+</tr>
+<tr>
+  <td>SOTL</td><td></td><td></td><td></td>
+</tr>
+<tr>
+  <td>AdaSOTL</td><td></td><td></td><td></td>
+</tr>
+</table>
 
 ### ES 2x3Grid: AdaSOTL, 100 iters, 5 runs, 900 vehicles, mu=2, lambda=6
 1102 min and 33.877640 seconds needed.

@@ -8,6 +8,7 @@ import xml.etree.ElementTree as ET
 from sumoadditionals.Detector import Detector
 from sumoadditionals.Lane import Lane
 from sumoadditionals.TrafficLight import TrafficLight
+import pickle
 
 if 'SUMO_HOME' in os.environ:
     tools = os.path.join(os.environ['SUMO_HOME'], 'tools')
@@ -27,8 +28,20 @@ def getMeanSpeedWaitingTime():
     tree = ET.parse("../statistics.xml")
     root = tree.getroot()
     avgSpeed = root.find('vehicleTripStatistics').attrib['speed']
-    avgWaitingTime = root.find('vehicleTripStatistics').attrib['waitingTime']
-    return avgSpeed, avgWaitingTime
+    with open("../arterialjunctionMatching.pickle", "rb") as f:
+        junctionMatching = pickle.load(f)
+    avgWaitingTime = calcWaitingTime(junctionMatching)
+    return float(avgSpeed), avgWaitingTime
+
+def calcWaitingTime(junctionMatching):
+    tree = ET.parse("../tripinfo.xml")
+    root = tree.getroot()
+    sumWaitingTime = 0
+    junctionCount = 0
+    for v in root.iter("tripinfo"):
+        sumWaitingTime += float(v.attrib['waitingTime']) 
+        junctionCount += junctionMatching[v.attrib['id'][0]]
+    return sumWaitingTime/junctionCount
 
 def createTrafficLights(minGreenTime = 5, maxGreenTime = 60):
     '''

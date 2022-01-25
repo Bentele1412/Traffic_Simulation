@@ -42,7 +42,7 @@ if __name__ == '__main__':
     sumoGui = checkBinary('sumo-gui')
     configPath = os.path.abspath("../arterial.sumocfg")
     simulationTime = 3600
-    numVehicles = 900
+    numVehicles = 1200
     ctFactor = 0.9
     #phaseShifts = [0]*6 #6 for 6 junctions 
     phaseShifts = [0, 10, 20, 10, 20, 30]

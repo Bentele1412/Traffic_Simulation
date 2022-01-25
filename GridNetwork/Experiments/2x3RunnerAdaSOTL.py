@@ -9,7 +9,7 @@ import os
 import traci
 from sumolib import checkBinary
 from controllers.AdaSOTL import AdaSOTL
-from GridNetwork.additionalFuncs.helper import getMeanSpeedWaitingTime, createTrafficLights, setFlows
+from GridNetwork.additionalFuncs.helper import getMeanSpeedWaitingTime, createTrafficLights, setFlows, calcWaitingTime
 
 if 'SUMO_HOME' in os.environ:
     tools = os.path.join(os.environ['SUMO_HOME'], 'tools')
@@ -60,5 +60,3 @@ if __name__ == '__main__':
     meanSpeed, meanWaitingTime = getMeanSpeedWaitingTime()
     print("Mean speed: ", meanSpeed)
     print("Mean waiting time: ", meanWaitingTime)
-    
-    
