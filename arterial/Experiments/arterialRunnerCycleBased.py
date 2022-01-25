@@ -38,19 +38,18 @@ def run(trafficLights, ctFactor, phaseShifts, lpSolveResultPaths):
 if __name__ == '__main__':
     sumoBinary = checkBinary('sumo')
     sumoGui = checkBinary('sumo-gui')
-    configPath = os.path.abspath("../2x3.sumocfg")
+    configPath = os.path.abspath("../arterial.sumocfg")
     simulationTime = 3600
-    numVehicles = 900
+    numVehicles = 1200
     ctFactor = 0.9
     #phaseShifts = [0]*6 #6 for 6 junctions 
     phaseShifts = [0, 50, 100, 50, 100, 150]
-    lpSolveResultPaths = ['../LPSolve/2x3Grid_a_eps0,4.lp.csv', '../LPSolve/2x3Grid_b_eps0,4.lp.csv', '../LPSolve/2x3Grid_c_eps0,4.lp.csv']
-    #TBD
+    lpSolveResultPaths = ['../LPSolve/arterial_a_eps0,2.lp.csv', '../LPSolve/arterial_b_eps0,2.lp.csv', '../LPSolve/arterial_c_eps0,2.lp.csv']
     #create instances
     trafficLights = createTrafficLights()
 
     setFlows_arterial(numVehicles, simulationTime)
-    os.system('jtrrouter -c ../2x3.jtrrcfg')
+    os.system('jtrrouter -c ../arterial.jtrrcfg')
 
     traci.start([sumoBinary, "-c", configPath,
                                     "--tripinfo-output", "../tripinfo.xml",

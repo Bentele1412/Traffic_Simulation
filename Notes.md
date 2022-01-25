@@ -38,13 +38,13 @@
 * Random optimization starts
 * **Freezed:** Handle more than 2 green phases + more than one red lane
 * **Freezed:** Create different scenario
-* **In Progress:** Waiting time calculated differently in paper than provided mean waiting time of statistics --> avg per intersection and then avg over all intersections
+* **Done:** Waiting time calculated differently in paper than provided mean waiting time of statistics --> avg per intersection and then avg over all intersections
 * compare SOTL and FIX + comparison to paper results --> Cycle based difficult due to flow switches --> phase shifts?
 * **Done:** ensure minCycleTime is never undercut
 * termination condition of HillClimbing 
-* implement all platoon based algorithms
-* arterial network to validate CB and learn mor about AdaSOTL behavior --> verification 
-* structure helperTwoPhases.py into more files
+* **Done:** implement all platoon based algorithms
+* **Done:** arterial network to validate CB and learn mor about AdaSOTL behavior --> verification 
+* **Done:** structure helperTwoPhases.py into more files
 
 
 ## Possible paper content

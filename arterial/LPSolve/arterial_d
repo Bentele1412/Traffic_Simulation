@@ -20,9 +20,9 @@
         <phaseDA>4</phaseDA>
         <phaseDB>4</phaseDB>
         <phaseDC>4</phaseDC>
-        <probAB>1.0</probAB>
+        <probAB>0.2</probAB>
         <probAC>0.0</probAC>
-        <probAD>0.0</probAD>
+        <probAD>0.8</probAD>
         <probBA>0.25</probBA>
         <probBC>0.5</probBC>
         <probBD>0.25</probBD>
@@ -33,8 +33,8 @@
         <probDB>0.25</probDB>
         <probDC>0.5</probDC>
         <serviceDelay>0.0</serviceDelay>
-        <sourceNorth rate="0.08333"/>
-        <sourceWest rate="0.66666"/>
+        <sourceNorth rate="0.3125"/>
+        <sourceWest rate="0.4375"/>
         <x>0</x>
         <y>0</y>
         <yellowDuration>0.0</yellowDuration>
@@ -66,13 +66,13 @@
         <probBC>0.5</probBC>
         <probBD>0.25</probBD>
         <probCA>0.0</probCA>
-        <probCB>0.875</probCB>
-        <probCD>0.125</probCD>
+        <probCB>0.0</probCB>
+        <probCD>1.0</probCD>
         <probDA>0.25</probDA>
         <probDB>0.25</probDB>
         <probDC>0.5</probDC>
         <serviceDelay>0.0</serviceDelay>
-        <sourceNorth rate="0.08333"/>
+        <sourceNorth rate="0.0625"/>
         <x>0</x>
         <y>1</y>
         <yellowDuration>0.0</yellowDuration>
@@ -110,7 +110,7 @@
         <probDB>0.25</probDB>
         <probDC>0.5</probDC>
         <serviceDelay>0.0</serviceDelay>
-        <sourceNorth rate="0.08333"/>
+        <sourceNorth rate="0.0625"/>
         <x>0</x>
         <y>2</y>
         <yellowDuration>0.0</yellowDuration>
@@ -148,9 +148,9 @@
         <probDB>0.25</probDB>
         <probDC>0.5</probDC>
         <serviceDelay>0.0</serviceDelay>
-        <sourceWest rate="0.08333"/>
-        <x>1</x>
-        <y>0</y>
+        <sourceNorth rate="0.0625"/>
+        <x>0</x>
+        <y>3</y>
         <yellowDuration>0.0</yellowDuration>
     </intersection>
     <intersection>
@@ -160,43 +160,6 @@
         <flowC>0.3</flowC>
         <flowD>0.3</flowD>
         <id>4</id>
-        <numPhases>4</numPhases>
-        <phaseAB>1</phaseAB>
-        <phaseAC>1</phaseAC>
-        <phaseAD>1</phaseAD>
-        <phaseBA>2</phaseBA>
-        <phaseBC>2</phaseBC>
-        <phaseBD>2</phaseBD>
-        <phaseCA>3</phaseCA>
-        <phaseCB>3</phaseCB>
-        <phaseCD>3</phaseCD>
-        <phaseDA>4</phaseDA>
-        <phaseDB>4</phaseDB>
-        <phaseDC>4</phaseDC>
-        <probAB>0.125</probAB>
-        <probAC>0.0</probAC>
-        <probAD>0.875</probAD>
-        <probBA>0.25</probBA>
-        <probBC>0.5</probBC>
-        <probBD>0.25</probBD>
-        <probCA>0.0</probCA>
-        <probCB>0.0</probCB>
-        <probCD>1.0</probCD>
-        <probDA>0.25</probDA>
-        <probDB>0.25</probDB>
-        <probDC>0.5</probDC>
-        <serviceDelay>0.0</serviceDelay>
-        <x>1</x>
-        <y>1</y>
-        <yellowDuration>0.0</yellowDuration>
-    </intersection>
-    <intersection>
-        <active>true</active>
-        <flowA>0.3</flowA>
-        <flowB>0.3</flowB>
-        <flowC>0.3</flowC>
-        <flowD>0.3</flowD>
-        <id>5</id>
         <numPhases>4</numPhases>
         <phaseAB>1</phaseAB>
         <phaseAC>1</phaseAC>
@@ -223,8 +186,9 @@
         <probDB>0.25</probDB>
         <probDC>0.5</probDC>
         <serviceDelay>0.0</serviceDelay>
-        <x>1</x>
-        <y>2</y>
+        <sourceNorth rate="0.0625"/>
+        <x>0</x>
+        <y>4</y>
         <yellowDuration>0.0</yellowDuration>
     </intersection>
 </intersections>
