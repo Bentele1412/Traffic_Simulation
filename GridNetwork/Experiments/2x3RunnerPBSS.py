@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 import sys
-sys.path.insert(0, "../")
+sys.path.insert(0, "../../")
 
 import os
 import traci
 from sumolib import checkBinary
 from controllers.PBSS import PBSS
-from additionalFuncs.helper import getMeanSpeedWaitingTime, createTrafficLights, setFlows
+from GridNetwork.additionalFuncs.helper import getMeanSpeedWaitingTime, createTrafficLights, setFlows
 
 
 def run(pbss):
@@ -35,12 +35,12 @@ if __name__ == '__main__':
 
     pbss = []
     for tl in trafficLights:
-        pbss.append(PBSS(tl, useAAC=True, usePBE=True, usePBS=False))
+        pbss.append(PBSS(tl, useAAC=True, usePBE=True, usePBS=True))
 
     setFlows(numVehicles, simulationTime)
     os.system('jtrrouter -c ../2x3.jtrrcfg')
 
-    traci.start([sumoGui, "-c", configPath,
+    traci.start([sumoBinary, "-c", configPath,
                                     "--tripinfo-output", "../tripinfo.xml",
                                     "--statistic-output", "../statistics.xml"])
     

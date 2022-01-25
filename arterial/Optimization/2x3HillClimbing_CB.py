@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import sys
-sys.path.insert(0, "../")
+sys.path.insert(0, "../../")
 
 from optimizers.HillClimbing import HillClimbing
 from additionalFuncs.evaluation import meanSpeedCycleBased

@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 
 import sys
-sys.path.insert(0, "../")
+sys.path.insert(0, "../../")
 
 from optimizers.HillClimbing import HillClimbing
-from additionalFuncs.evaluation import meanSpeedSOTL
+from arterial.additionalFuncs.evaluation import meanSpeedSOTL
 
 if __name__ == '__main__':
     theta = 30

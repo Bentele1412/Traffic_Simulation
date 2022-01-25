@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 import sys
-sys.path.insert(0, "../")
+sys.path.insert(0, "../../")
 
 import traci
 from sumolib import checkBinary
 import os
 import numpy as np
 from controllers.CycleBasedTLController import CycleBasedTLController
-from additionalFuncs.helper import mapLPDetailsToTL, getMeanSpeedWaitingTime, getTLPhaseInfo, createTrafficLights, setFlows
+from GridNetwork.additionalFuncs.helper import mapLPDetailsToTL, getMeanSpeedWaitingTime, getTLPhaseInfo, createTrafficLights, setFlows
 
 def run(trafficLights, ctFactor, phaseShifts, lpSolveResultPaths):
     step = 0

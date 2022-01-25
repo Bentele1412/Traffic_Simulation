@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 
 import sys
-sys.path.insert(0, "../")
+sys.path.insert(0, "../../")
 
 import os
 import traci
 from sumolib import checkBinary
 from controllers.SOTL import SOTL
-from additionalFuncs.helper import getMeanSpeedWaitingTime, createTrafficLights, setFlows_arterial
+from arterial.additionalFuncs.helper import getMeanSpeedWaitingTime, createTrafficLights, setFlows_arterial
 
 
 def run(sotls):

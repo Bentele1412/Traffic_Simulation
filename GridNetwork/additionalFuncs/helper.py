@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 
+import sys
+sys.path.insert(0, "../../")
+
 import numpy as np
 import pandas as pd
-import sys
 import os
 import xml.etree.ElementTree as ET
 from sumoadditionals.Detector import Detector
@@ -64,6 +66,27 @@ def setFlows(numVehicles, simulationTime):
     for counter, flow in enumerate(root.iter("flow")):
         flow.set("probability", str(probabilities[counter]))
     tree.write("../2x3.flow.xml")
+
+def setFlows_arterial(numVehicles, simulationTime, delta_r_t=1/16):
+    groundProb = numVehicles/simulationTime/16
+    
+    probabilities = [groundProb]*4          #vertical flows
+    probabilities.append(groundProb*7)      # horizontal flows
+
+    #flows with turn probability
+    prob_turners_total = 5*groundProb # = r_s + r_t
+    r_t = 0
+    for _ in range(3):
+        r_s = prob_turners_total - r_t
+        probabilities.append(r_s) # vehicles going straight at intersection O
+        if r_t != 0:
+            probabilities.append(r_t) # vehicles that turn at intersection O
+        r_t += groundProb*delta_r_t*16
+    tree = ET.parse("../arterial.flow.xml")
+    root = tree.getroot()
+    for counter, flow in enumerate(root.iter("flow")):
+        flow.set("probability", str(probabilities[counter]))
+    tree.write("../arterial.flow.xml")
 
 def mapLPDetailsToTL(trafficLights, path):
     lpSolveResults = pd.read_csv(path, sep=';')

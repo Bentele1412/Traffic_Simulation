@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 
-import traci
 import sys
+sys.path.insert(0, "../../")
+
+import traci
 import os
 import numpy as np
 from sumolib import checkBinary

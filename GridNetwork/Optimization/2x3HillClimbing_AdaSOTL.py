@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 import sys
-sys.path.insert(0, "../")
+sys.path.insert(0, "../../")
 
 from optimizers.HillClimbing import HillClimbing
-from additionalFuncs.evaluation import meanSpeedAdaSOTL
+from GridNetwork.additionalFuncs.evaluation import meanSpeedAdaSOTL
 import pickle
 
 if __name__ == '__main__':

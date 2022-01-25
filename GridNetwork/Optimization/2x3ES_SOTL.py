@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 import sys
-sys.path.insert(0, "../")
+sys.path.insert(0, "../../")
 
 from optimizers.ES_MuSlashMuCommaLambda import ES_MuSlashMuCommaLambda
-from additionalFuncs.evaluation import meanSpeedSOTL
+from GridNetwork.additionalFuncs.evaluation import meanSpeedSOTL
 import random
 import pickle
 

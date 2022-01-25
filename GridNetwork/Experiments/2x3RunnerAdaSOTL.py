@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import sys
-sys.path.insert(0, "../")
+sys.path.insert(0, "../../")
 
 '''
 Imports
@@ -9,7 +9,7 @@ import os
 import traci
 from sumolib import checkBinary
 from controllers.AdaSOTL import AdaSOTL
-from additionalFuncs.helper import getMeanSpeedWaitingTime, createTrafficLights, setFlows
+from GridNetwork.additionalFuncs.helper import getMeanSpeedWaitingTime, createTrafficLights, setFlows
 
 if 'SUMO_HOME' in os.environ:
     tools = os.path.join(os.environ['SUMO_HOME'], 'tools')
@@ -42,8 +42,8 @@ if __name__ == '__main__':
     trafficLights = createTrafficLights(minGreenTime, maxGreenTime)
 
     mu = 3
-    beta = 1.18
-    alpha = 4
+    beta = 1.4591
+    alpha = 3.601
     sotls = []
     for tl in trafficLights:
         sotls.append(AdaSOTL(tl, mu, alpha, beta))

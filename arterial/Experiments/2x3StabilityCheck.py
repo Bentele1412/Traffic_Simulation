@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import sys
-sys.path.insert(0, "../")
+sys.path.insert(0, "../../")
 
 import traci
 from sumolib import checkBinary
@@ -8,7 +8,7 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 from controllers.CycleBasedTLController import CycleBasedTLController
-from additionalFuncs.helper import mapLPDetailsToTL, createTrafficLights, setFlows
+from arterial.additionalFuncs.helper import mapLPDetailsToTL, createTrafficLights, setFlows
 
 if __name__ == '__main__':
     def _run(trafficLights, ctFactor, phaseShifts, lpSolveResultPaths):

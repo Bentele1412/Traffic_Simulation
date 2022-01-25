@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 
 import sys
-sys.path.insert(0, "../")
+sys.path.insert(0, "../../")
 
 from optimizers.HillClimbing import HillClimbing
-from additionalFuncs.evaluation import meanSpeedCycleBased
-from additionalFuncs.helper import checkCTFactor
+from GridNetwork.additionalFuncs.evaluation import meanSpeedCycleBased
+from GridNetwork.additionalFuncs.helper import checkCTFactor
 
 if __name__ == '__main__':
     ctFactor = 0.6

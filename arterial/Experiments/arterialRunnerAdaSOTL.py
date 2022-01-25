@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import sys
-sys.path.insert(0, "../")
+sys.path.insert(0, "../../")
 
 '''
 Imports
@@ -9,7 +9,7 @@ import os
 import traci
 from sumolib import checkBinary
 from controllers.AdaSOTL import AdaSOTL
-from additionalFuncs.helper import getMeanSpeedWaitingTime, createTrafficLights, setFlows_arterial
+from arterial.additionalFuncs.helper import getMeanSpeedWaitingTime, createTrafficLights, setFlows_arterial
 
 if 'SUMO_HOME' in os.environ:
     tools = os.path.join(os.environ['SUMO_HOME'], 'tools')
