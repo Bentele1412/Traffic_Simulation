@@ -50,6 +50,6 @@ if __name__ == '__main__':
 
     meanSpeed, meanWaitingTime = getMeanSpeedWaitingTime()
     print("Mean speed: ", meanSpeed)
-    print("Mean waiting time: ", meanWaitingTime)
+    print("Mean waiting time: ", float(meanWaitingTime)/4)
     
     

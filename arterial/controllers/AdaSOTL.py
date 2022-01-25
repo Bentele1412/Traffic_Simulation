@@ -47,7 +47,7 @@ class AdaSOTL():
             
             #adaptivity
             avgCarsTowardsCrossway += lane.runningAvgCoL
-        self.theta = avgCarsTowardsCrossway**self.beta * self.alpha
+        self.theta = avgCarsTowardsCrossway**self.beta * self.alpha #konstante hinzufügen
 
         if self.phi >= self.phi_min:
             for lane in self.tl.lanes:

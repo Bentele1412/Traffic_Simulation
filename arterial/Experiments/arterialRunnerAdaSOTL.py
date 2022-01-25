@@ -51,7 +51,7 @@ if __name__ == '__main__':
     setFlows_arterial(numVehicles, simulationTime)
     os.system('jtrrouter -c ../arterial.jtrrcfg')
 
-    traci.start([sumoGui, "-c", configPath,
+    traci.start([sumoBinary, "-c", configPath,
                                     "--tripinfo-output", "../tripinfo.xml",
                                     "--statistic-output", "../statistics.xml"])
     
@@ -59,6 +59,6 @@ if __name__ == '__main__':
 
     meanSpeed, meanWaitingTime = getMeanSpeedWaitingTime()
     print("Mean speed: ", meanSpeed)
-    print("Mean waiting time: ", meanWaitingTime)
+    print("Mean waiting time: ", float(meanWaitingTime)/4)
     
     
