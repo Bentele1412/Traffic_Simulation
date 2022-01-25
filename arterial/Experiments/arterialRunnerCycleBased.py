@@ -7,7 +7,7 @@ from sumolib import checkBinary
 import os
 import numpy as np
 from controllers.CycleBasedTLController import CycleBasedTLController
-from additionalFuncs.helper import mapLPDetailsToTL, getMeanSpeedWaitingTime, getTLPhaseInfo, createTrafficLights, setFlows_arterial
+from arterial.additionalFuncs.helper import mapLPDetailsToTL, getMeanSpeedWaitingTime, getTLPhaseInfo, createTrafficLights, setFlows_arterial
 
 def run(trafficLights, ctFactor, phaseShifts, lpSolveResultPaths):
     step = 0

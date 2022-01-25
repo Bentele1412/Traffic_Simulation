@@ -4,8 +4,8 @@ import sys
 sys.path.insert(0, "../../")
 
 from optimizers.HillClimbing import HillClimbing
-from additionalFuncs.evaluation import meanSpeedCycleBased
-from additionalFuncs.helper import checkCTFactor
+from arterial.additionalFuncs.evaluation import meanSpeedCycleBased
+from arterial.additionalFuncs.helper import checkCTFactor
 
 if __name__ == '__main__':
     ctFactor = 0.6

@@ -6,7 +6,7 @@ import os
 import traci
 from sumolib import checkBinary
 from controllers.PBSS import PBSS
-from additionalFuncs.helper import getMeanSpeedWaitingTime, createTrafficLights, setFlows_arterial
+from arterial.additionalFuncs.helper import getMeanSpeedWaitingTime, createTrafficLights, setFlows_arterial
 
 
 def run(pbss):
