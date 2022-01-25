@@ -1,0 +1,46 @@
+<routes>
+    <flow begin="0" end="3600" id="1" probability="0.015625" type="paperVehicle">
+        <route edges="nA As" />
+    </flow>
+
+    <flow begin="0" end="3600" id="2" probability="0.015625" type="paperVehicle">
+        <route edges="nB Bs" />
+    </flow>
+
+    <flow begin="0" end="3600" id="3" probability="0.015625" type="paperVehicle">
+        <route edges="nC Cs" />
+    </flow>
+
+    <flow begin="0" end="3600" id="4" probability="0.015625" type="paperVehicle">
+        <route edges="nD Ds" />
+    </flow>
+
+    <flow begin="0" end="3600" id="5" probability="0.109375" type="paperVehicle">
+        <route edges="wO OA AB BC CD De" />
+    </flow>
+
+    <flow begin="0" end="1200" id="6" probability="0.078125" type="paperVehicle">
+        <route edges="nO Os" />
+    </flow>
+
+    <flow begin="0" end="1200" id="7" probability="0" type="paperVehicle">
+        <route edges="nO OA AB BC CD De" />
+    </flow>
+
+    <flow begin="1200" end="2400" id="8" probability="0.0625" type="paperVehicle">
+        <route edges="nO Os" />
+    </flow>
+
+        <flow begin="1200" end="2400" id="9" probability="0.015625" type="paperVehicle">
+        <route edges="nO OA AB BC CD De" />
+    </flow>
+
+        <flow begin="2400" end="3600" id="10" probability="0.046875" type="paperVehicle">
+        <route edges="nO Os" />
+    </flow>
+
+        <flow begin="2400" end="3600" id="11" probability="0.03125" type="paperVehicle">
+        <route edges="nO OA AB BC CD De" />
+    </flow>
+    
+</routes>

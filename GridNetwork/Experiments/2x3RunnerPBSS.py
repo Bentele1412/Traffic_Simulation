@@ -35,12 +35,12 @@ if __name__ == '__main__':
 
     pbss = []
     for tl in trafficLights:
-        pbss.append(PBSS(tl, useAAC=False, usePBE=True, usePBS=False))
+        pbss.append(PBSS(tl, useAAC=True, usePBE=True, usePBS=False))
 
     setFlows(numVehicles, simulationTime)
     os.system('jtrrouter -c ../2x3.jtrrcfg')
 
-    traci.start([sumoBinary, "-c", configPath,
+    traci.start([sumoGui, "-c", configPath,
                                     "--tripinfo-output", "../tripinfo.xml",
                                     "--statistic-output", "../statistics.xml"])
     
