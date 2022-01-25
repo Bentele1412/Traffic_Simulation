@@ -12,5 +12,6 @@ if __name__ == '__main__':
     
     params = [alpha, beta]
     stepSizes = [0.5, 0.05]
+    plotFolderPath = "../Plots/HillClimbing_AdaSOTL_2x3_5runs_strat1_900veh/" #CAUTION!!!:change before running --> create new folder for each optimization experiment
     hillClimbing = HillClimbing(evalFunc, params, stepSizes)
-    hillClimbing.optimize(epsilon=0.001, maxIter=100, numRuns=5, strategy=1)
+    hillClimbing.optimize(plotFolderPath=plotFolderPath, epsilon=0.001, maxIter=100, numRuns=5, strategy=1)

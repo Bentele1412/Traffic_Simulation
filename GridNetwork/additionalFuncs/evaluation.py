@@ -7,7 +7,7 @@ import traci
 import os
 import numpy as np
 from sumolib import checkBinary
-from additionalFuncs.helper import mapLPDetailsToTL, getTLPhaseInfo, getMeanSpeedWaitingTime, createTrafficLights, setFlows
+from GridNetwork.additionalFuncs.helper import mapLPDetailsToTL, getTLPhaseInfo, getMeanSpeedWaitingTime, createTrafficLights, setFlows
 from controllers.CycleBasedTLController import CycleBasedTLController
 from controllers.AdaSOTL import AdaSOTL
 from controllers.SOTL import SOTL

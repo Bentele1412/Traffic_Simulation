@@ -12,5 +12,6 @@ if __name__ == '__main__':
     
     params = [theta]
     stepSizes = [1]
+    plotFolderPath = "../Plots/HillClimbing_SOTL_2x3_5runs_strat1_900veh/" #CAUTION!!!:change before running --> create new folder for each optimization experiment
     hillClimbing = HillClimbing(evalFunc, params, stepSizes)
-    hillClimbing.optimize(epsilon=0.01, maxIter=3, numRuns=1, strategy=1)
+    hillClimbing.optimize(plotFolderPath=plotFolderPath, epsilon=0.01, maxIter=3, numRuns=1, strategy=1)

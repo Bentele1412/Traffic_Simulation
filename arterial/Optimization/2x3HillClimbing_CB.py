@@ -14,5 +14,6 @@ if __name__ == '__main__':
     
     params = [ctFactor] + phaseShifts
     stepSizes = [0.1] + [1]*5
+    plotFolderPath = "../Plots/HillClimbing_CB_2x3_5runs_strat1_900veh/" #CAUTION!!!:change before running --> create new folder for each optimization experiment
     hillClimbing = HillClimbing(evalFunc, params, stepSizes)
-    hillClimbing.optimize(epsilon=0.1, maxIter=1, numRuns=1, strategy=1, paramValidCallbacks=[checkCTFactor])
+    hillClimbing.optimize(plotFolderPath=plotFolderPath, epsilon=0.1, maxIter=1, numRuns=1, strategy=1, paramValidCallbacks=[checkCTFactor])

@@ -3,6 +3,7 @@
 import time
 import matplotlib.pyplot as plt
 import numpy as np
+import pickle
 
 class ES_MuSlashMuCommaLambda():
     def __init__(self, parent, mu, lambda_):
@@ -11,12 +12,13 @@ class ES_MuSlashMuCommaLambda():
         self.lambda_ = lambda_
         self.tau = 1/np.sqrt(2*len(parent))
     
-    def optimize(self, evalFunc, sigma=1, sigma_stop=1e-5, isMaximization=False, numRuns=1, maxIter=50):
+    def optimize(self, evalFunc, plotFolderPath, sigma=1, sigma_stop=1e-5, isMaximization=False, numRuns=1, maxIter=50):
         self.start = time.time()
 
         self.sigma_stop = sigma_stop
         self.isMaximization = isMaximization
         self.evalFunc = evalFunc
+        self.plotFolderPath = plotFolderPath
         self.maxIter = maxIter
         self.numRuns = numRuns
 
@@ -81,31 +83,45 @@ class ES_MuSlashMuCommaLambda():
         plt.xlabel("Generation")
         plt.ylabel("Mean Speed")
         plt.title("Mean Speed dynamics")
+        plt.savefig(self.plotFolderPath + "meanSpeed.png")
         plt.show()
 
         plt.plot(self.sigmaDynamics)
         plt.xlabel("Generation")
         plt.ylabel("Sigma")
         plt.title("Sigma dynamics")
+        plt.savefig(self.plotFolderPath + "sigma.png")
         plt.show()
 
         plt.plot(self.stdMeanSpeeds)
         plt.xlabel("Generation")
         plt.ylabel("Std Mean Speed")
         plt.title("Std Mean Speed dynamics")
+        plt.savefig(self.plotFolderPath + "stdMeanSpeed.png")
         plt.show()
 
         plt.plot(self.meanWaitingTimes)
         plt.xlabel("Generation")
         plt.ylabel("Mean waiting time")
         plt.title("Mean waiting time dynamics")
+        plt.savefig(self.plotFolderPath + "meanWaitingTime.png")
         plt.show()
 
         plt.plot(self.stdWaitingTimes)
         plt.xlabel("Generation")
         plt.ylabel("Std waiting time")
         plt.title("Std waiting time dynamics")
+        plt.savefig(self.plotFolderPath + "stdMeanWaitingTime.png")
         plt.show()
+
+        #save dynamics
+        dynamics = {'meanSpeed': self.fitnessDynamics,
+                'sigmaDynamics': self.sigmaDynamics,
+                'stdMeanSpeed': self.stdMeanSpeeds,
+                'meanWaitingTime': self.meanWaitingTimes,
+                'stdMeanWaitingTime': self.stdWaitingTimes}
+        with open(self.plotFolderPath + "dynamicsData.pickle", 'wb') as f:
+            pickle.dump(dynamics, f)
 
     def _performRuns(self, params):
         fitnesses = []

@@ -110,6 +110,9 @@ Optimal fitness: 8.495999999999999
 Optimal params: [31.84]
 
 ## Experiment results with setup similar to paper
+### Distribution of optimization experiments
+
+
 ### ES 2x3Grid: AdaSOTL, 100 iters, 5 runs, 900 vehicles, mu=2, lambda=6
 1102 min and 33.877640 seconds needed.
 Best:

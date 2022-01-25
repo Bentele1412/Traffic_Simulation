@@ -3,6 +3,7 @@
 import time
 import numpy as np
 import matplotlib.pyplot as plt
+import pickle
 
 class HillClimbing():
     def __init__(self, evalFunc, params, stepSizes):
@@ -19,7 +20,7 @@ class HillClimbing():
         self.stdWaitingTimes = []
         self.stdMeanSpeeds = []
     
-    def optimize(self, epsilon=1, numRuns=1, maxIter=50, strategy=0, paramValidCallbacks=None):
+    def optimize(self, plotFolderPath, epsilon=1, numRuns=1, maxIter=50, strategy=0, paramValidCallbacks=None):
         '''
         strategy: 
             0 = calc all directions, take best and multiply with gradient
@@ -29,6 +30,7 @@ class HillClimbing():
         self.start = time.time()
         self.epsilon = epsilon
         self.numRuns = numRuns
+        self.plotFolderPath = plotFolderPath
         print("NumRuns: ", self.numRuns)
         print("maxIter: ", maxIter)
 
@@ -78,25 +80,37 @@ class HillClimbing():
         plt.xlabel("Iteration")
         plt.ylabel("Mean Speed")
         plt.title("Mean Speed dynamics")
+        plt.savefig(self.plotFolderPath + "meanSpeed.png")
         plt.show()
 
         plt.plot(self.stdMeanSpeeds)
         plt.xlabel("Iteration")
         plt.ylabel("Std Mean Speed")
         plt.title("Std Mean Speed dynamics")
+        plt.savefig(self.plotFolderPath + "stdMeanSpeed.png")
         plt.show()
 
         plt.plot(self.meanWaitingTimes)
         plt.xlabel("Iteration")
         plt.ylabel("Mean waiting time")
         plt.title("Mean waiting time dynamics")
+        plt.savefig(self.plotFolderPath + "meanWaitingTime.png")
         plt.show()
 
         plt.plot(self.stdWaitingTimes)
         plt.xlabel("Iteration")
         plt.ylabel("Std waiting time")
         plt.title("Std waiting time dynamics")
+        plt.savefig(self.plotFolderPath + "stdMeanWaitingTime.png")
         plt.show()
+
+        #save dynamics data
+        dynamics = {'meanSpeed': self.fitnessDynamics,
+                'stdMeanSpeed': self.stdMeanSpeeds,
+                'meanWaitingTime': self.meanWaitingTimes,
+                'stdMeanWaitingTime': self.stdWaitingTimes}
+        with open(self.plotFolderPath + "dynamicsData.pickle", 'wb') as f:
+            pickle.dump(dynamics, f)
 
     def _calcGradientUpdateOne(self):
         fitnessDevResults = []

@@ -4,7 +4,6 @@ sys.path.insert(0, "../../")
 
 from optimizers.HillClimbing import HillClimbing
 from GridNetwork.additionalFuncs.evaluation import meanSpeedAdaSOTL
-import pickle
 
 if __name__ == '__main__':
     alpha = 3.5665
@@ -13,11 +12,6 @@ if __name__ == '__main__':
     
     params = [alpha, beta]
     stepSizes = [0.5, 0.05]
+    plotFolderPath = "../Plots/Test/" #CAUTION!!!:change before running --> create new folder for each optimization experiment  
     hillClimbing = HillClimbing(evalFunc, params, stepSizes)
-    hillClimbing.optimize(epsilon=0.001, maxIter=50, numRuns=5, strategy=1)
-    dynamics = {'meanSpeed': hillClimbing.fitnessDynamics,
-                'stdMeanSpeed': hillClimbing.stdMeanSpeeds,
-                'meanWaitingTime': hillClimbing.meanWaitingTimes,
-                'stdMeanWaitingTime': hillClimbing.stdWaitingTimes}
-    with open("Dynamics_HillClimbing_AdaSOTL_strat1_5runs_rerun.pickle", 'wb') as f:
-        pickle.dump(dynamics, f)
+    hillClimbing.optimize(plotFolderPath=plotFolderPath, epsilon=0.001, maxIter=1, numRuns=1, strategy=1)

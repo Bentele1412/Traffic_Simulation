@@ -5,7 +5,7 @@ import sys
 import os
 import numpy as np
 from sumolib import checkBinary
-from additionalFuncs.helper import mapLPDetailsToTL, getTLPhaseInfo, getMeanSpeedWaitingTime, createTrafficLights, setFlows_arterial
+from arterial.additionalFuncs.helper import mapLPDetailsToTL, getTLPhaseInfo, getMeanSpeedWaitingTime, createTrafficLights, setFlows_arterial, setFlows
 from controllers.CycleBasedTLController import CycleBasedTLController
 from controllers.AdaSOTL import AdaSOTL
 from controllers.SOTL import SOTL
