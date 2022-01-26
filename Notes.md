@@ -33,7 +33,6 @@
     * **Done:** calc all directions, get all fitness increasing gradients and summarize as one gradient --> updates are performed in several directions at once
     * **Done:** iterate over directions and make the step and update for one direction immediately, if a better fitness value is achieved --> fitnessDynamics???
 * **Done:** Consider phase switches at switching routes (t=1200/2400) --> maybe green light gets red immediately, but that should not be the case
-* **Declined:** Parallelization --> file writings are issues to face
 * Bigger Phase shifts --> 50 secs per node
 * Random optimization starts
 * **Freezed:** Handle more than 2 green phases + more than one red lane
@@ -45,6 +44,9 @@
 * **Done:** implement all platoon based algorithms
 * **Done:** arterial network to validate CB and learn mor about AdaSOTL behavior --> verification 
 * **Done:** structure helperTwoPhases.py into more files
+* Parallelization 
+* HillClimbing updates
+* Additional evaluation functions --> e.g. minimize meanWaitingTime, consider stds in evalFuncs
 
 
 ## Possible paper content
