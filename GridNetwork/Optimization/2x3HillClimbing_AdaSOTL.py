@@ -14,4 +14,4 @@ if __name__ == '__main__':
     stepSizes = [0.5, 0.05]
     plotFolderPath = "../Plots/Test/" #CAUTION!!!:change before running --> create new folder for each optimization experiment  
     hillClimbing = HillClimbing(evalFunc, params, stepSizes)
-    hillClimbing.optimize(plotFolderPath=plotFolderPath, epsilon=0.001, maxIter=1, numRuns=1, strategy=1)
+    hillClimbing.optimize(plotFolderPath=plotFolderPath, epsilon=0.001, maxIter=1, numRuns=3, strategy=1)

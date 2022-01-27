@@ -4,6 +4,9 @@ import time
 import numpy as np
 import matplotlib.pyplot as plt
 import pickle
+import ray
+from multiprocessing import Pool
+
 
 class HillClimbing():
     def __init__(self, evalFunc, params, stepSizes):
@@ -28,6 +31,7 @@ class HillClimbing():
             2 = iterate over directions and make the step and update for one direction immediately, if a better fitness value is achieved
         '''
         self.start = time.time()
+        #ray.init()
         self.epsilon = epsilon
         self.numRuns = numRuns
         self.plotFolderPath = plotFolderPath
@@ -180,11 +184,17 @@ class HillClimbing():
     def _performRuns(self, params):
         fitnesses = []
         waitingTimes = []
-        def _runRuns(params):
-            return self.evalFunc(params)
-        for _ in range(self.numRuns):
-            meanSpeed, meanWaitingTime = _runRuns(params)
+    
+        p = Pool()
+        results = p.map(self._runRuns, [params]*self.numRuns)
+        #results = ray.get([_runRuns.remote(x) for x in range(self.numRuns)])
+        for meanSpeed, meanWaitingTime in results:
+            #meanSpeed, meanWaitingTime = _runRuns(params)
             fitnesses.append(meanSpeed)
             waitingTimes.append(meanWaitingTime)
         #fitnesses = [_runRuns(params) for _ in range(self.numRuns)]
         return np.mean(fitnesses), np.std(fitnesses), np.mean(waitingTimes), np.std(waitingTimes)
+
+    #@ray.remote
+    def _runRuns(self, params):
+        return self.evalFunc(params)

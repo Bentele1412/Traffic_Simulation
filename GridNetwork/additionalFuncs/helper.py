@@ -17,6 +17,12 @@ if 'SUMO_HOME' in os.environ:
     sys.path.append(tools)
 else:
     sys.exit("please declare environment variable 'SUMO_HOME'")
+ 
+def deleteTempFiles(timestamp):
+    os.remove("../"+timestamp+"2x3.flow.xml")
+    os.remove("../"+timestamp+"2x3Routes.xml")
+    os.remove("../"+timestamp+"statistics.xml")
+    os.remove("../"+timestamp+"tripinfo.xml")
 
 def getTLPhaseInfo():
     tree = ET.parse("../2x3net.net.xml")
@@ -26,17 +32,17 @@ def getTLPhaseInfo():
     yellowPhaseDurations = tls[1].attrib['duration']
     return numPhases, int(yellowPhaseDurations)
 
-def getMeanSpeedWaitingTime():
-    tree = ET.parse("../statistics.xml")
+def getMeanSpeedWaitingTime(statisticsPath, tripInfoPath):
+    tree = ET.parse(statisticsPath)
     root = tree.getroot()
     avgSpeed = root.find('vehicleTripStatistics').attrib['speed']
     with open("../2x3junctionMatching.pickle", "rb") as f:
         junctionMatching = pickle.load(f)
-    avgWaitingTime = calcWaitingTime(junctionMatching)
+    avgWaitingTime = calcWaitingTime(junctionMatching, tripInfoPath)
     return float(avgSpeed), avgWaitingTime
 
-def calcWaitingTime(junctionMatching):
-    tree = ET.parse("../tripinfo.xml")
+def calcWaitingTime(junctionMatching, path):
+    tree = ET.parse(path)
     root = tree.getroot()
     sumWaitingTime = 0
     junctionCount = 0
@@ -68,19 +74,19 @@ def createTrafficLights(minGreenTime = 5, maxGreenTime = 60):
     trafficLights.append(TrafficLight(prevDetector.get('lane')[2:4], lanes, minGreenTime, maxGreenTime))
     return trafficLights
 
-def setFlows(numVehicles, simulationTime):
+def setFlows(numVehicles, simulationTime, path):
     groundProb = numVehicles/simulationTime/12
     heavyProb = groundProb*7
     probabilities = [groundProb]*5
     for _ in range(3):
         probabilities.append(heavyProb)
-    tree = ET.parse("../2x3.flow.xml")
+    tree = ET.parse(path)
     root = tree.getroot()
     for counter, flow in enumerate(root.iter("flow")):
         flow.set("probability", str(probabilities[counter]))
-    tree.write("../2x3.flow.xml")
+    tree.write(path)
 
-def setFlows_arterial(numVehicles, simulationTime, delta_r_t=1/16):
+def setFlows_arterial(numVehicles, simulationTime, path, delta_r_t=1/16):
     groundProb = numVehicles/simulationTime/16
     
     probabilities = [groundProb]*4          #vertical flows
@@ -95,11 +101,11 @@ def setFlows_arterial(numVehicles, simulationTime, delta_r_t=1/16):
         if r_t != 0:
             probabilities.append(r_t) # vehicles that turn at intersection O
         r_t += groundProb*delta_r_t*16
-    tree = ET.parse("../arterial.flow.xml")
+    tree = ET.parse(path)
     root = tree.getroot()
     for counter, flow in enumerate(root.iter("flow")):
         flow.set("probability", str(probabilities[counter]))
-    tree.write("../arterial.flow.xml")
+    tree.write(path)
 
 def mapLPDetailsToTL(trafficLights, path):
     lpSolveResults = pd.read_csv(path, sep=';')

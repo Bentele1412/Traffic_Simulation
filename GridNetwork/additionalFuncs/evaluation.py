@@ -7,16 +7,25 @@ import traci
 import os
 import numpy as np
 from sumolib import checkBinary
-from GridNetwork.additionalFuncs.helper import mapLPDetailsToTL, getTLPhaseInfo, getMeanSpeedWaitingTime, createTrafficLights, setFlows
+from GridNetwork.additionalFuncs.helper import mapLPDetailsToTL, getTLPhaseInfo, getMeanSpeedWaitingTime, createTrafficLights, setFlows, deleteTempFiles
 from controllers.CycleBasedTLController import CycleBasedTLController
 from controllers.AdaSOTL import AdaSOTL
 from controllers.SOTL import SOTL
+import time
+import shutil
 
 if 'SUMO_HOME' in os.environ:
     tools = os.path.join(os.environ['SUMO_HOME'], 'tools')
     sys.path.append(tools)
 else:
     sys.exit("please declare environment variable 'SUMO_HOME'")
+
+SUMO_CONFIG_PATH = "../2x3.sumocfg"
+JTRROUTER_CONFIG_PATH = "../2x3.jtrrcfg"
+TRIPINFO_PATH = "../tripinfo.xml"
+STATISTICS_PATH = "../statistics.xml"
+FLOW_PATH = "../2x3.flow.xml"
+ROUTES_PATH = "../2x3Routes.xml"
 
 
 def meanSpeedCycleBased(params):
@@ -82,7 +91,10 @@ def meanSpeedAdaSOTL(params):
         sys.stdout.flush()
 
     sumoBinary = checkBinary('sumo')
-    configPath = os.path.abspath("../2x3.sumocfg")
+    
+    timestamp = str(time.time())
+    #shutil.copy(SUMO_CONFIG_PATH, SUMO_CONFIG_PATH[:3]+timestamp+SUMO_CONFIG_PATH[3:])
+    configPath = os.path.abspath("../"+timestamp+"2x3.sumocfg")
     simulationTime = 3600
     numVehicles = 900
 
@@ -99,16 +111,25 @@ def meanSpeedAdaSOTL(params):
     for tl in trafficLights:
         adaSotls.append(AdaSOTL(tl, mu, alpha, beta))
 
-    setFlows(numVehicles, simulationTime)
-    os.system('jtrrouter -c ../2x3.jtrrcfg')
+    shutil.copy("../2x3.flow.xml", "../"+timestamp+"2x3.flow.xml")
+    setFlows(numVehicles, simulationTime, "../"+timestamp+"2x3.flow.xml")
+    #os.system('jtrrouter -c ../2x3.jtrrcfg')
+    os.system('jtrrouter -n ../2x3net.net.xml --additional-files ../paperVehicle.xml -r ../'+timestamp+'2x3.flow.xml -o ../'+timestamp+'2x3Routes.xml --seed '+timestamp.replace(".", "")[-8:])
 
+    '''
     traci.start([sumoBinary, "-c", configPath,
                                     "--tripinfo-output", "../tripinfo.xml",
                                     "--statistic-output", "../statistics.xml"])
-    
+    '''
+    traci.start([sumoBinary, "-n", "../2x3net.net.xml", "-r", "../"+timestamp+"2x3Routes.xml", "--additional-files", "../additionals.xml", "--no-step-log", "true",
+                                    "--tripinfo-output", "../"+timestamp+"tripinfo.xml",
+                                    "--statistic-output", "../"+timestamp+"statistics.xml"])
+
+
     _run(adaSotls)
 
-    meanSpeed, meanWaitingTime = getMeanSpeedWaitingTime()
+    meanSpeed, meanWaitingTime = getMeanSpeedWaitingTime("../"+timestamp+"statistics.xml", "../"+timestamp+"tripinfo.xml")
+    deleteTempFiles(timestamp)
     return float(meanSpeed), float(meanWaitingTime)
 
 def meanSpeedSOTL(params):
