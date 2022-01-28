@@ -4,6 +4,7 @@ import time
 import matplotlib.pyplot as plt
 import numpy as np
 import pickle
+from multiprocessing import Pool
 
 class ES_MuSlashMuCommaLambda():
     def __init__(self, parent, mu, lambda_):
@@ -37,7 +38,7 @@ class ES_MuSlashMuCommaLambda():
                 sigma_l = self.sigma*np.e**(self.tau*self.rng.normal())
                 s_l = self.rng.normal(size=len(self.parent))
                 offspring_l = np.add(self.parent, sigma_l*s_l)
-                print(offspring_l)
+                #print(offspring_l)
                 fitness_l, _, _, _ = self._performRuns(offspring_l)
                 offsprings.append([fitness_l, offspring_l, sigma_l])
             if self.isMaximization:
@@ -126,11 +127,17 @@ class ES_MuSlashMuCommaLambda():
     def _performRuns(self, params):
         fitnesses = []
         waitingTimes = []
-        def _runRuns(params):
-            return self.evalFunc(params)
-        for _ in range(self.numRuns):
-            meanSpeed, meanWaitingTime = _runRuns(params)
+    
+        p = Pool()
+        results = p.map(self._runRuns, [params]*self.numRuns)
+        #results = ray.get([_runRuns.remote(x) for x in range(self.numRuns)])
+        for meanSpeed, meanWaitingTime in results:
+            #meanSpeed, meanWaitingTime = _runRuns(params)
             fitnesses.append(meanSpeed)
             waitingTimes.append(meanWaitingTime)
         #fitnesses = [_runRuns(params) for _ in range(self.numRuns)]
         return np.mean(fitnesses), np.std(fitnesses), np.mean(waitingTimes), np.std(waitingTimes)
+
+    #@ray.remote
+    def _runRuns(self, params):
+        return self.evalFunc(params)

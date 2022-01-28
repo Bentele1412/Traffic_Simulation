@@ -48,7 +48,7 @@ if __name__ == '__main__':
     for tl in trafficLights:
         sotls.append(AdaSOTL(tl, mu, alpha, beta))
 
-    setFlows(numVehicles, simulationTime)
+    setFlows(numVehicles, simulationTime, "../2x3.flow.xml")
     os.system('jtrrouter -c ../2x3.jtrrcfg')
 
     traci.start([sumoBinary, "-c", configPath,
@@ -57,6 +57,6 @@ if __name__ == '__main__':
     
     run(sotls)
 
-    meanSpeed, meanWaitingTime = getMeanSpeedWaitingTime()
+    meanSpeed, meanWaitingTime = getMeanSpeedWaitingTime("../statistics.xml", "../tripinfo.xml")
     print("Mean speed: ", meanSpeed)
     print("Mean waiting time: ", meanWaitingTime)

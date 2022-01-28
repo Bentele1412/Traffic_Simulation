@@ -20,8 +20,7 @@ if 'SUMO_HOME' in os.environ:
 else:
     sys.exit("please declare environment variable 'SUMO_HOME'")
 
-SUMO_CONFIG_PATH = "../2x3.sumocfg"
-JTRROUTER_CONFIG_PATH = "../2x3.jtrrcfg"
+NETFILE_PATH = "../2x3net.net.xml"
 TRIPINFO_PATH = "../tripinfo.xml"
 STATISTICS_PATH = "../statistics.xml"
 FLOW_PATH = "../2x3.flow.xml"
@@ -56,7 +55,7 @@ def meanSpeedCycleBased(params):
         sys.stdout.flush()
 
     sumoBinary = checkBinary('sumo')
-    configPath = os.path.abspath("../2x3.sumocfg")
+    timestamp = str(time.time())
     simulationTime = 3600
     numVehicles = 900
     ctFactor = params[0]
@@ -67,16 +66,17 @@ def meanSpeedCycleBased(params):
     #create instances
     trafficLights = createTrafficLights()
 
-    setFlows(numVehicles, simulationTime)
-    os.system('jtrrouter -c ../2x3.jtrrcfg')
-
-    traci.start([sumoBinary, "-c", configPath,
-                                    "--tripinfo-output", "../tripinfo.xml",
-                                    "--statistic-output", "../statistics.xml"])
+    shutil.copy(FLOW_PATH, FLOW_PATH[:3]+timestamp+FLOW_PATH[3:])
+    setFlows(numVehicles, simulationTime, FLOW_PATH[:3]+timestamp+FLOW_PATH[3:])
+    os.system('jtrrouter -n '+NETFILE_PATH+' --additional-files ../paperVehicle.xml -r '+FLOW_PATH[:3]+timestamp+FLOW_PATH[3:]+' -o '+ROUTES_PATH[:3]+timestamp+ROUTES_PATH[3:]+' --seed '+timestamp.replace(".", "")[-8:])
+    traci.start([sumoBinary, "-n", NETFILE_PATH, "-r", ROUTES_PATH[:3]+timestamp+ROUTES_PATH[3:], "--additional-files", "../additionals.xml", "--no-step-log", "true",
+                                    "--tripinfo-output", TRIPINFO_PATH[:3]+timestamp+TRIPINFO_PATH[3:],
+                                    "--statistic-output", STATISTICS_PATH[:3]+timestamp+STATISTICS_PATH[3:]])
 
     _run(trafficLights, ctFactor, phaseShifts, lpSolveResultPaths)
 
-    meanSpeed, meanWaitingTime = getMeanSpeedWaitingTime()
+    meanSpeed, meanWaitingTime = getMeanSpeedWaitingTime(STATISTICS_PATH[:3]+timestamp+STATISTICS_PATH[3:], TRIPINFO_PATH[:3]+timestamp+TRIPINFO_PATH[3:])
+    deleteTempFiles(timestamp)
     return float(meanSpeed), float(meanWaitingTime)
 
 def meanSpeedAdaSOTL(params):
@@ -93,8 +93,6 @@ def meanSpeedAdaSOTL(params):
     sumoBinary = checkBinary('sumo')
     
     timestamp = str(time.time())
-    #shutil.copy(SUMO_CONFIG_PATH, SUMO_CONFIG_PATH[:3]+timestamp+SUMO_CONFIG_PATH[3:])
-    configPath = os.path.abspath("../"+timestamp+"2x3.sumocfg")
     simulationTime = 3600
     numVehicles = 900
 
@@ -111,24 +109,17 @@ def meanSpeedAdaSOTL(params):
     for tl in trafficLights:
         adaSotls.append(AdaSOTL(tl, mu, alpha, beta))
 
-    shutil.copy("../2x3.flow.xml", "../"+timestamp+"2x3.flow.xml")
-    setFlows(numVehicles, simulationTime, "../"+timestamp+"2x3.flow.xml")
-    #os.system('jtrrouter -c ../2x3.jtrrcfg')
-    os.system('jtrrouter -n ../2x3net.net.xml --additional-files ../paperVehicle.xml -r ../'+timestamp+'2x3.flow.xml -o ../'+timestamp+'2x3Routes.xml --seed '+timestamp.replace(".", "")[-8:])
-
-    '''
-    traci.start([sumoBinary, "-c", configPath,
-                                    "--tripinfo-output", "../tripinfo.xml",
-                                    "--statistic-output", "../statistics.xml"])
-    '''
-    traci.start([sumoBinary, "-n", "../2x3net.net.xml", "-r", "../"+timestamp+"2x3Routes.xml", "--additional-files", "../additionals.xml", "--no-step-log", "true",
-                                    "--tripinfo-output", "../"+timestamp+"tripinfo.xml",
-                                    "--statistic-output", "../"+timestamp+"statistics.xml"])
+    shutil.copy(FLOW_PATH, FLOW_PATH[:3]+timestamp+FLOW_PATH[3:])
+    setFlows(numVehicles, simulationTime, FLOW_PATH[:3]+timestamp+FLOW_PATH[3:])
+    os.system('jtrrouter -n '+NETFILE_PATH+' --additional-files ../paperVehicle.xml -r '+FLOW_PATH[:3]+timestamp+FLOW_PATH[3:]+' -o '+ROUTES_PATH[:3]+timestamp+ROUTES_PATH[3:]+' --seed '+timestamp.replace(".", "")[-8:])
+    traci.start([sumoBinary, "-n", NETFILE_PATH, "-r", ROUTES_PATH[:3]+timestamp+ROUTES_PATH[3:], "--additional-files", "../additionals.xml", "--no-step-log", "true",
+                                    "--tripinfo-output", TRIPINFO_PATH[:3]+timestamp+TRIPINFO_PATH[3:],
+                                    "--statistic-output", STATISTICS_PATH[:3]+timestamp+STATISTICS_PATH[3:]])
 
 
     _run(adaSotls)
 
-    meanSpeed, meanWaitingTime = getMeanSpeedWaitingTime("../"+timestamp+"statistics.xml", "../"+timestamp+"tripinfo.xml")
+    meanSpeed, meanWaitingTime = getMeanSpeedWaitingTime(STATISTICS_PATH[:3]+timestamp+STATISTICS_PATH[3:], TRIPINFO_PATH[:3]+timestamp+TRIPINFO_PATH[3:])
     deleteTempFiles(timestamp)
     return float(meanSpeed), float(meanWaitingTime)
 
@@ -144,7 +135,7 @@ def meanSpeedSOTL(params):
         sys.stdout.flush()
 
     sumoBinary = checkBinary('sumo')
-    configPath = os.path.abspath("../2x3.sumocfg")
+    timestamp = str(time.time())
     simulationTime = 3600
     numVehicles = 900
 
@@ -160,14 +151,15 @@ def meanSpeedSOTL(params):
     for tl in trafficLights:
         sotls.append(SOTL(tl, mu, theta))
 
-    setFlows(numVehicles, simulationTime)
-    os.system('jtrrouter -c ../2x3.jtrrcfg')
-
-    traci.start([sumoBinary, "-c", configPath,
-                                    "--tripinfo-output", "../tripinfo.xml",
-                                    "--statistic-output", "../statistics.xml"])
+    shutil.copy(FLOW_PATH, FLOW_PATH[:3]+timestamp+FLOW_PATH[3:])
+    setFlows(numVehicles, simulationTime, FLOW_PATH[:3]+timestamp+FLOW_PATH[3:])
+    os.system('jtrrouter -n '+NETFILE_PATH+' --additional-files ../paperVehicle.xml -r '+FLOW_PATH[:3]+timestamp+FLOW_PATH[3:]+' -o '+ROUTES_PATH[:3]+timestamp+ROUTES_PATH[3:]+' --seed '+timestamp.replace(".", "")[-8:])
+    traci.start([sumoBinary, "-n", NETFILE_PATH, "-r", ROUTES_PATH[:3]+timestamp+ROUTES_PATH[3:], "--additional-files", "../additionals.xml", "--no-step-log", "true",
+                                    "--tripinfo-output", TRIPINFO_PATH[:3]+timestamp+TRIPINFO_PATH[3:],
+                                    "--statistic-output", STATISTICS_PATH[:3]+timestamp+STATISTICS_PATH[3:]])
     
     _run(sotls)
 
-    meanSpeed, meanWaitingTime = getMeanSpeedWaitingTime()
+    meanSpeed, meanWaitingTime = getMeanSpeedWaitingTime(STATISTICS_PATH[:3]+timestamp+STATISTICS_PATH[3:], TRIPINFO_PATH[:3]+timestamp+TRIPINFO_PATH[3:])
+    deleteTempFiles(timestamp)
     return float(meanSpeed), float(meanWaitingTime)

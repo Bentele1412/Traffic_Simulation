@@ -57,7 +57,7 @@ if __name__ == '__main__':
         #create instances
         trafficLights = createTrafficLights()
 
-        setFlows(numVehicles, simulationTime)
+        setFlows(numVehicles, simulationTime, "../2x3.flow.xml")
         os.system('jtrrouter -c ../2x3.jtrrcfg')
 
         traci.start([sumoBinary, "-c", configPath,
@@ -66,7 +66,7 @@ if __name__ == '__main__':
 
         run(trafficLights, ctFactor, phaseShifts, lpSolveResultPaths)
 
-        meanSpeed, meanWaitingTime = getMeanSpeedWaitingTime()
+        meanSpeed, meanWaitingTime = getMeanSpeedWaitingTime("../statistics.xml", "tripinfo.xml")
         meanSpeeds.append(float(meanSpeed))
         meanWaitingTimes.append(float(meanWaitingTime))
         print("Replication %i done." % (i+1))

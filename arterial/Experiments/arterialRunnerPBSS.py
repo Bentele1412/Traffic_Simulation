@@ -37,7 +37,7 @@ if __name__ == '__main__':
     for tl in trafficLights:
         pbss.append(PBSS(tl, useAAC=True, usePBE=True, usePBS=True))
 
-    setFlows_arterial(numVehicles, simulationTime)
+    setFlows_arterial(numVehicles, simulationTime, "../arterial.flow.xml")
     os.system('jtrrouter -c ../arterial.jtrrcfg')
 
     traci.start([sumoGui, "-c", configPath,
@@ -46,7 +46,7 @@ if __name__ == '__main__':
     
     run(pbss)
 
-    meanSpeed, meanWaitingTime = getMeanSpeedWaitingTime()
+    meanSpeed, meanWaitingTime = getMeanSpeedWaitingTime("../statistics.xml", "../tripinfo.xml")
     print("Mean speed: ", float(meanSpeed))
     print("Mean waiting time: ", meanWaitingTime)
     

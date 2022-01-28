@@ -48,7 +48,7 @@ if __name__ == '__main__':
     #create instances
     trafficLights = createTrafficLights()
 
-    setFlows_arterial(numVehicles, simulationTime)
+    setFlows_arterial(numVehicles, simulationTime, "../arterial.flow.xml")
     os.system('jtrrouter -c ../arterial.jtrrcfg')
 
     traci.start([sumoBinary, "-c", configPath,
@@ -57,7 +57,7 @@ if __name__ == '__main__':
 
     run(trafficLights, ctFactor, phaseShifts, lpSolveResultPaths)
 
-    meanSpeed, meanWaitingTime = getMeanSpeedWaitingTime()
+    meanSpeed, meanWaitingTime = getMeanSpeedWaitingTime("../statistics.xml", "../tripinfo.xml")
     print("Mean speed: ", meanSpeed)
     print("Mean waiting time: ", meanWaitingTime)
     

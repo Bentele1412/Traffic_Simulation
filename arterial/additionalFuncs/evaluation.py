@@ -1,14 +1,17 @@
 #!/usr/bin/env python
 
+from GridNetwork.additionalFuncs.helper import deleteTempFiles
 import traci
 import sys
 import os
 import numpy as np
 from sumolib import checkBinary
-from arterial.additionalFuncs.helper import mapLPDetailsToTL, getTLPhaseInfo, getMeanSpeedWaitingTime, createTrafficLights, setFlows_arterial, setFlows
+from arterial.additionalFuncs.helper import mapLPDetailsToTL, getTLPhaseInfo, getMeanSpeedWaitingTime, createTrafficLights, setFlows_arterial, setFlows, deleteTempFiles
 from controllers.CycleBasedTLController import CycleBasedTLController
 from controllers.AdaSOTL import AdaSOTL
 from controllers.SOTL import SOTL
+import shutil
+import time
 
 if 'SUMO_HOME' in os.environ:
     tools = os.path.join(os.environ['SUMO_HOME'], 'tools')
@@ -16,6 +19,11 @@ if 'SUMO_HOME' in os.environ:
 else:
     sys.exit("please declare environment variable 'SUMO_HOME'")
 
+NETFILE_PATH = "../arterialnet.net.xml"
+TRIPINFO_PATH = "../tripinfo.xml"
+STATISTICS_PATH = "../statistics.xml"
+FLOW_PATH = "../arterial.flow.xml"
+ROUTES_PATH = "../arterialRoutes.xml"
 
 def meanSpeedCycleBased(params):
     def _run(trafficLights, ctFactor, phaseShifts, lpSolveResultPaths):
@@ -45,7 +53,7 @@ def meanSpeedCycleBased(params):
         sys.stdout.flush()
 
     sumoBinary = checkBinary('sumo')
-    configPath = os.path.abspath("../arterial.sumocfg")
+    timestamp = str(time.time())
     simulationTime = 3600
     numVehicles = 1200
     ctFactor = params[0]
@@ -56,16 +64,17 @@ def meanSpeedCycleBased(params):
     #create instances
     trafficLights = createTrafficLights()
 
-    setFlows_arterial(numVehicles, simulationTime)
-    os.system('jtrrouter -c ../arterial.jtrrcfg')
-
-    traci.start([sumoBinary, "-c", configPath,
-                                    "--tripinfo-output", "../tripinfo.xml",
-                                    "--statistic-output", "../statistics.xml"])
+    shutil.copy(FLOW_PATH, FLOW_PATH[:3]+timestamp+FLOW_PATH[3:])
+    setFlows_arterial(numVehicles, simulationTime, FLOW_PATH[:3]+timestamp+FLOW_PATH[3:])
+    os.system('jtrrouter -n '+NETFILE_PATH+' --additional-files ../paperVehicle.xml -r '+FLOW_PATH[:3]+timestamp+FLOW_PATH[3:]+' -o '+ROUTES_PATH[:3]+timestamp+ROUTES_PATH[3:]+' --seed '+timestamp.replace(".", "")[-8:])
+    traci.start([sumoBinary, "-n", NETFILE_PATH, "-r", ROUTES_PATH[:3]+timestamp+ROUTES_PATH[3:], "--additional-files", "../additionals.xml", "--no-step-log", "true",
+                                    "--tripinfo-output", TRIPINFO_PATH[:3]+timestamp+TRIPINFO_PATH[3:],
+                                    "--statistic-output", STATISTICS_PATH[:3]+timestamp+STATISTICS_PATH[3:]])
 
     _run(trafficLights, ctFactor, phaseShifts, lpSolveResultPaths)
 
-    meanSpeed, meanWaitingTime = getMeanSpeedWaitingTime()
+    meanSpeed, meanWaitingTime = getMeanSpeedWaitingTime(STATISTICS_PATH[:3]+timestamp+STATISTICS_PATH[3:], TRIPINFO_PATH[:3]+timestamp+TRIPINFO_PATH[3:])
+    deleteTempFiles(timestamp)
     return float(meanSpeed), float(meanWaitingTime)
 
 def meanSpeedAdaSOTL(params):
@@ -80,7 +89,7 @@ def meanSpeedAdaSOTL(params):
         sys.stdout.flush()
 
     sumoBinary = checkBinary('sumo')
-    configPath = os.path.abspath("../arterial.sumocfg")
+    timestamp = str(time.time())
     simulationTime = 3600
     numVehicles = 1200
 
@@ -97,16 +106,17 @@ def meanSpeedAdaSOTL(params):
     for tl in trafficLights:
         adaSotls.append(AdaSOTL(tl, mu, alpha, beta))
 
-    setFlows(numVehicles, simulationTime)
-    os.system('jtrrouter -c ../arterial.jtrrcfg')
-
-    traci.start([sumoBinary, "-c", configPath,
-                                    "--tripinfo-output", "../tripinfo.xml",
-                                    "--statistic-output", "../statistics.xml"])
+    shutil.copy(FLOW_PATH, FLOW_PATH[:3]+timestamp+FLOW_PATH[3:])
+    setFlows_arterial(numVehicles, simulationTime, FLOW_PATH[:3]+timestamp+FLOW_PATH[3:])
+    os.system('jtrrouter -n '+NETFILE_PATH+' --additional-files ../paperVehicle.xml -r '+FLOW_PATH[:3]+timestamp+FLOW_PATH[3:]+' -o '+ROUTES_PATH[:3]+timestamp+ROUTES_PATH[3:]+' --seed '+timestamp.replace(".", "")[-8:])
+    traci.start([sumoBinary, "-n", NETFILE_PATH, "-r", ROUTES_PATH[:3]+timestamp+ROUTES_PATH[3:], "--additional-files", "../additionals.xml", "--no-step-log", "true",
+                                    "--tripinfo-output", TRIPINFO_PATH[:3]+timestamp+TRIPINFO_PATH[3:],
+                                    "--statistic-output", STATISTICS_PATH[:3]+timestamp+STATISTICS_PATH[3:]])
     
     _run(adaSotls)
 
-    meanSpeed, meanWaitingTime = getMeanSpeedWaitingTime()
+    meanSpeed, meanWaitingTime = getMeanSpeedWaitingTime(STATISTICS_PATH[:3]+timestamp+STATISTICS_PATH[3:], TRIPINFO_PATH[:3]+timestamp+TRIPINFO_PATH[3:])
+    deleteTempFiles(timestamp)
     return float(meanSpeed), float(meanWaitingTime)
 
 def meanSpeedSOTL(params):
@@ -121,7 +131,7 @@ def meanSpeedSOTL(params):
         sys.stdout.flush()
 
     sumoBinary = checkBinary('sumo')
-    configPath = os.path.abspath("../arterial.sumocfg")
+    timestamp = str(time.time())
     simulationTime = 3600
     numVehicles = 1200
 
@@ -137,14 +147,15 @@ def meanSpeedSOTL(params):
     for tl in trafficLights:
         sotls.append(SOTL(tl, mu, theta))
 
-    setFlows_arterial(numVehicles, simulationTime)
-    os.system('jtrrouter -c ../arterial.jtrrcfg')
-
-    traci.start([sumoBinary, "-c", configPath,
-                                    "--tripinfo-output", "../tripinfo.xml",
-                                    "--statistic-output", "../statistics.xml"])
+    shutil.copy(FLOW_PATH, FLOW_PATH[:3]+timestamp+FLOW_PATH[3:])
+    setFlows_arterial(numVehicles, simulationTime, FLOW_PATH[:3]+timestamp+FLOW_PATH[3:])
+    os.system('jtrrouter -n '+NETFILE_PATH+' --additional-files ../paperVehicle.xml -r '+FLOW_PATH[:3]+timestamp+FLOW_PATH[3:]+' -o '+ROUTES_PATH[:3]+timestamp+ROUTES_PATH[3:]+' --seed '+timestamp.replace(".", "")[-8:])
+    traci.start([sumoBinary, "-n", NETFILE_PATH, "-r", ROUTES_PATH[:3]+timestamp+ROUTES_PATH[3:], "--additional-files", "../additionals.xml", "--no-step-log", "true",
+                                    "--tripinfo-output", TRIPINFO_PATH[:3]+timestamp+TRIPINFO_PATH[3:],
+                                    "--statistic-output", STATISTICS_PATH[:3]+timestamp+STATISTICS_PATH[3:]])
     
     _run(sotls)
 
-    meanSpeed, meanWaitingTime = getMeanSpeedWaitingTime()
+    meanSpeed, meanWaitingTime = getMeanSpeedWaitingTime(STATISTICS_PATH[:3]+timestamp+STATISTICS_PATH[3:], TRIPINFO_PATH[:3]+timestamp+TRIPINFO_PATH[3:])
+    deleteTempFiles(timestamp)
     return float(meanSpeed), float(meanWaitingTime)

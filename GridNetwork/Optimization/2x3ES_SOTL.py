@@ -14,6 +14,6 @@ if __name__ == '__main__':
     params = [theta]
     mu = 3
     lambda_ = 6
-    plotFolderPath = "../Plots/ES_SOTL_2x3_5runs_3mu_6lambda_900veh/" #CAUTION!!!:change before running --> create new folder for each optimization experiment  
+    plotFolderPath = "../Plots/Test/" #CAUTION!!!:change before running --> create new folder for each optimization experiment  
     es = ES_MuSlashMuCommaLambda(params, mu, lambda_)
-    es.optimize(evalFunc, plotFolderPath= plotFolderPath, isMaximization=True, sigma=1, numRuns=5, maxIter=50)
+    es.optimize(evalFunc, plotFolderPath= plotFolderPath, isMaximization=True, sigma=1, numRuns=3, maxIter=1)
