@@ -23,7 +23,7 @@ class HillClimbing():
         self.stdWaitingTimes = []
         self.stdMeanSpeeds = []
     
-    def optimize(self, plotFolderPath, epsilon=1, numRuns=1, maxIter=50, strategy=0, paramValidCallbacks=None):
+    def optimize(self, plotFolderPath, epsilon=1, numRuns=1, maxIter=50, strategy=0, paramValidCallbacks=None, useGradient=True):
         '''
         strategy: 
             0 = calc all directions, take best and multiply with gradient
@@ -51,7 +51,10 @@ class HillClimbing():
             print(gradient)
             print(np.linalg.norm(gradient))
             if any(gradient) and np.linalg.norm(gradient) > self.epsilon: #commented in norm(gradient)
-                self.params = self.params + gradient * self.stepSizes if strategy != 2 else self.params
+                if useGradient:
+                    self.params = self.params + gradient * self.stepSizes if strategy != 2 else self.params
+                else:
+                    self.params = np.add(self.params, self.stepSizes) if strategy != 2 else self.params
                 if paramValidCallbacks:
                     for callback in paramValidCallbacks:
                         self.params = callback(self.params)

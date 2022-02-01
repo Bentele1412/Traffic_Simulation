@@ -19,10 +19,19 @@ else:
     sys.exit("please declare environment variable 'SUMO_HOME'")
  
 def deleteTempFiles(timestamp):
-    os.remove("../"+timestamp+"2x3.flow.xml")
-    os.remove("../"+timestamp+"2x3Routes.xml")
-    os.remove("../"+timestamp+"statistics.xml")
-    os.remove("../"+timestamp+"tripinfo.xml")
+    #os.remove("../"+timestamp+"2x3.flow.xml")
+    try:
+        os.remove("../"+timestamp+"2x3Routes.xml")
+    except Exception:
+        pass
+    try:
+        os.remove("../"+timestamp+"statistics.xml")
+    except Exception:
+        pass
+    try:
+        os.remove("../"+timestamp+"tripinfo.xml")
+    except Exception:
+        pass
 
 def getTLPhaseInfo():
     tree = ET.parse("../2x3net.net.xml")

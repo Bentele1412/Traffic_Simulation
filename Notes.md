@@ -150,6 +150,13 @@ Best:
 Optimal fitness: 8.286
 Optimal params: [3.18689112 1.61760802]
 
+### ES 2x3Grid: AdaSOTL, 50 iters, 5 runs, 1200 vehicles, mu=3, lambda=8
+525 min and 9.521330 seconds needed.
+Best:
+Optimal fitness: 8.036
+Optimal params: [1.44550967 1.93555081]
+--> see dynamics, maybe even better mean speed achieved
+
 ### ES 2x3Grid: SOTL, 50 iters, 5 runs, 900 vehicles, mu=3, lambda=6
 554 min and 32.572487 seconds needed.
 Best:
@@ -177,6 +184,26 @@ Best:
 Optimal fitness: 8.315999999999999
 Optimal params: [3.601  1.4591]
 
+### HillClimbing 2x3Grid: AdaSOTL, 50 iters, 5 runs, strategy 1, 1200 vehicles
+252 min and 15.884611 seconds needed.
+Last evaluation:
+Fitness: 7.994
+Params: [3.98760892 1.41701679]
+
+Best:
+Optimal fitness: 8.042
+Optimal params: [3.93910892 1.41431679]
+
+### HillClimbing 2x3Grid: AdaSOTL, 50 iters, 5 runs, strategy 1, 1500 vehicles
+260 min and 28.675490 seconds needed.
+Last evaluation:
+Fitness: 7.75
+Params: [4.49560892 1.48061679]
+
+Best:
+Optimal fitness: 7.802
+Optimal params: [4.49260892 1.48011679]
+
 ### HillClimbing 2x3Grid: SOTL, 50 iters, 5 runs, strategy 1, 900 vehicles
 237 min and 34.809808 seconds needed.
 Last evaluation:
@@ -186,3 +213,13 @@ Params: [28.77]
 Best:
 Optimal fitness: 7.47
 Optimal params: [30]
+
+### HillClimbing 2x3Grid: SOTL, 50 iters, 5 runs, strategy 1, 1200 vehicles
+79 min and 24.685507 seconds needed.
+Last evaluation:
+Fitness: 5.464
+Params: [50]
+
+Best:
+Optimal fitness: 5.52
+Optimal params: [45]

@@ -13,6 +13,7 @@ from controllers.AdaSOTL import AdaSOTL
 from controllers.SOTL import SOTL
 import time
 import shutil
+import random
 
 if 'SUMO_HOME' in os.environ:
     tools = os.path.join(os.environ['SUMO_HOME'], 'tools')
@@ -55,7 +56,8 @@ def meanSpeedCycleBased(params):
         sys.stdout.flush()
 
     sumoBinary = checkBinary('sumo')
-    timestamp = str(time.time())
+    #timestamp = str(time.time())
+    timestamp = str(random.uniform(0.0, 10000.0))
     simulationTime = 3600
     numVehicles = 900
     ctFactor = params[0]
@@ -66,9 +68,9 @@ def meanSpeedCycleBased(params):
     #create instances
     trafficLights = createTrafficLights()
 
-    shutil.copy(FLOW_PATH, FLOW_PATH[:3]+timestamp+FLOW_PATH[3:])
-    setFlows(numVehicles, simulationTime, FLOW_PATH[:3]+timestamp+FLOW_PATH[3:])
-    os.system('jtrrouter -n '+NETFILE_PATH+' --additional-files ../paperVehicle.xml -r '+FLOW_PATH[:3]+timestamp+FLOW_PATH[3:]+' -o '+ROUTES_PATH[:3]+timestamp+ROUTES_PATH[3:]+' --seed '+timestamp.replace(".", "")[-8:])
+    #shutil.copy(FLOW_PATH, FLOW_PATH[:3]+timestamp+FLOW_PATH[3:])
+    #setFlows(numVehicles, simulationTime, FLOW_PATH[:3]+timestamp+FLOW_PATH[3:])
+    os.system('jtrrouter -n '+NETFILE_PATH+' --additional-files ../paperVehicle.xml -r '+FLOW_PATH+' -o '+ROUTES_PATH[:3]+timestamp+ROUTES_PATH[3:]+' --seed '+timestamp.replace(".", "")[-8:])
     traci.start([sumoBinary, "-n", NETFILE_PATH, "-r", ROUTES_PATH[:3]+timestamp+ROUTES_PATH[3:], "--additional-files", "../additionals.xml", "--no-step-log", "true",
                                     "--tripinfo-output", TRIPINFO_PATH[:3]+timestamp+TRIPINFO_PATH[3:],
                                     "--statistic-output", STATISTICS_PATH[:3]+timestamp+STATISTICS_PATH[3:]])
@@ -92,9 +94,12 @@ def meanSpeedAdaSOTL(params):
 
     sumoBinary = checkBinary('sumo')
     
-    timestamp = str(time.time())
+    #timestamp = str(time.time())
+    #random.seed(12345)
+    timestamp = str(random.uniform(0.0, 10000.0))
+    #shutil.copy(FLOW_PATH, FLOW_PATH[:3]+timestamp+FLOW_PATH[3:])
     simulationTime = 3600
-    numVehicles = 900
+    numVehicles = 1200
 
     #create instances
     minGreenTime = 20
@@ -109,9 +114,8 @@ def meanSpeedAdaSOTL(params):
     for tl in trafficLights:
         adaSotls.append(AdaSOTL(tl, mu, alpha, beta))
 
-    shutil.copy(FLOW_PATH, FLOW_PATH[:3]+timestamp+FLOW_PATH[3:])
-    setFlows(numVehicles, simulationTime, FLOW_PATH[:3]+timestamp+FLOW_PATH[3:])
-    os.system('jtrrouter -n '+NETFILE_PATH+' --additional-files ../paperVehicle.xml -r '+FLOW_PATH[:3]+timestamp+FLOW_PATH[3:]+' -o '+ROUTES_PATH[:3]+timestamp+ROUTES_PATH[3:]+' --seed '+timestamp.replace(".", "")[-8:])
+    #setFlows(numVehicles, simulationTime, FLOW_PATH[:3]+timestamp+FLOW_PATH[3:])
+    os.system('jtrrouter -n '+NETFILE_PATH+' --additional-files ../paperVehicle.xml -r '+FLOW_PATH+' -o '+ROUTES_PATH[:3]+timestamp+ROUTES_PATH[3:]+' --seed '+timestamp.replace(".", "")[-8:])
     traci.start([sumoBinary, "-n", NETFILE_PATH, "-r", ROUTES_PATH[:3]+timestamp+ROUTES_PATH[3:], "--additional-files", "../additionals.xml", "--no-step-log", "true",
                                     "--tripinfo-output", TRIPINFO_PATH[:3]+timestamp+TRIPINFO_PATH[3:],
                                     "--statistic-output", STATISTICS_PATH[:3]+timestamp+STATISTICS_PATH[3:]])
@@ -135,9 +139,10 @@ def meanSpeedSOTL(params):
         sys.stdout.flush()
 
     sumoBinary = checkBinary('sumo')
-    timestamp = str(time.time())
+    #timestamp = str(time.time())
+    timestamp = str(random.uniform(0.0, 10000.0))
     simulationTime = 3600
-    numVehicles = 900
+    numVehicles = 1200
 
     #create instances
     minGreenTime = 20
@@ -151,9 +156,9 @@ def meanSpeedSOTL(params):
     for tl in trafficLights:
         sotls.append(SOTL(tl, mu, theta))
 
-    shutil.copy(FLOW_PATH, FLOW_PATH[:3]+timestamp+FLOW_PATH[3:])
-    setFlows(numVehicles, simulationTime, FLOW_PATH[:3]+timestamp+FLOW_PATH[3:])
-    os.system('jtrrouter -n '+NETFILE_PATH+' --additional-files ../paperVehicle.xml -r '+FLOW_PATH[:3]+timestamp+FLOW_PATH[3:]+' -o '+ROUTES_PATH[:3]+timestamp+ROUTES_PATH[3:]+' --seed '+timestamp.replace(".", "")[-8:])
+    #shutil.copy(FLOW_PATH, FLOW_PATH[:3]+timestamp+FLOW_PATH[3:])
+    #setFlows(numVehicles, simulationTime, FLOW_PATH[:3]+timestamp+FLOW_PATH[3:])
+    os.system('jtrrouter -n '+NETFILE_PATH+' --additional-files ../paperVehicle.xml -r '+FLOW_PATH+' -o '+ROUTES_PATH[:3]+timestamp+ROUTES_PATH[3:]+' --seed '+timestamp.replace(".", "")[-8:])
     traci.start([sumoBinary, "-n", NETFILE_PATH, "-r", ROUTES_PATH[:3]+timestamp+ROUTES_PATH[3:], "--additional-files", "../additionals.xml", "--no-step-log", "true",
                                     "--tripinfo-output", TRIPINFO_PATH[:3]+timestamp+TRIPINFO_PATH[3:],
                                     "--statistic-output", STATISTICS_PATH[:3]+timestamp+STATISTICS_PATH[3:]])
