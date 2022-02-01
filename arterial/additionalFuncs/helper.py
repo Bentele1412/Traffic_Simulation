@@ -17,7 +17,7 @@ else:
     sys.exit("please declare environment variable 'SUMO_HOME'")
 
 def deleteTempFiles(timestamp):
-    os.remove("../"+timestamp+"arterial.flow.xml")
+    #os.remove("../"+timestamp+"arterial.flow.xml")
     os.remove("../"+timestamp+"arterialRoutes.xml")
     os.remove("../"+timestamp+"statistics.xml")
     os.remove("../"+timestamp+"tripinfo.xml")

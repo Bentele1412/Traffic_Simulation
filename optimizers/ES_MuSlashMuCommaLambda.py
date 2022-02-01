@@ -65,6 +65,17 @@ class ES_MuSlashMuCommaLambda():
             self.meanWaitingTimes.append(meanWaitingTime)
             self.stdWaitingTimes.append(stdWaitingTime)
 
+            if g == 0:
+                self.best = [self.parent, fitness]
+            else:
+                if isMaximization:
+                    if self.fitness > self.best[-1]:
+                        self.best = [self.parent, fitness]
+                else:
+                    if self.fitness < self.best[-1]:
+                        self.best = [self.parent, fitness]
+            
+
             g += 1
             print("Generation %i done." % g)
             if g == self.maxIter:
@@ -75,9 +86,13 @@ class ES_MuSlashMuCommaLambda():
         
         #Optimization results
         print("%d min and %f seconds needed." % (minutes, seconds))
-        print("Best:")
+        print("Last evaluation:")
         print("Optimal fitness:", self.fitnessDynamics[-1])
         print("Optimal params:", self.parent)
+        print()
+        print("Best:")
+        print("Optimal fitness:", self.best[0])
+        print("Optimal params:", self.best[-1])
         
         #Dynamics ploting
         plt.plot(self.fitnessDynamics)

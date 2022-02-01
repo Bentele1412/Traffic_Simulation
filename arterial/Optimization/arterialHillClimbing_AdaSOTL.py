@@ -4,11 +4,15 @@ sys.path.insert(0, "../../")
 
 from optimizers.HillClimbing import HillClimbing
 from arterial.additionalFuncs.evaluation import meanSpeedAdaSOTL
+from arterial.additionalFuncs.helper import setFlows_arterial
+import random
 
 if __name__ == '__main__':
-    alpha = 3
-    beta = 1.4
+    random.seed(32)
+    alpha = random.uniform(1.0, 6.0)
+    beta = random.uniform(1.0, 2.0)
     evalFunc = meanSpeedAdaSOTL
+    setFlows_arterial(900, 3600, "../arterial.flow.xml")
     
     params = [alpha, beta]
     stepSizes = [0.5, 0.05]

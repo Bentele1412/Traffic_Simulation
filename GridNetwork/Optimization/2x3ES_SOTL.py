@@ -4,12 +4,14 @@ sys.path.insert(0, "../../")
 
 from optimizers.ES_MuSlashMuCommaLambda import ES_MuSlashMuCommaLambda
 from GridNetwork.additionalFuncs.evaluation import meanSpeedSOTL
+from GridNetwork.additionalFuncs.helper import setFlows
 import random
 
 if __name__ == '__main__':
-    random.seed(12345)
+    random.seed(32)
     theta = random.randint(20, 70)
     evalFunc = meanSpeedSOTL
+    setFlows(1200, 3600, "../2x3.flow.xml")
     
     params = [theta]
     mu = 3
