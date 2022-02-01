@@ -122,10 +122,10 @@ Optimal params: [31.84]
   <td>CB</td><td></td><td></td><td></td>
 </tr>
 <tr>
-  <td>SOTL</td><td>Marcus</td><td></td><td></td>
+  <td>SOTL</td><td>Marcus</td><td>Georg</td><td></td>
 </tr>
 <tr>
-  <td>AdaSOTL</td><td>Marcus</td><td></td><td></td>
+  <td>AdaSOTL</td><td>Marcus</td><td>Georg</td><td></td>
 </tr>
 </table>
 Arterial Grid:
