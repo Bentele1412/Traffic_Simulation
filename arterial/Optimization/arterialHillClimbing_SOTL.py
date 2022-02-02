@@ -12,7 +12,7 @@ if __name__ == '__main__':
     random.seed(32)
     theta = random.randint(20, 70)
     evalFunc = meanSpeedSOTL
-    setFlows_arterial(1200, 3600, "../arterial.flow.xml")
+    setFlows_arterial(1200, 3600, "../arterial.flow.xml", delta_r_t=0)
     
     params = [theta]
     stepSizes = [1]

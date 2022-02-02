@@ -23,7 +23,7 @@ class HillClimbing():
         self.stdWaitingTimes = []
         self.stdMeanSpeeds = []
     
-    def optimize(self, plotFolderPath, epsilon=1, numRuns=1, maxIter=50, strategy=0, paramValidCallbacks=None, useGradient=True):
+    def optimize(self, plotFolderPath, epsilon=1, numRuns=1, maxIter=50, strategy=0, paramValidCallbacks=None, useGradient=True, reduceStepSize=False):
         '''
         strategy: 
             0 = calc all directions, take best and multiply with gradient
@@ -54,7 +54,8 @@ class HillClimbing():
                 if useGradient:
                     self.params = self.params + gradient * self.stepSizes if strategy != 2 else self.params
                 else:
-                    self.params = np.add(self.params, self.stepSizes) if strategy != 2 else self.params
+                    goodDirections = np.array(list(map(lambda x: np.sign(x), gradient)))
+                    self.params = self.params + goodDirections * self.stepSizes if strategy != 2 else self.params
                 if paramValidCallbacks:
                     for callback in paramValidCallbacks:
                         self.params = callback(self.params)
@@ -66,6 +67,8 @@ class HillClimbing():
                 self.stdWaitingTimes.append(stdMeanWaitingTime)
                 if self.fitness > self.best[0]:
                     self.best = [self.fitness, self.params]
+            elif reduceStepSize:
+                self.stepSizes = np.array(self.stepSizes)/2
             else:
                 break
         self.totalSeconds = time.time()-self.start 

@@ -232,5 +232,4 @@ Params: [  1.5 164.  147.  187.  170.  237. ]
 
 Best:
 Optimal fitness: 7.754
-Optimal params: [  1.40806634  88.          71.         111.          94.
- 161.        ]
+Optimal params: [  1.40806634   88.  71.  111.  94.  161.]
