@@ -7,6 +7,7 @@ import traci
 from sumolib import checkBinary
 from controllers.PBSS import PBSS
 from arterial.additionalFuncs.helper import getMeanSpeedWaitingTime, createTrafficLights, setFlows_arterial
+import numpy as np
 
 
 def run(pbss):
@@ -22,32 +23,39 @@ def run(pbss):
 
 
 if __name__ == '__main__':
-    sumoBinary = checkBinary('sumo')
-    sumoGui = checkBinary('sumo-gui')
-    configPath = os.path.abspath("../arterial.sumocfg")
-    simulationTime = 3600
-    numVehicles = 1200
+    meanSpeeds = []
+    meanWaitingTimes = []
+    replications = 5
 
-    #create instances
-    minGreenTime = 5
-    maxGreenTime = 55 
-    trafficLights = createTrafficLights(minGreenTime, maxGreenTime)
+    for rep in range(replications):
+        sumoBinary = checkBinary('sumo')
+        sumoGui = checkBinary('sumo-gui')
+        configPath = os.path.abspath("../arterial.sumocfg")
+        simulationTime = 3600
+        numVehicles = 1200
 
-    pbss = []
-    for tl in trafficLights:
-        pbss.append(PBSS(tl, useAAC=True, usePBE=True, usePBS=True))
+        #create instances
+        minGreenTime = 5
+        maxGreenTime = 55 
+        trafficLights = createTrafficLights(minGreenTime, maxGreenTime)
 
-    setFlows_arterial(numVehicles, simulationTime, "../arterial.flow.xml")
-    os.system('jtrrouter -c ../arterial.jtrrcfg')
+        pbss = []
+        for tl in trafficLights:
+            pbss.append(PBSS(tl, useAAC=True, usePBE=True, usePBS=True))
 
-    traci.start([sumoGui, "-c", configPath,
-                                    "--tripinfo-output", "../tripinfo.xml",
-                                    "--statistic-output", "../statistics.xml"])
-    
-    run(pbss)
+        setFlows_arterial(numVehicles, simulationTime, "../arterial.flow.xml", delta_r_t=2/16)
+        os.system('jtrrouter -c ../arterial.jtrrcfg')
 
-    meanSpeed, meanWaitingTime = getMeanSpeedWaitingTime("../statistics.xml", "../tripinfo.xml")
-    print("Mean speed: ", float(meanSpeed))
-    print("Mean waiting time: ", meanWaitingTime)
+        traci.start([sumoBinary, "-c", configPath,
+                                        "--tripinfo-output", "../tripinfo.xml",
+                                        "--statistic-output", "../statistics.xml"])
+        
+        run(pbss)
+
+        meanSpeed, meanWaitingTime = getMeanSpeedWaitingTime("../statistics.xml", "../tripinfo.xml")
+        meanSpeeds.append(meanSpeed)
+        meanWaitingTimes.append(meanWaitingTime)
+    print("Mean speed: ", np.mean(meanSpeeds))
+    print("Mean waiting time: ", np.mean(meanWaitingTimes))
     
     

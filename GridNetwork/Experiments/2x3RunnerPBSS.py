@@ -27,12 +27,12 @@ if __name__ == '__main__':
     meanWaitingTimes = []
     replications = 5
 
-    for rep in replications:
+    for rep in range(replications):
         sumoBinary = checkBinary('sumo')
         sumoGui = checkBinary('sumo-gui')
         configPath = os.path.abspath("../2x3.sumocfg")
         simulationTime = 3600
-        numVehicles = 900
+        numVehicles = 1500
 
         #create instances
         minGreenTime = 5
@@ -41,7 +41,7 @@ if __name__ == '__main__':
 
         pbss = []
         for tl in trafficLights:
-            pbss.append(PBSS(tl, useAAC=True, usePBE=False, usePBS=False))
+            pbss.append(PBSS(tl, useAAC=True, usePBE=False, usePBS=True))
 
         setFlows(numVehicles, simulationTime, "../2x3.flow.xml")
         os.system('jtrrouter -c ../2x3.jtrrcfg')
