@@ -223,3 +223,14 @@ Params: [50]
 Best:
 Optimal fitness: 5.52
 Optimal params: [45]
+
+### HillClimbing 2x3Grid: CB, 50 iters, 5 runs, strategy 1, 900 veh
+688 min and 16.009214 seconds needed.
+Last evaluation:
+Fitness: 7.616
+Params: [  1.5 164.  147.  187.  170.  237. ]
+
+Best:
+Optimal fitness: 7.754
+Optimal params: [  1.40806634  88.          71.         111.          94.
+ 161.        ]
