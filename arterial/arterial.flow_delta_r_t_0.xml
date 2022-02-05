@@ -23,20 +23,12 @@
         <route edges="nO Os" />
     </flow>
 
-    <flow begin="1200" end="2400" id="6" probability="0.06249999999999999" type="paperVehicle">
+    <flow begin="1200" end="2400" id="6" probability="0.10416666666666666" type="paperVehicle">
         <route edges="nO Os" />
     </flow>
 
-        <flow begin="1200" end="2400" id="7" probability="0.041666666666666664" type="paperVehicle">
-        <route edges="nO OA AB BC CD De" />
-    </flow>
-
-        <flow begin="2400" end="3600" id="8" probability="0.02083333333333333" type="paperVehicle">
+        <flow begin="2400" end="3600" id="7" probability="0.10416666666666666" type="paperVehicle">
         <route edges="nO Os" />
-    </flow>
-
-        <flow begin="2400" end="3600" id="9" probability="0.08333333333333333" type="paperVehicle">
-        <route edges="nO OA AB BC CD De" />
     </flow>
     
 </routes>

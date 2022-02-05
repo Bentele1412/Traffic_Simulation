@@ -13,7 +13,7 @@ if __name__ == '__main__':
     ctFactor = random.uniform(0.75, 1.5)
     phaseShifts = [random.randint(10, 150), random.randint(10, 150), random.randint(10, 150), random.randint(10, 150), random.randint(10, 150)]
     evalFunc = meanSpeedCycleBased
-    setFlows_arterial(900, 3600, "../arterial.flow.xml")
+    setFlows_arterial(1200, 3600, "../arterial.flow.xml", delta_r_t=0)
     
     params = [ctFactor] + phaseShifts
     stepSizes = [0.1] + [2]*5
