@@ -273,3 +273,64 @@ Params: [2.58710892 1.53361679]
 Best:
 Optimal fitness: 8.172
 Optimal params: [2.68710892 1.55361679]
+
+### HillClimbing Arterial: SOTL, 50 iters, 5 runs, strategy 1, Delta = 0
+95 min and 30.440051 seconds needed.
+Last evaluation:
+Fitness: 7.453999999999999
+Params: [74]
+
+Best:
+Optimal fitness: 7.83
+Optimal params: [24]
+
+### HillClimbing Arterial: SOTL, 50 iters, 5 runs, strategy 1, Delta = 1/16
+65 min and 6.446793 seconds needed.
+Last evaluation:
+Fitness: 7.628
+Params: [59]
+
+Best:
+Optimal fitness: 7.83
+Optimal params: [24] 
+
+ ### HillClimbing Arterial: SOTL, 50 iters, 5 runs, strategy 1, Delta = 2/16
+151 min and 20.474988 seconds needed.
+Last evaluation:
+Fitness: 7.136
+Params: [74]
+
+Best:
+Optimal fitness: 7.36
+Optimal params: [24]
+
+
+  ### HillClimbing Arterial: CB, 50 iters, 5 runs, strategy 1, Delta = 0 (mayby do a rerun)
+381 min and 10.183828 seconds needed.
+Last evaluation:
+Fitness: 7.5600000000000005
+Params: [  1.5 164.  147.  187.  170.  237. ]
+
+Best:
+Optimal fitness: 8.0
+Optimal params: [0.8080663378899781, 64, 47, 87, 70, 137]
+
+  ### HillClimbing Arterial: CB, 50 iters, 5 runs, strategy 1, Delta = 1/16
+455 min and 59.874841 seconds needed.
+Last evaluation:
+Fitness: 7.4879999999999995
+Params: [  1.5 164.  147.  187.  170.  237. ]
+
+Best:
+Optimal fitness: 7.97
+Optimal params: [0.8080663378899781, 64, 47, 87, 70, 137]
+
+  ### HillClimbing Arterial: CB, 50 iters, 5 runs, strategy 1, Delta = 2/16
+428 min and 40.581102 seconds needed.
+Last evaluation:
+Fitness: 7.544
+Params: [  1.5 164.  147.  187.  170.  237. ]
+
+Best:
+Optimal fitness: 7.95
+Optimal params: [0.8080663378899781, 64, 47, 87, 70, 137]
