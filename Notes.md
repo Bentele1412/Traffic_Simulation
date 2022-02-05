@@ -233,3 +233,43 @@ Params: [  1.5 164.  147.  187.  170.  237. ]
 Best:
 Optimal fitness: 7.754
 Optimal params: [  1.40806634   88.  71.  111.  94.  161.]
+
+### HillClimbing arterial: AdaSOTL, 50 iters, 5 runs, strategy 1, 900 veh --> invalid
+207 min and 37.548431 seconds needed.
+Last evaluation:
+Fitness: 8.372
+Params: [3.08710892 1.33361679]
+
+Best:
+Optimal fitness: 8.399999999999999
+Optimal params: [2.68710892 1.41361679]
+
+### HillClimbing arterial: AdaSOTL, 50 iters, 5 runs, strategy 1, delta_r_t=0
+425 min and 29.947640 seconds needed.
+Last evaluation:
+Fitness: 8.22
+Params: [1.18710892 1.89361679]
+
+Best:
+Optimal fitness: 8.286000000000001
+Optimal params: [1.38710892 1.79361679]
+
+### HillClimbing arterial: AdaSOTL, 50 iters, 5 runs, strategy 1, delta_r_t=1/16
+250 min and 1.750037 seconds needed.
+Last evaluation:
+Fitness: 8.148
+Params: [3.48710892 1.43361679]
+
+Best:
+Optimal fitness: 8.193999999999999
+Optimal params: [3.48710892 1.39361679]
+
+### HillClimbing arterial: AdaSOTL, 50 iters, 5 runs, strategy 1, delta_r_t=2/16
+251 min and 9.850723 seconds needed.
+Last evaluation:
+Fitness: 8.128
+Params: [2.58710892 1.53361679]
+
+Best:
+Optimal fitness: 8.172
+Optimal params: [2.68710892 1.55361679]
