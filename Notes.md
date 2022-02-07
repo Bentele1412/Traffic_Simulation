@@ -374,3 +374,67 @@ Params: [3.28710892 1.61361679]
 Best:
 Optimal fitness: 8.144
 Optimal params: [3.48710892 1.61361679]
+
+### HillClimbing 2x3 fixed: AdaSOTL, 50 iters, 5 runs, strategy 1, 1500 veh
+292 min and 59.228068 seconds needed.
+Last evaluation:
+Fitness: 7.814
+Params: [3.28710892 1.59361679]
+
+Best:
+Optimal fitness: 7.874
+Optimal params: [3.08710892 1.59361679]
+
+### HillClimbing 2x3Grid_fixed: CB, 50 iters, 5 runs, strategy 1, 900 veh
+404 min and 2.141102 seconds needed.
+Last evaluation:
+Fitness: 8.608
+Params: [0.90806634  78.          39.          99.54.107.        ]
+
+Best:
+Optimal fitness: 8.618
+Optimal params: [0.85806634 ,80,49,99,52,107]
+
+### HillClimbing 2x3Grid_fixed: CB, 50 iters, 5 runs, strategy 1, 1200 veh
+429 min and 51.646476 seconds needed.
+Last evaluation:
+Fitness: 8.294
+Params: [0.90806634  34.   51.  99.    58. 153. ]
+
+Best:
+Optimal fitness: 8.384
+Optimal params: [0.85806634  36.    53.  101.   56. 155.]
+
+
+### HillClimbing 2x3Grid_fixed: CB, 50 iters, 5 runs, strategy 1, 1500 veh
+
+
+### HillClimbing 2x3Grid_fixed: SOTL, 50 iters, 5 runs, strategy 1, 900 vehicles
+96 min and 8.348288 seconds needed.
+Last evaluation:
+Fitness: 6.474000000000001
+Params: [25.]
+
+Best:
+Optimal fitness: 6.824
+Optimal params: [28.]
+
+### HillClimbing 2x3Grid_fixed: SOTL, 50 iters, 5 runs, strategy 1, 1200 vehicles
+134 min and 51.604621 seconds needed.
+Last evaluation:
+Fitness: 5.09
+Params: [25.]
+
+Best:
+Optimal fitness: 5.180000000000001
+Optimal params: [30.]
+
+### HillClimbing 2x3Grid_fixed: SOTL, 50 iters, 5 runs, strategy 1, 1500 vehicles
+146 min and 30.462012 seconds needed.
+Last evaluation:
+Fitness: 4.92
+Params: [37.]
+
+Best:
+Optimal fitness: 4.965999999999999
+Optimal params: [34.]
