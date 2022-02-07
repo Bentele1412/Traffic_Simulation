@@ -184,6 +184,16 @@ Best:
 Optimal fitness: 8.315999999999999
 Optimal params: [3.601  1.4591]
 
+Corrected version:
+275 min and 10.550787 seconds needed.
+Last evaluation:
+Fitness: 8.142
+Params: [3.24260892 1.31881679]
+
+Best:
+Optimal fitness: 8.222
+Optimal params: [3.20760892 1.31576679]
+
 ### HillClimbing 2x3Grid: AdaSOTL, 50 iters, 5 runs, strategy 1, 1200 vehicles
 252 min and 15.884611 seconds needed.
 Last evaluation:
@@ -334,3 +344,33 @@ Params: [  1.5 164.  147.  187.  170.  237. ]
 Best:
 Optimal fitness: 7.95
 Optimal params: [0.8080663378899781, 64, 47, 87, 70, 137]
+
+### HillClimbing arterial meanWaitingTime: AdaSOTL, 50 iters, 5 runs, strategy 1, delta_r_t=2/16
+255 min and 5.082778 seconds needed.
+Last evaluation:
+Fitness: 8.136
+Params: [3.58710892 1.49361679]
+
+Best:
+Optimal fitness: 8.196000000000002
+Optimal params: [3.48710892 1.51361679]
+
+### HillClimbing 2x3 fixed: AdaSOTL, 50 iters, 5 runs, strategy 1, 900 veh
+274 min and 52.418194 seconds needed.
+Last evaluation:
+Fitness: 8.315999999999999
+Params: [3.28710892 1.57361679]
+
+Best:
+Optimal fitness: 8.348
+Optimal params: [3.38710892 1.55361679]
+
+### HillClimbing 2x3 fixed: AdaSOTL, 50 iters, 5 runs, strategy 1, 1200 veh
+279 min and 57.165212 seconds needed.
+Last evaluation:
+Fitness: 8.129999999999999
+Params: [3.28710892 1.61361679]
+
+Best:
+Optimal fitness: 8.144
+Optimal params: [3.48710892 1.61361679]
