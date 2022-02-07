@@ -15,11 +15,11 @@ class Lane():
         self.outflowRate = 0
         self.greenPhaseDurationRatio = 0
 
-    def updateCarCount(self):
+    def updateCarCount(self, decayRate = 0.1):
         incomingCars = self.detectors[0].getCurrentCars()
         incomingCarsOmega = self.detectors[1].getCurrentCars()
         outflowingCars = self.detectors[-1].getCurrentCars()
         
         self.carsOnLane += incomingCars - outflowingCars
         self.carsWithinOmega += incomingCarsOmega - outflowingCars
-        self.runningAvgCoL = 0.9*self.runningAvgCoL + (1-0.9)*self.carsOnLane
+        self.runningAvgCoL = (1 - decayRate)*self.runningAvgCoL + decayRate*self.carsOnLane

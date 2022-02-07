@@ -146,3 +146,16 @@ def checkCTFactor(params):
     elif ctFactor > 1.5:
         params[0] = 1.5
     return params
+
+def checkAdaSOTL_v2_params(params):
+    k = params[0]
+    alpha = params[1]
+    beta = params[2]
+    decayRate = params[3]
+    for counter, param in enumerate(params):
+        if param <= 0:
+            params[counter] = 0.0
+    if decayRate >= 1:
+        params[3] = 1.0
+    return params
+    

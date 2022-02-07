@@ -10,6 +10,7 @@ from sumolib import checkBinary
 from GridNetwork.additionalFuncs.helper import mapLPDetailsToTL, getTLPhaseInfo, getMeanSpeedWaitingTime, createTrafficLights, setFlows, deleteTempFiles
 from controllers.CycleBasedTLController import CycleBasedTLController
 from controllers.AdaSOTL import AdaSOTL
+from controllers.AdaSOTL_v2 import AdaSOTL_v2
 from controllers.SOTL import SOTL
 import time
 import shutil
@@ -164,6 +165,54 @@ def meanSpeedSOTL(params):
                                     "--statistic-output", STATISTICS_PATH[:3]+timestamp+STATISTICS_PATH[3:]])
     
     _run(sotls)
+
+    meanSpeed, meanWaitingTime = getMeanSpeedWaitingTime(STATISTICS_PATH[:3]+timestamp+STATISTICS_PATH[3:], TRIPINFO_PATH[:3]+timestamp+TRIPINFO_PATH[3:])
+    deleteTempFiles(timestamp)
+    return float(meanSpeed), float(meanWaitingTime)
+
+def meanSpeedAdaSOTL_v2(params):
+    def _run(adaSotls):
+        step = 0
+        while traci.simulation.getMinExpectedNumber() > 0:
+            traci.simulationStep()
+            for adasotl in adaSotls:
+                adasotl.step()
+            step += 1
+        traci.close()
+        sys.stdout.flush()
+
+    sumoBinary = checkBinary('sumo')
+    
+    #timestamp = str(time.time())
+    #random.seed(12345)
+    timestamp = str(random.uniform(0.0, 10000.0))
+    #shutil.copy(FLOW_PATH, FLOW_PATH[:3]+timestamp+FLOW_PATH[3:])
+    simulationTime = 3600
+    numVehicles = 1200
+
+    #create instances
+    minGreenTime = 5
+    maxGreenTime = 55 #change to maxRedTime
+    trafficLights = createTrafficLights(minGreenTime, maxGreenTime)
+
+    mu = 3
+    
+    k = params[0]
+    alpha = params[1]
+    beta = params[2]
+    decayRate = params[3]
+    adaSotls = []
+    for tl in trafficLights:
+        adaSotls.append(AdaSOTL_v2(tl, mu, k, alpha, beta, decayRate))
+
+    #setFlows(numVehicles, simulationTime, FLOW_PATH[:3]+timestamp+FLOW_PATH[3:])
+    os.system('jtrrouter -n '+NETFILE_PATH+' --additional-files ../paperVehicle.xml -r '+FLOW_PATH+' -o '+ROUTES_PATH[:3]+timestamp+ROUTES_PATH[3:]+' --seed '+timestamp.replace(".", "")[-8:])
+    traci.start([sumoBinary, "-n", NETFILE_PATH, "-r", ROUTES_PATH[:3]+timestamp+ROUTES_PATH[3:], "--additional-files", "../additionals.xml", "--no-step-log", "true",
+                                    "--tripinfo-output", TRIPINFO_PATH[:3]+timestamp+TRIPINFO_PATH[3:],
+                                    "--statistic-output", STATISTICS_PATH[:3]+timestamp+STATISTICS_PATH[3:]])
+
+
+    _run(adaSotls)
 
     meanSpeed, meanWaitingTime = getMeanSpeedWaitingTime(STATISTICS_PATH[:3]+timestamp+STATISTICS_PATH[3:], TRIPINFO_PATH[:3]+timestamp+TRIPINFO_PATH[3:])
     deleteTempFiles(timestamp)

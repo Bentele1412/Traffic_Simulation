@@ -22,6 +22,8 @@ class HillClimbing():
         self.meanWaitingTimes = []
         self.stdWaitingTimes = []
         self.stdMeanSpeeds = []
+        self.paramsDynamics = []
+        self.gradientDynamics = []
     
     def optimize(self, plotFolderPath, epsilon=1, numRuns=1, maxIter=50, strategy=0, paramValidCallbacks=None, useGradient=True, reduceStepSize=False):
         '''
@@ -59,12 +61,14 @@ class HillClimbing():
                 if paramValidCallbacks:
                     for callback in paramValidCallbacks:
                         self.params = callback(self.params)
-                self.fitness, stdMeanSpeed, meanWaitingTime, stdMeanWaitingTime = self._performRuns(self.params) if strategy != 2 else self.fitness
+                self.fitness, stdMeanSpeed, meanWaitingTime, stdMeanWaitingTime = self._performRuns(self.params) # (commented out) if strategy != 2 else self.fitness
                 print(self.fitness)
                 self.fitnessDynamics.append(self.fitness)
                 self.meanWaitingTimes.append(meanWaitingTime)
                 self.stdMeanSpeeds.append(stdMeanSpeed)
                 self.stdWaitingTimes.append(stdMeanWaitingTime)
+                self.paramsDynamics.append(self.params)
+                self.gradientDynamics.append(gradient)
                 if self.fitness > self.best[0]:
                     self.best = [self.fitness, self.params]
             elif reduceStepSize:
@@ -118,7 +122,9 @@ class HillClimbing():
         dynamics = {'meanSpeed': self.fitnessDynamics,
                 'stdMeanSpeed': self.stdMeanSpeeds,
                 'meanWaitingTime': self.meanWaitingTimes,
-                'stdMeanWaitingTime': self.stdWaitingTimes}
+                'stdMeanWaitingTime': self.stdWaitingTimes,
+                'gradientDynamics': self.gradientDynamics,
+                'paramsDynamics': self.paramsDynamics}
         with open(self.plotFolderPath + "dynamicsData.pickle", 'wb') as f:
             pickle.dump(dynamics, f)
 
