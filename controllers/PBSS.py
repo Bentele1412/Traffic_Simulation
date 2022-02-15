@@ -64,11 +64,14 @@ class PBSS():
             #perform outgoing detection
             outflowingCars = lane.detectors[1].getCurrentCars()
             while outflowingCars > 0:
-                if self.S[counter][0].n_pc - outflowingCars <= 0:
-                    outflowingCars -= self.S[counter][0].n_pc 
-                    del self.S[counter][0]
+                if len(self.S[counter]) > 0:
+                    if self.S[counter][0].n_pc - outflowingCars <= 0:
+                        outflowingCars -= self.S[counter][0].n_pc 
+                        del self.S[counter][0]
+                    else:
+                        self.S[counter][0].n_pc -= outflowingCars
+                        break
                 else:
-                    self.S[counter][0].n_pc -= outflowingCars
                     break
         
         #update tau_ps_t for all clusters

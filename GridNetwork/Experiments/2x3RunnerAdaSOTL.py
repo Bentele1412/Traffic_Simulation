@@ -51,7 +51,7 @@ if __name__ == '__main__':
     setFlows(numVehicles, simulationTime, "../2x3.flow.xml")
     os.system('jtrrouter -c ../2x3.jtrrcfg')
 
-    traci.start([sumoBinary, "-c", configPath,
+    traci.start([sumoGui, "-c", configPath,
                                     "--tripinfo-output", "../tripinfo.xml",
                                     "--statistic-output", "../statistics.xml"])
     

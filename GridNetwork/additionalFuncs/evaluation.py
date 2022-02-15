@@ -60,11 +60,11 @@ def meanSpeedCycleBased(params):
     #timestamp = str(time.time())
     timestamp = str(random.uniform(0.0, 10000.0))
     simulationTime = 3600
-    numVehicles = 900
+    numVehicles = 1200
     ctFactor = params[0]
     #phaseShifts = [0]*6 #6 for 6 junctions 
     phaseShifts = [0] + list(map(lambda x: int(x), params[1:]))
-    lpSolveResultPaths = ['../LPSolve/2x3Grid_a_eps0,4.lp.csv', '../LPSolve/2x3Grid_b_eps0,4.lp.csv', '../LPSolve/2x3Grid_c_eps0,4.lp.csv']
+    lpSolveResultPaths = ['../LPSolve/2x3Grid_a_eps0,2.lp.csv', '../LPSolve/2x3Grid_b_eps0,2.lp.csv', '../LPSolve/2x3Grid_c_eps0,2.lp.csv']
 
     #create instances
     trafficLights = createTrafficLights()
