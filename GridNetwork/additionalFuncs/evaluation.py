@@ -12,8 +12,6 @@ from controllers.CycleBasedTLController import CycleBasedTLController
 from controllers.AdaSOTL import AdaSOTL
 from controllers.AdaSOTL_v2 import AdaSOTL_v2
 from controllers.SOTL import SOTL
-import time
-import shutil
 import random
 
 if 'SUMO_HOME' in os.environ:
@@ -39,7 +37,7 @@ def meanSpeedCycleBased(params):
                 mapLPDetailsToTL(trafficLights, lpSolveResultPaths[pathCounter])
                 maxNodeUtilization = max([tl.utilization for tl in trafficLights])
                 numPhases, yellowPhaseDuration = getTLPhaseInfo()
-                cycleTime = int(np.round(ctFactor * ((1.5 * (numPhases/2)*yellowPhaseDuration + 5)/(1 - maxNodeUtilization)))) #maybe edit hard coded yellow phases and extract them from file
+                cycleTime = int(np.round(ctFactor * ((1.5 * (numPhases/2)*yellowPhaseDuration + 5)/(1 - maxNodeUtilization))))
                 pathCounter += 1
                 if step == 0:
                     for counter, tl in enumerate(trafficLights):
@@ -60,11 +58,11 @@ def meanSpeedCycleBased(params):
     #timestamp = str(time.time())
     timestamp = str(random.uniform(0.0, 10000.0))
     simulationTime = 3600
-    numVehicles = 1200
+    numVehicles = 1500
     ctFactor = params[0]
     #phaseShifts = [0]*6 #6 for 6 junctions 
     phaseShifts = [0] + list(map(lambda x: int(x), params[1:]))
-    lpSolveResultPaths = ['../LPSolve/2x3Grid_a_eps0,2.lp.csv', '../LPSolve/2x3Grid_b_eps0,2.lp.csv', '../LPSolve/2x3Grid_c_eps0,2.lp.csv']
+    lpSolveResultPaths = ['../LPSolve/2x3Grid_a_eps0,1.lp.csv', '../LPSolve/2x3Grid_b_eps0,1.lp.csv', '../LPSolve/2x3Grid_c_eps0,1.lp.csv']
 
     #create instances
     trafficLights = createTrafficLights()

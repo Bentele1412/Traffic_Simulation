@@ -234,6 +234,16 @@ Best:
 Optimal fitness: 5.52
 Optimal params: [45]
 
+### HillClimbing 2x3Grid: CB, 50 iters, 5 runs, strategy 1, 1500 veh
+959 min and 30.552535 seconds needed.
+Last evaluation:
+Fitness: 6.843999999999999
+Params: [  0.8  36.   59.  105.   86.  129. ]
+
+Best:
+Optimal fitness: 7.0200000000000005
+Optimal params: [  0.8  48.   55.   93.   86.  125. ]
+
 ### HillClimbing 2x3Grid: CB, 50 iters, 5 runs, strategy 1, 900 veh
 688 min and 16.009214 seconds needed.
 Last evaluation:
@@ -407,7 +417,14 @@ Optimal params: [0.85806634  36.    53.  101.   56. 155.]
 
 
 ### HillClimbing 2x3Grid_fixed: CB, 50 iters, 5 runs, strategy 1, 1500 veh
+779 min and 5.406524 seconds needed.
+Last evaluation:
+Fitness: 7.822
+Params: [  0.75  60.    23.    51.    78.   137.  ]
 
+Best:
+Optimal fitness: 7.952
+Optimal params: [  0.75  74.    25.    53.    84.   135.  ]
 
 ### HillClimbing 2x3Grid_fixed: SOTL, 50 iters, 5 runs, strategy 1, 900 vehicles
 96 min and 8.348288 seconds needed.
